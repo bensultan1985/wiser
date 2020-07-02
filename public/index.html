@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Three lines of necessary code for Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <!-- reference your copy Font Awesome here (from our CDN or by hosting yourself) -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./stylesheet2.css">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="jquery.js"></script>
+    </head>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- <div class="one"><h1>T₵</h1><h4 id="tctag">Two-Cents: the social collection of wisdom</h4></div> -->
+    <div class="one" id="leftheader"><h1 id="wiserlogo">Wiser</h1><h4 id="tctag">the social collection of wisdom</h4></div>
+    <!-- <div class="two"></div> -->
+    <div class="three">
+      <div id="headlogin">
+        <button id="headregbutton">register</button>
+        <button id="headloginbutton">login</button> 
+        <div id="headusername" style="display: none"></div>
+
+        <div style="display: none" class="dropdown" id="test1">
+          <i id="topmenu" style="display: block" class="fa fa-bars dropdown"></i>
+        </div>
+        <div class="dropdown-content" id="test2">
+          <a href="#" id="dashboardlink">Dashboard</a>
+          <a href="#" id="accountlink">Account</a>
+          <a href="#" id="favoriteslink">Favorites</a>
+          <a href="#" id="mysubmissionslink">My Submissions</a>
+          <a href="#" id="calendarlink">Edit Calendar</a>
+          <a href="#" id="logoutlink">Logout</a>
+        </div>
+      </div>
+    </div>
+
+<!-- 
+<div class="wrapper2"> -->
+<div class="row">
+  <!-- <div id="one2"> -->
+  <div class="column">
+    <a id="dbcount"></a>
+    <br>
+    <br>
+    <div id="retrievedisplay">
+      
+      <div>
+        <h4 id="categoriestitle"> 
+          <button id="makesubmit">submit your wisdom</button>
+          <br><br>
+          Browse Wisdom:</h4>
+        <ul id="visitcategory">
+
+          <li class="category-li"><span class="cathead" value="newest wisdom" id="getnew">Newest Wisdom</span></li>
+
+          <li class="category-li" value="career"><span class="cathead" value="career" id="getcareer">Career</span>
+            <ul name="Career" id="career" class="cattab">
+              <li class="subcat" value="career path">
+                career path
+              </li>|
+              <li class="subcat" value="communication">
+                communication
+              </li>|
+              <li class="subcat" value="conflict">
+                conflict
+              </li>|
+              <li class="subcat" value="engineering">
+                engineering
+              </li>|
+              <li class="subcat" value="entrepreneurship">
+                entrepreneurship
+              </li>|
+              <li class="subcat" value="freelance">
+                freelance
+              </li>|
+              <li class="subcat" value="inspiration">
+                inspiration
+              </li>|
+              <li class="subcat" value="interpersonal skills">
+                interpersonal skills
+              </li>|
+              <li class="subcat" value="resume & interview">
+                resume & interview
+              </li>|
+              <li class="subcat" value="jobs">
+                jobs
+              </li>|
+              <li class="subcat" value="marketing">
+                marketing
+              </li>|
+              <li class="subcat" value="negotiation">
+                negotiation
+              </li>|
+              <li class="subcat" value="networking">
+                networking
+              </li>|
+              <li class="subcat" value="sales">
+                sales
+              </li>|
+              <li class="subcat" value="small business">
+                small business
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li" ><span class="cathead" value="citizenship" id="getcitizenship">Citizenship</span>
+            <ul name="Citizenship" id="citizenshipcat"class="cattab">
+              <li class="subcat" value="activism">
+                activism
+              </li>|
+              <li class="subcat" value="community">
+                community
+              </li>|
+              <li class="subcat" value="emergency">
+                emergency
+              </li>|
+              <li class="subcat" value="government">
+                government
+              </li>|
+              <li class="subcat" value="laws">
+                laws
+              </li>|
+              <li class="subcat" value="programs">
+                programs
+              </li>|
+
+            </ul>
+          </li>
+          
+          <li class="category-li"><span class="cathead" value="creativity" id="getcreativity">Creativity</span>
+            <ul name="Creativity" id="creativitycat" class="cattab">
+              <li class="subcat" value="arts & crafts">
+                arts & crafts
+              </li>|
+              <li class="subcat" value="criticism">
+                criticism
+              </li>|
+              <li class="subcat" value="inspiration">
+                inspiration
+              </li>|
+              <li class="subcat" value="motivation">
+                motivation
+              </li>|
+              <li class="subcat" value="music business">
+                music business
+              </li>|
+              <li class="subcat" value="musicians">
+                musicians
+              </li>|
+              <li class="subcat" value="performing arts">
+                performing arts
+              </li>|
+              <li class="subcat" value="photography">
+                photography
+              </li>|
+              <li class="subcat" value="show business">
+                show business
+              </li>|
+              <li class="subcat" value="writing">
+                writing
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="education" id="geteducation" >Education</span>
+            <ul name="Education" id="educationcat" class="cattab">
+              <li class="subcat" value="adult learning">
+                adult learning
+              </li>|
+              <li class="subcat" value="alternative education">
+                alternative education
+              </li>|
+              <li class="subcat" value="birth - preschool">
+                birth - preschool
+              </li>|
+              <li class="subcat" value="elementary school">
+                elementary school
+              </li>|
+              <li class="subcat" value="high school">
+                high school
+              </li>|
+              <li class="subcat" value="middle school">
+                middle school
+              </li>|
+              <li class="subcat" value="students">
+                students
+              </li>|
+              <li class="subcat" value="study skills">
+                study skills
+              </li>|
+              <li class="subcat" value="teachers & teaching">
+                teachers & teaching
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li" value="finance" ><span class="cathead" value="finance" id="getfinance">Finance</span>
+            <ul name="Finance" id="financecat" class="cattab">
+              <li class="subcat" value="budgeting">
+                budgeting
+              </li>|
+              <li class="subcat" value="dangers">
+                dangers
+              </li>|
+              <li class="subcat" value="decision making">
+                decision making
+              </li>|
+              <li class="subcat" value="household">
+                household
+              </li>|
+              <li class="subcat" value="investing">
+                investing
+              </li>|
+              <li class="subcat" value="negotiation">
+                negotiation
+              </li>|
+              <li class="subcat" value="opportunities">
+                opportunities
+              </li>|
+              <li class="subcat" value="retirement">
+                retirement
+              </li>|
+              <li class="subcat" value="salary & benefits">
+                salary & benefits
+              </li>|
+              <li class="subcat" value="saving money">
+                saving money
+            </ul>
+          </li>
+
+          <li class="category-li" ><span class="cathead" value="hardship" id="gethardship">Hardship</span>
+            <ul name="Hardship" id="hardshipcat" class="cattab">
+              <li class="subcat" value="anxiety">
+                anxiety
+              </li>|
+              <li class="subcat" value="depression">
+                depression
+              </li>|
+              <li class="subcat" value="disappointment">
+                disappointment
+              </li>|
+              <li class="subcat" value="grief & loss">
+                grief & loss
+              </li>|
+              <li class="subcat" value="illness">
+                illness
+              </li>|
+              <li class="subcat" value="poverty">
+                poverty
+              </li>|
+              <li class="subcat"value="unemployment">
+                unemployment
+            </ul>
+          </li>
+
+          <li class="category-li" ><span class="cathead" value="health & fitness" id="gethealthandfitness">Health & Fitness</span>
+            <ul name="Health & Fitness" id="healthandfitnesscat" class="cattab">
+              <li class="subcat" value="adulthood">
+                adulthood
+              </li>|
+              <li class="subcat" value="childhood">
+                childhood
+              </li>|
+              <li class="subcat" value="diet">
+                diet
+              </li>|
+              <li class="subcat" value="fitness">
+                fitness
+              </li>|
+              <li class="subcat" value="fitness plans">
+                fitness plans
+              </li>|
+              <li class="subcat" value="gyms">
+                gyms
+              </li>|
+              <li class="subcat" value="health">
+                health
+              </li>|
+              <li class="subcat" value="health plans">
+                health plans
+              </li>|
+              <li class="subcat" value="medicine">
+                medicine
+              </li>|
+              <li class="subcat" value="nutrition">
+                nutrition
+              </li>|
+              <li class="subcat" value="senior years">
+                senior years
+              </li>|
+              <li class="subcat" value="sports">
+                sports
+              </li>|
+              <li class="subcat" value="teen years">
+                teen years
+              </li>|
+              <li class="subcat" value="hygiene">
+                hygiene
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="home" id="gethome">Home</span>
+            <ul name="Home" id="homecat" class="cattab">
+              <li class="subcat" value="appliances">
+                appliances
+              </li>|
+              <li class="subcat" value="buying & selling">
+                buying & selling
+              </li>|
+              <li class="subcat" value="cleaning & clutter">
+                cleaning & clutter
+              </li>|
+              <li class="subcat" value="construction">
+                construction
+              </li>|
+              <li class="subcat" value="dangers">
+                dangers
+              </li>|
+              <li class="subcat" value="decor">
+                décor
+              </li>|
+              <li class="subcat" value="geographic location">
+                geographic location
+              </li>|
+              <li class="subcat" value="home improvement">
+                home improvement
+              </li>|
+              <li class="subcat" value="neighborhood">
+                neighborhood
+              </li>|
+              <li class="subcat" value="renting">
+                renting
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="life" id="getlife">Life</span>
+            <ul name="Life" id="lifecat" class="cattab">
+              <li class="subcat" value="adulthood">
+                adulthood
+              </li>|
+              <li class="subcat" value="aspirations">
+                aspirations
+              </li>|
+              <li class="subcat" value="childhood">
+                childhood
+              </li>|
+              <li class="subcat" value="planning">
+                planning
+              </li>|
+              <li class="subcat" value="regrets">
+                parenting
+              </li>|
+              <li class="subcat" value="regrets">
+                regrets
+              </li>|
+              <li class="subcat" value="self-reflection">
+                self-reflection
+              </li>|
+              <li class="subcat" value="self-awareness">
+                self-awareness
+              </li>|
+              <li class="subcat" value="senior years">
+                senior years
+              </li>|
+              <li class="subcat" value="success & failure">
+                success & failure
+              </li>|
+              <li class="subcat" value="teen years">
+                teen years
+              </li>|
+              <li class="subcat" value="well-being">
+                well-being
+              </li>|
+              <li class="subcat" value="young adulthood">
+                young adulthood
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="love" id="getlove">Love</span>
+            <ul name="Love" id="lovecat" class="cattab">
+              <li class="subcat" value="dating">
+                dating
+              </li>|
+              <li class="subcat" value="lust">
+                lust
+              </li>|
+              <li class="subcat" value="marriage">
+                marriage
+              </li>|
+              <li class="subcat" value="relationships">
+                relationships
+              </li>|
+              <li class="subcat" value="romance">
+                romance
+              </li>|
+              <li class="subcat" value="sex">
+                sex
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="routine" id="getroutine">Routine</span>
+            <ul name="Routine" id="routinecat" class="cattab">
+              <li class="subcat" value="bedtime routine">
+                bedtime routine
+              </li>|
+              <li class="subcat" value="daily routine">
+                daily routine
+              </li>|
+              <li class="subcat" value="evening routine">
+                evening routine
+              </li>|
+              <li class="subcat" value="midday routine">
+                midday routine
+              </li>|
+              <li class="subcat" value="morning routine">
+                morning routine
+              </li>|
+              <li class="subcat" value="weekly routine">
+                weekly routine
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="social" id="getsocial">Social</span>
+            <ul name="Social" id="socialcat" class="cattab">
+              <li class="subcat" value="activities">
+                activities
+              </li>|
+              <li class="subcat" value="caring">
+                caring
+              </li>|
+              <li class="subcat" value="communication">
+                communication
+              </li>|
+              <li class="subcat" value="conflict">
+                conflict
+              </li>|
+              <li class="subcat" value="etiquette">
+                etiquette
+              </li>|
+              <li class="subcat" value="expectations">
+                expectations
+              </li>|
+              <li class="subcat" value="extended family">
+                extended family
+              </li>|
+              <li class="subcat" value="family">
+                family
+              </li>|
+              <li class="subcat" value="friends">
+                friends
+              </li>|
+              <li class="subcat" value="giving & receiving">
+                giving & receiving
+              </li>|
+              <li class="subcat" value="holidays">
+                holidays
+              </li>|
+              <li class="subcat" value="making friends">
+                making friends
+              </li>|
+              <li class="subcat" value="parties & gatherings">
+                parties & gatherings
+              </li>|
+              <li class="subcat" value="physical contact">
+                physical contact
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="technology" id="gettechnology">Technology</span>
+            <ul name="Technology" id="technologycat" class="cattab">
+              <li class="subcat" value="computers">
+                computers
+              </li>|
+              <li class="subcat" value="electronics">
+                electronics
+              </li>|
+              <li class="subcat" value="email">
+                email
+              </li>|
+              <li class="subcat" value="gaming">
+                gaming
+              </li>|
+              <li class="subcat" value="social media">
+                social media
+              </li>|
+              <li class="subcat" value="the future">
+                the future
+              </li>|
+              <li class="subcat" value="the internet">
+                the internet
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="transportation" id="gettransportation">Transportation</span>
+            <ul name="Transportation" id="transportationcat" class="cattab">
+              <li class="subcat" value="air travel">
+                air travel
+              </li>|
+              <li class="subcat" value="automobiles">
+                automobiles
+              </li>|
+              <li class="subcat" value="boats & boating">
+                boats & boating
+              </li>|
+              <li class="subcat" value="budget">
+                budget
+              </li>|
+              <li class="subcat" value="cruises">
+                cruises
+              </li>|
+              <li class="subcat" value="luxury">
+                luxury
+              </li>|
+              <li class="subcat" value="other vehicles">
+                other vehicles
+              </li>|
+              <li class="subcat" value="planning">
+                planning
+              </li>|
+              <li class="subcat" value="public transportation">
+                public transportation
+              </li>|
+              <li class="subcat" value="trains">
+                trains
+              </li>|
+              <li class="subcat" value="walking">
+                walking
+              </li>|
+            </ul>
+          </li>
+          
+          <li class="category-li"><span class="cathead" value="travel" id="gettravel">Travel</span>
+            <ul name="Travel" id="travelcat" class="cattab">
+              <li class="subcat" value="attractions">
+                attractions
+              </li>|
+              <li class="subcat" value="beaches">
+                beaches
+              </li>|
+              <li class="subcat" value="budget">
+                budget
+              </li>|
+              <li class="subcat" value="dangers">
+                dangers
+              </li>|
+              <li class="subcat" value="domestic">
+                domestic
+              </li>|
+              <li class="subcat" value="foreign languages">
+                foreign languages
+              </li>|
+              <li class="subcat" value="hotels & rentals">
+                hotels & rentals
+              </li>|
+              <li class="subcat" value="international">
+                international
+              </li>|
+              <li class="subcat" value="luxury">
+                luxury
+              </li>|
+              <li class="subcat" value="preparedness">
+                preparedness
+              </li>|
+              <li class="subcat" value="vacations">
+                vacations
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="wellness" id="getwellness">Wellness</span>
+            <ul name="Wellness" id="wellnesscat" class="cattab">
+              <li class="subcat" value="beauty">
+                beauty
+              </li>|
+              <li class="subcat" value="meditation">
+                meditation
+              </li>|
+              <li class="subcat" value="mind & body">
+                mind & body
+              </li>|
+              <li class="subcat" value="spirituality">
+                spirituality
+              </li>|
+            </ul>
+          </li>
+
+          <li class="category-li"><span class="cathead" value="other" id="getother">Other</span></li>
+        </ul>
+      </div>
+      <button id="retrieve" style="display: none;">view all submissions</button>
+  </div>
+    <button id="openarticlesbutton">open articles</button>
+    <button id="openwishbutton">wishing well</button>
+  </div>
+
+<!-- </div> -->
+
+
+
+
+
+<!-- <div id="two2"> -->
+
+  <div class="secondcolumn" id="viewerWindow">
+    <div id="viewid"></div>
+    <div id="viewer"></div>
+    <div class=" addbackground" id="formcolumn" style="display: none">
+      <form id="form">
+        <br>
+        So, you've lived some life and you want to share a bit of wisdom!
+          Give us your very best:
+          <br>
+          <br>
+          (Fields with * are required)
+        <br>
+        <br>
+        <br>
+        <label for="category">*Select a category:</label>
+        <br>
+        <select id="category" name="category">
+          <option value="Career">Career</option>
+          <option value="Citizenship">Citizenship</option>
+          <option value="Creativity">Creativity</option>
+          <option value="Education">Education</option>
+          <option value="Finance">Finance</option>
+          <option value="Hardship">Hardship</option>
+          <option value="Health & Fitness">Health & Fitness</option>
+          <option value="Home">Home</option>
+          <option value="Life">Life</option>
+          <option value="Love">Love</option>
+          <option value="Routine">Routine</option>
+          <option value="Social">Social</option>
+          <option value="Technology">Technology</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Travel">Travel</option>
+          <option value="Wellness">Wellness</option>
+          <option value="Other">Other</option>
+        </select>
+        <div id="subcatdiv">
+          <label for="subcategory">*Select a sub-category</label>
+          <br>
+        <select id="subcategory" name="subcategory"></select>
+        </div>
+        <br><br>
+        <label for="wisdom">*Enter your widsom:</label>
+        <br>
+        <br>
+        <textarea type="text" id="wisdom" name="wisdom"></textarea>
+        <br>
+        <br>
+        <label for="origauthor">if the original author is not you, give their name:</label>
+        <br>
+        <br>
+        <input type="text" id="origauthor" name="origauthor">
+        <br>
+        <br>
+        <br>
+        <br>
+        <label for="postethnic">If this wisdom has known cultural roots, please specify:</label>
+        <br>
+        <br>
+        <select id="postethnic" name="postethnic">
+          <option value ="unspecified">unspecified</option>
+          <option value="Caucasian">Caucasian</option>
+          <option value="African-American / Black">African-American / Black</option>
+          <option value="Hispanic">Hispanic</option>
+          <option value="Native American">Native American</option>
+          <option value="Pacific Islander">Pacific Islander</option>
+          <option value="Asian">Asian</option>
+          <option value="Christian">Christian</option>
+          <option value="Jewish">Jewish</option>
+          <option value="Islamic">Islamic</option>
+          <option value="Buddhist">Buddhist</option>
+          <option value="Hindu">Hindu</option>
+          <option value="Atheist">Atheist</option>
+          <option value="other">other</option>
+        </select>
+        <br>
+        <br>
+        <label for="postcountry">If this wisdom has roots in a country, please specify:</label>
+        <br>
+        <br>
+        <select id="postcountry" name="postcountry">
+          <option value="unspecified">unspecified</option>
+          <option value="United States of America">United States of America</option>
+          <option value="Afganistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+          <option value="American Samoa">American Samoa</option>
+          <option value="Andorra">Andorra</option>
+          <option value="Angola">Angola</option>
+          <option value="Anguilla">Anguilla</option>
+          <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Aruba">Aruba</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Azerbaijan">Azerbaijan</option>
+          <option value="Bahamas">Bahamas</option>
+          <option value="Bahrain">Bahrain</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Barbados">Barbados</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Belize">Belize</option>
+          <option value="Benin">Benin</option>
+          <option value="Bermuda">Bermuda</option>
+          <option value="Bhutan">Bhutan</option>
+          <option value="Bolivia">Bolivia</option>
+          <option value="Bonaire">Bonaire</option>
+          <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+          <option value="Botswana">Botswana</option>
+          <option value="Brazil">Brazil</option>
+          <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+          <option value="Brunei">Brunei</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Burkina Faso">Burkina Faso</option>
+          <option value="Burundi">Burundi</option>
+          <option value="Cambodia">Cambodia</option>
+          <option value="Cameroon">Cameroon</option>
+          <option value="Canada">Canada</option>
+          <option value="Canary Islands">Canary Islands</option>
+          <option value="Cape Verde">Cape Verde</option>
+          <option value="Cayman Islands">Cayman Islands</option>
+          <option value="Central African Republic">Central African Republic</option>
+          <option value="Chad">Chad</option>
+          <option value="Channel Islands">Channel Islands</option>
+          <option value="Chile">Chile</option>
+          <option value="China">China</option>
+          <option value="Christmas Island">Christmas Island</option>
+          <option value="Cocos Island">Cocos Island</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Comoros">Comoros</option>
+          <option value="Congo">Congo</option>
+          <option value="Cook Islands">Cook Islands</option>
+          <option value="Costa Rica">Costa Rica</option>
+          <option value="Cote DIvoire">Cote DIvoire</option>
+          <option value="Croatia">Croatia</option>
+          <option value="Cuba">Cuba</option>
+          <option value="Curaco">Curacao</option>
+          <option value="Cyprus">Cyprus</option>
+          <option value="Czech Republic">Czech Republic</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Djibouti">Djibouti</option>
+          <option value="Dominica">Dominica</option>
+          <option value="Dominican Republic">Dominican Republic</option>
+          <option value="East Timor">East Timor</option>
+          <option value="Ecuador">Ecuador</option>
+          <option value="Egypt">Egypt</option>
+          <option value="El Salvador">El Salvador</option>
+          <option value="Equatorial Guinea">Equatorial Guinea</option>
+          <option value="Eritrea">Eritrea</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Falkland Islands">Falkland Islands</option>
+          <option value="Faroe Islands">Faroe Islands</option>
+          <option value="Fiji">Fiji</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="French Guiana">French Guiana</option>
+          <option value="French Polynesia">French Polynesia</option>
+          <option value="French Southern Ter">French Southern Ter</option>
+          <option value="Gabon">Gabon</option>
+          <option value="Gambia">Gambia</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Germany">Germany</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Gibraltar">Gibraltar</option>
+          <option value="Great Britain">Great Britain</option>
+          <option value="Greece">Greece</option>
+          <option value="Greenland">Greenland</option>
+          <option value="Grenada">Grenada</option>
+          <option value="Guadeloupe">Guadeloupe</option>
+          <option value="Guam">Guam</option>
+          <option value="Guatemala">Guatemala</option>
+          <option value="Guinea">Guinea</option>
+          <option value="Guyana">Guyana</option>
+          <option value="Haiti">Haiti</option>
+          <option value="Hawaii">Hawaii</option>
+          <option value="Honduras">Honduras</option>
+          <option value="Hong Kong">Hong Kong</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Iceland">Iceland</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="India">India</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Isle of Man">Isle of Man</option>
+          <option value="Israel">Israel</option>
+          <option value="Italy">Italy</option>
+          <option value="Jamaica">Jamaica</option>
+          <option value="Japan">Japan</option>
+          <option value="Jordan">Jordan</option>
+          <option value="Kazakhstan">Kazakhstan</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Kiribati">Kiribati</option>
+          <option value="Korea North">Korea North</option>
+          <option value="Korea Sout">Korea South</option>
+          <option value="Kuwait">Kuwait</option>
+          <option value="Kyrgyzstan">Kyrgyzstan</option>
+          <option value="Laos">Laos</option>
+          <option value="Latvia">Latvia</option>
+          <option value="Lebanon">Lebanon</option>
+          <option value="Lesotho">Lesotho</option>
+          <option value="Liberia">Liberia</option>
+          <option value="Libya">Libya</option>
+          <option value="Liechtenstein">Liechtenstein</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Macau">Macau</option>
+          <option value="Macedonia">Macedonia</option>
+          <option value="Madagascar">Madagascar</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Malawi">Malawi</option>
+          <option value="Maldives">Maldives</option>
+          <option value="Mali">Mali</option>
+          <option value="Malta">Malta</option>
+          <option value="Marshall Islands">Marshall Islands</option>
+          <option value="Martinique">Martinique</option>
+          <option value="Mauritania">Mauritania</option>
+          <option value="Mauritius">Mauritius</option>
+          <option value="Mayotte">Mayotte</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Midway Islands">Midway Islands</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Monaco">Monaco</option>
+          <option value="Mongolia">Mongolia</option>
+          <option value="Montserrat">Montserrat</option>
+          <option value="Morocco">Morocco</option>
+          <option value="Mozambique">Mozambique</option>
+          <option value="Myanmar">Myanmar</option>
+          <option value="Nambia">Nambia</option>
+          <option value="Nauru">Nauru</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Netherland Antilles">Netherland Antilles</option>
+          <option value="Netherlands">Netherlands (Holland, Europe)</option>
+          <option value="Nevis">Nevis</option>
+          <option value="New Caledonia">New Caledonia</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Nicaragua">Nicaragua</option>
+          <option value="Niger">Niger</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Niue">Niue</option>
+          <option value="Norfolk Island">Norfolk Island</option>
+          <option value="Norway">Norway</option>
+          <option value="Oman">Oman</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Palau Island">Palau Island</option>
+          <option value="Palestine">Palestine</option>
+          <option value="Panama">Panama</option>
+          <option value="Papua New Guinea">Papua New Guinea</option>
+          <option value="Paraguay">Paraguay</option>
+          <option value="Peru">Peru</option>
+          <option value="Phillipines">Philippines</option>
+          <option value="Pitcairn Island">Pitcairn Island</option>
+          <option value="Poland">Poland</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Puerto Rico">Puerto Rico</option>
+          <option value="Qatar">Qatar</option>
+          <option value="Republic of Montenegro">Republic of Montenegro</option>
+          <option value="Republic of Serbia">Republic of Serbia</option>
+          <option value="Reunion">Reunion</option>
+          <option value="Romania">Romania</option>
+          <option value="Russia">Russia</option>
+          <option value="Rwanda">Rwanda</option>
+          <option value="St Barthelemy">St Barthelemy</option>
+          <option value="St Eustatius">St Eustatius</option>
+          <option value="St Helena">St Helena</option>
+          <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+          <option value="St Lucia">St Lucia</option>
+          <option value="St Maarten">St Maarten</option>
+          <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+          <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+          <option value="Saipan">Saipan</option>
+          <option value="Samoa">Samoa</option>
+          <option value="Samoa American">Samoa American</option>
+          <option value="San Marino">San Marino</option>
+          <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="Senegal">Senegal</option>
+          <option value="Seychelles">Seychelles</option>
+          <option value="Sierra Leone">Sierra Leone</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Solomon Islands">Solomon Islands</option>
+          <option value="Somalia">Somalia</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Spain">Spain</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="Sudan">Sudan</option>
+          <option value="Suriname">Suriname</option>
+          <option value="Swaziland">Swaziland</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Syria">Syria</option>
+          <option value="Tahiti">Tahiti</option>
+          <option value="Taiwan">Taiwan</option>
+          <option value="Tajikistan">Tajikistan</option>
+          <option value="Tanzania">Tanzania</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Togo">Togo</option>
+          <option value="Tokelau">Tokelau</option>
+          <option value="Tonga">Tonga</option>
+          <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+          <option value="Tunisia">Tunisia</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Turkmenistan">Turkmenistan</option>
+          <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+          <option value="Tuvalu">Tuvalu</option>
+          <option value="Uganda">Uganda</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="United Arab Erimates">United Arab Emirates</option>
+          <option value="United States of America">United States of America</option>
+          <option value="Uraguay">Uruguay</option>
+          <option value="Uzbekistan">Uzbekistan</option>
+          <option value="Vanuatu">Vanuatu</option>
+          <option value="Vatican City State">Vatican City State</option>
+          <option value="Venezuela">Venezuela</option>
+          <option value="Vietnam">Vietnam</option>
+          <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+          <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+          <option value="Wake Island">Wake Island</option>
+          <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+          <option value="Yemen">Yemen</option>
+          <option value="Zaire">Zaire</option>
+          <option value="Zambia">Zambia</option>
+          <option value="Zimbabwe">Zimbabwe</option>
+        </select>
+        <br>
+        <br>
+        <label for="posttags">Tag three words or phrases related to improve searches (separate by commas):</label>
+        <br>
+        <br>
+        <input type="text" id="posttags" name="posttags"/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <input type="checkbox" id="includemydemo" name="includemydemo" value="includemydemo">
+        <label for="includemydemo"> attach my demographic profile to the "more context" section (highly recommended)</label>
+        <br>
+        <br>
+        <br>
+        <label for="opcontext">Share more context about this wisdom; cite sources if applicable, or share your personal experience:</label>
+        <br>
+        <br>
+        <textarea type="text" id="opcontext" name="opcontext"></textarea>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+
+        <input type="submit" id="submit" value="submit">
+      </form>
+      <br>
+      <br>
+    </div>
+
+    <div class="addbackground" id="promptcolumn" style="display: none">
+      <div class="promptline1">To use this feature, you must log in:
+        <br>
+        <br>
+        <button class="errorlogin" id="promptlogin">login</button>
+      </div>
+      <br>
+      <br>
+      <div class="promptline2">Not a member? Join free:
+        <br>
+        <br>
+        <button class="errorlogin" id="regbutton">register</button>
+      </div>
+    </div>
+    
+  <div class="addbackground" id="logincolumn" style="display: none">
+    <div class="indented-div">
+      <form class="form" id="loginform">
+      <p>Log in:</p>
+      <!-- <br>
+      <label for="getname">Enter your username:</label>
+      <br>
+      <br>
+      <input type="text" id="getname" name="getname">
+      <br> -->
+      <br>
+      <label for="getemail">Enter your email:</label>
+      <br>
+      <br>
+      <input type="text" id="getemail" name="getemail">
+      <br><br>
+      <label for="getpass">Enter your password:</label>
+      <br><br>
+      <input type="text" id="getpass" name="">
+      <br>
+      <br>
+      <button type="submit" id="getsubmit" value="submit">log in</button>
+    </form>
+  </div>
+  </div>
+
+  <div class="addbackground" id="regcolumn" style="display: none">
+    <div class="indented-div">
+    <form class="form" id="regform">
+      <p>This is exciting!</p><p>We'll get you registered right away!:
+      </p>
+      <br>
+      <br>
+      <label for="regname">Choose your username:</label>
+      <br>
+      <br>
+      <input type="text" id="regname" name="regname">
+      <br><br>
+      <label for="regpass">Choose your password (6 character min.):</label>
+      <br><br>
+      <input type="text" id="regpass" name="">
+      <br><br>
+      <label for="regpassreentry">re-enter your password:</label>
+      <br><br>
+      <input type="text" id="regpassreentry" name="">
+      <br><br>
+      <label for="regemail">Enter your email address:</label>
+      <br>
+      <br>
+      <input type="text" id="regemail" name="regemail">
+      <br>
+      <br>
+      <br>
+      <br>
+      Optional:<br>
+      <br>
+      Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:
+      <br>
+      <br>
+      <label for="regsex">sex:</label>
+      <br>
+      <br>
+        <input type="radio" id="unspecifiedsex" name="regsex" value="unspecified" class="sexchange">   <label for="unspecifiedsex">unspecified</label><br>
+        <input type="radio" id="malesex" name="regsex" value="male" class="sexchange">  <label for="malesex">Male</label><br>
+        <input type="radio" id="femalesex" name="regsex" value="female" class="sexchange">   <label for="femalesex">Female</label><br>
+        <input type="radio" id="othersex" name="regsex" value="other" class="sexchange">  <label for="othersex">Other</label>
+      <br>
+      <br>
+      age:
+      <br>
+      <br>
+      <input type="radio" id="unspecifiedage" name="regage" value="unspecified" class="agechange">
+      <label for="unspecifiedsex">unspecified</label>
+      <br>
+      <input type="radio" id="age1" name="regage" value="13-18" class="agechange">
+      <label for="age1">13-18</label>
+      <br>
+      <input type="radio" id="age2" name="regage" value="19-25" class="agechange">   <label for="age2">19-25</label>
+      <br>
+      <input type="radio" id="age3" name="regage" value="26-35" class="agechange">
+      <label for="age3">26-35</label>
+      <br>
+      <input type="radio" id="age4" name="regage" value="36-45" class="agechange">
+      <label for="age3">36-45</label>
+      <br>
+      <input type="radio" id="age5" name="regage" value="46-65" class="agechange">
+      <label for="age3">46-65</label>
+      <br>
+      <input type="radio" id="age6" name="regage" value="66-86" class="agechange">
+      <label for="age3">66-85</label>
+      <br>
+      <input type="radio" id="age7" name="regage" value="86-99" class="agechange">
+      <label for="age3">86-99</label>
+      <br>
+      <input type="radio" id="age8" name="regage" value="100+" class="agechange">
+      <label for="age3">100+ (good for you!)</label>
+      <br>
+      <br>
+      <label for="regcountry">current location:</label>
+      <br>
+      <br>
+      <select id="regcountry" name="regcountry">
+        <option value="unspecified">unspecified</option>
+        <option value="United States of America">United States of America</option>
+        <option value="Afganistan">Afghanistan</option>
+        <option value="Albania">Albania</option>
+        <option value="Algeria">Algeria</option>
+        <option value="American Samoa">American Samoa</option>
+        <option value="Andorra">Andorra</option>
+        <option value="Angola">Angola</option>
+        <option value="Anguilla">Anguilla</option>
+        <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+        <option value="Argentina">Argentina</option>
+        <option value="Armenia">Armenia</option>
+        <option value="Aruba">Aruba</option>
+        <option value="Australia">Australia</option>
+        <option value="Austria">Austria</option>
+        <option value="Azerbaijan">Azerbaijan</option>
+        <option value="Bahamas">Bahamas</option>
+        <option value="Bahrain">Bahrain</option>
+        <option value="Bangladesh">Bangladesh</option>
+        <option value="Barbados">Barbados</option>
+        <option value="Belarus">Belarus</option>
+        <option value="Belgium">Belgium</option>
+        <option value="Belize">Belize</option>
+        <option value="Benin">Benin</option>
+        <option value="Bermuda">Bermuda</option>
+        <option value="Bhutan">Bhutan</option>
+        <option value="Bolivia">Bolivia</option>
+        <option value="Bonaire">Bonaire</option>
+        <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+        <option value="Botswana">Botswana</option>
+        <option value="Brazil">Brazil</option>
+        <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+        <option value="Brunei">Brunei</option>
+        <option value="Bulgaria">Bulgaria</option>
+        <option value="Burkina Faso">Burkina Faso</option>
+        <option value="Burundi">Burundi</option>
+        <option value="Cambodia">Cambodia</option>
+        <option value="Cameroon">Cameroon</option>
+        <option value="Canada">Canada</option>
+        <option value="Canary Islands">Canary Islands</option>
+        <option value="Cape Verde">Cape Verde</option>
+        <option value="Cayman Islands">Cayman Islands</option>
+        <option value="Central African Republic">Central African Republic</option>
+        <option value="Chad">Chad</option>
+        <option value="Channel Islands">Channel Islands</option>
+        <option value="Chile">Chile</option>
+        <option value="China">China</option>
+        <option value="Christmas Island">Christmas Island</option>
+        <option value="Cocos Island">Cocos Island</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Comoros">Comoros</option>
+        <option value="Congo">Congo</option>
+        <option value="Cook Islands">Cook Islands</option>
+        <option value="Costa Rica">Costa Rica</option>
+        <option value="Cote DIvoire">Cote DIvoire</option>
+        <option value="Croatia">Croatia</option>
+        <option value="Cuba">Cuba</option>
+        <option value="Curaco">Curacao</option>
+        <option value="Cyprus">Cyprus</option>
+        <option value="Czech Republic">Czech Republic</option>
+        <option value="Denmark">Denmark</option>
+        <option value="Djibouti">Djibouti</option>
+        <option value="Dominica">Dominica</option>
+        <option value="Dominican Republic">Dominican Republic</option>
+        <option value="East Timor">East Timor</option>
+        <option value="Ecuador">Ecuador</option>
+        <option value="Egypt">Egypt</option>
+        <option value="El Salvador">El Salvador</option>
+        <option value="Equatorial Guinea">Equatorial Guinea</option>
+        <option value="Eritrea">Eritrea</option>
+        <option value="Estonia">Estonia</option>
+        <option value="Ethiopia">Ethiopia</option>
+        <option value="Falkland Islands">Falkland Islands</option>
+        <option value="Faroe Islands">Faroe Islands</option>
+        <option value="Fiji">Fiji</option>
+        <option value="Finland">Finland</option>
+        <option value="France">France</option>
+        <option value="French Guiana">French Guiana</option>
+        <option value="French Polynesia">French Polynesia</option>
+        <option value="French Southern Ter">French Southern Ter</option>
+        <option value="Gabon">Gabon</option>
+        <option value="Gambia">Gambia</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Germany">Germany</option>
+        <option value="Ghana">Ghana</option>
+        <option value="Gibraltar">Gibraltar</option>
+        <option value="Great Britain">Great Britain</option>
+        <option value="Greece">Greece</option>
+        <option value="Greenland">Greenland</option>
+        <option value="Grenada">Grenada</option>
+        <option value="Guadeloupe">Guadeloupe</option>
+        <option value="Guam">Guam</option>
+        <option value="Guatemala">Guatemala</option>
+        <option value="Guinea">Guinea</option>
+        <option value="Guyana">Guyana</option>
+        <option value="Haiti">Haiti</option>
+        <option value="Hawaii">Hawaii</option>
+        <option value="Honduras">Honduras</option>
+        <option value="Hong Kong">Hong Kong</option>
+        <option value="Hungary">Hungary</option>
+        <option value="Iceland">Iceland</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="India">India</option>
+        <option value="Iran">Iran</option>
+        <option value="Iraq">Iraq</option>
+        <option value="Ireland">Ireland</option>
+        <option value="Isle of Man">Isle of Man</option>
+        <option value="Israel">Israel</option>
+        <option value="Italy">Italy</option>
+        <option value="Jamaica">Jamaica</option>
+        <option value="Japan">Japan</option>
+        <option value="Jordan">Jordan</option>
+        <option value="Kazakhstan">Kazakhstan</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Kiribati">Kiribati</option>
+        <option value="Korea North">Korea North</option>
+        <option value="Korea Sout">Korea South</option>
+        <option value="Kuwait">Kuwait</option>
+        <option value="Kyrgyzstan">Kyrgyzstan</option>
+        <option value="Laos">Laos</option>
+        <option value="Latvia">Latvia</option>
+        <option value="Lebanon">Lebanon</option>
+        <option value="Lesotho">Lesotho</option>
+        <option value="Liberia">Liberia</option>
+        <option value="Libya">Libya</option>
+        <option value="Liechtenstein">Liechtenstein</option>
+        <option value="Lithuania">Lithuania</option>
+        <option value="Luxembourg">Luxembourg</option>
+        <option value="Macau">Macau</option>
+        <option value="Macedonia">Macedonia</option>
+        <option value="Madagascar">Madagascar</option>
+        <option value="Malaysia">Malaysia</option>
+        <option value="Malawi">Malawi</option>
+        <option value="Maldives">Maldives</option>
+        <option value="Mali">Mali</option>
+        <option value="Malta">Malta</option>
+        <option value="Marshall Islands">Marshall Islands</option>
+        <option value="Martinique">Martinique</option>
+        <option value="Mauritania">Mauritania</option>
+        <option value="Mauritius">Mauritius</option>
+        <option value="Mayotte">Mayotte</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Midway Islands">Midway Islands</option>
+        <option value="Moldova">Moldova</option>
+        <option value="Monaco">Monaco</option>
+        <option value="Mongolia">Mongolia</option>
+        <option value="Montserrat">Montserrat</option>
+        <option value="Morocco">Morocco</option>
+        <option value="Mozambique">Mozambique</option>
+        <option value="Myanmar">Myanmar</option>
+        <option value="Nambia">Nambia</option>
+        <option value="Nauru">Nauru</option>
+        <option value="Nepal">Nepal</option>
+        <option value="Netherland Antilles">Netherland Antilles</option>
+        <option value="Netherlands">Netherlands (Holland, Europe)</option>
+        <option value="Nevis">Nevis</option>
+        <option value="New Caledonia">New Caledonia</option>
+        <option value="New Zealand">New Zealand</option>
+        <option value="Nicaragua">Nicaragua</option>
+        <option value="Niger">Niger</option>
+        <option value="Nigeria">Nigeria</option>
+        <option value="Niue">Niue</option>
+        <option value="Norfolk Island">Norfolk Island</option>
+        <option value="Norway">Norway</option>
+        <option value="Oman">Oman</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="Palau Island">Palau Island</option>
+        <option value="Palestine">Palestine</option>
+        <option value="Panama">Panama</option>
+        <option value="Papua New Guinea">Papua New Guinea</option>
+        <option value="Paraguay">Paraguay</option>
+        <option value="Peru">Peru</option>
+        <option value="Phillipines">Philippines</option>
+        <option value="Pitcairn Island">Pitcairn Island</option>
+        <option value="Poland">Poland</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Puerto Rico">Puerto Rico</option>
+        <option value="Qatar">Qatar</option>
+        <option value="Republic of Montenegro">Republic of Montenegro</option>
+        <option value="Republic of Serbia">Republic of Serbia</option>
+        <option value="Reunion">Reunion</option>
+        <option value="Romania">Romania</option>
+        <option value="Russia">Russia</option>
+        <option value="Rwanda">Rwanda</option>
+        <option value="St Barthelemy">St Barthelemy</option>
+        <option value="St Eustatius">St Eustatius</option>
+        <option value="St Helena">St Helena</option>
+        <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+        <option value="St Lucia">St Lucia</option>
+        <option value="St Maarten">St Maarten</option>
+        <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+        <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+        <option value="Saipan">Saipan</option>
+        <option value="Samoa">Samoa</option>
+        <option value="Samoa American">Samoa American</option>
+        <option value="San Marino">San Marino</option>
+        <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+        <option value="Saudi Arabia">Saudi Arabia</option>
+        <option value="Senegal">Senegal</option>
+        <option value="Seychelles">Seychelles</option>
+        <option value="Sierra Leone">Sierra Leone</option>
+        <option value="Singapore">Singapore</option>
+        <option value="Slovakia">Slovakia</option>
+        <option value="Slovenia">Slovenia</option>
+        <option value="Solomon Islands">Solomon Islands</option>
+        <option value="Somalia">Somalia</option>
+        <option value="South Africa">South Africa</option>
+        <option value="Spain">Spain</option>
+        <option value="Sri Lanka">Sri Lanka</option>
+        <option value="Sudan">Sudan</option>
+        <option value="Suriname">Suriname</option>
+        <option value="Swaziland">Swaziland</option>
+        <option value="Sweden">Sweden</option>
+        <option value="Switzerland">Switzerland</option>
+        <option value="Syria">Syria</option>
+        <option value="Tahiti">Tahiti</option>
+        <option value="Taiwan">Taiwan</option>
+        <option value="Tajikistan">Tajikistan</option>
+        <option value="Tanzania">Tanzania</option>
+        <option value="Thailand">Thailand</option>
+        <option value="Togo">Togo</option>
+        <option value="Tokelau">Tokelau</option>
+        <option value="Tonga">Tonga</option>
+        <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+        <option value="Tunisia">Tunisia</option>
+        <option value="Turkey">Turkey</option>
+        <option value="Turkmenistan">Turkmenistan</option>
+        <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+        <option value="Tuvalu">Tuvalu</option>
+        <option value="Uganda">Uganda</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Ukraine">Ukraine</option>
+        <option value="United Arab Erimates">United Arab Emirates</option>
+        <option value="United States of America">United States of America</option>
+        <option value="Uraguay">Uruguay</option>
+        <option value="Uzbekistan">Uzbekistan</option>
+        <option value="Vanuatu">Vanuatu</option>
+        <option value="Vatican City State">Vatican City State</option>
+        <option value="Venezuela">Venezuela</option>
+        <option value="Vietnam">Vietnam</option>
+        <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+        <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+        <option value="Wake Island">Wake Island</option>
+        <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+        <option value="Yemen">Yemen</option>
+        <option value="Zaire">Zaire</option>
+        <option value="Zambia">Zambia</option>
+        <option value="Zimbabwe">Zimbabwe</option>
+      </select>
+      <br>
+      <br>
+      <label for="regethnic">ethnicity:</label>
+      <br>
+      <br>
+      <select id="regethnic" name="regethnic">
+        <option value ="unspecified">unspecified</option>
+        <option value="Caucasian">Caucasian</option>
+        <option value="African-American / Black">African-American / Black</option>
+        <option value="Hispanic">Hispanic</option>
+        <option value="Native American">Native American</option>
+        <option value="Pacific Islander">Pacific Islander</option>
+        <option value="Asian">Asian</option>
+        <option value="other">other</option>
+      </select>
+      <br>
+      <br>
+      <label for="regedu">highest degree:</label>
+      <br>
+      <br>
+      <select id="regedu" name="regedu">
+        <option value ="unspecified">unspecified</option>
+        <option value ="less than high school diploma">less than high school diploma</option>
+        <option value="high school diploma or equivalent">high school diploma or equivalent</option>
+        <option value="associate's degree">associate's degree</option>
+        <option value="bachelor's degree">bachelor's degree</option>
+        <option value="master's degree">master's degree</option>
+        <option value="doctorate degree">doctorate degree</option>
+      </select>
+      <br>
+      <br>
+      <!-- Enter optional advanced demographic information. This info will NEVER appear publicly on this site, and will only be used anonymously for not-for-profit analytics and research.
+      <br>
+      <br> -->
+      <!-- income level:
+      <br>
+      <br>
+      your most-common outlook:
+      <br>
+      <br> -->
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <button type="submit" id="regsubmit" value="submit">register</button>
+    </form>
+  </div>
+  </div>
+
+  </div>
+
+<!-- </div> -->
+
+
+
+
+
+
+<!-- <div id="three2"> -->
+
+<div class="thirdcolumn" id="favoritescolumn" name="favoritesColumn"style="display: none">
+  <p id="favoritesheader">Your personal collection of favorites:</p>
+  <div id="favoriteslist"></div>
+</div>
+
+<div class="thirdcolumn" id="mysubmissionscolumn" name="mySubmissionsColumn" style="display: none">
+  <p id="mysubmissionsheader">My Submissions:</p>
+  <div id="mysubmissionslist"></div>
+</div>
+
+<div class="thirdcolumn" id="wisdetailscolumn" name="wisDetailsColumn" style="display: none">
+  <div id="detailsheadwrapper">
+  <i id="wisdetailsbackbutton" class="fa fa-times"></i>
+  <span id="wisdetailsheader">WisBit Details</span>
+</div>
+  <div id="wisdetailscolumnbody"></div>
+</div>
+
+<div class="thirdcolumn" id="accountcolumn" name="accountColumn" style="display: none">
+  <p>Welcome to your account page.</p>
+</div>
+
+<div class="thirdcolumn" id="welcomecolumn" name="welcomeColumn" style="display: none; padding: 10px; overflow-y: auto;">
+  <p id="welcome">
+    <img id="spock" src="flower-nature-shape-abstract-bloom-floral_161-512.png" /><b>WISER BETA-Test Updates:</b>
+    <p>
+    - Registration and login are secure and 100% functional. However, if you fill in registration incorrectly, your form may not submit and you will not receive an error message (error messages will be added soon).
+    <br>
+    <br>
+    - "articles section" not active yet.
+    <br>
+    <br>
+    - When you click on a wisbit, the details page will be blank (details coming soon).
+    </p>
+    <br>
+    <br>
+    <b>Welcome to Wiser, the social network for wisdom!</b></br></p>
+  <p>Browse the categories to your left to view wisdom submitted by registered users. To "favorite" or submit wisdom, register above!</p>
+  <p><b>Our Mission:</b></p><p>At Wiser, we believe the key to growth is learning from ourselves and others. Nobody here is perfect, but everyone comes with valuable insights. Perhaps buying your first car taught you an important lesson. Perhaps you found the secret to maintaining a loving marriage. We want to hear it! Or, if you'd like to share a famous motto that you live by, we want to know! Together, our community will spotlight the most user-tested, success-achieving wisdom.
+    <br>
+    <br>
+    <b>Commenting Guidelines:</b>
+  <br>
+  <br>Comments should be courteous and well-thought-out. Unlike other social media platforms, argumentative discourse is not encouraged. A wisdom bit (or "wisbit") is weighted by the amount of favorites and comments it receives. If you disagree with the wisdom, your best course of action is to submit your own alternative wisbit, which may gain traction and win in the battle of ideas! Lastly, while spiritual wisdom is acceptable, no religion or religious figures should be named or promoted.
+</p>
+</div>
+
+<div class="thirdcolumn" id="wishingwellcolumn" name="wishingWellColumn" style="display: none;">
+  <p>Welcome to the Wishing Well!</p>
+  <p>Although this is an intellect-driven site, even the most secular and analytic of us need a wish now and then.</p>
+    <p>Release your inner wants and desires, anonymously. Each day, you will gain one "wish penny" to toss into our waterless well. The neat part is, by grabbing at the well, you can read any wish penny in the history of the well. This well is never emptied!</p>
+  <div id="wishingwell"><a id="coindiv" class="trigger_popup_fricc"><img id="wwimage" src="https://66.media.tumblr.com/a55a293ac696afffa584d70c69b856b1/tumblr_p6gxekulZ11wvrjqso1_500.gifv" /></a>
+
+    <div class="hover_bkgr_fricc">
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">&times;</div>
+            <p id="coincontents">searching...</p>
+        </div>
+    </div></div>
+  <!--https://www.formywife.info/ow/2017/09/15/garden-fountain-animation-decent-image-scraps-animated-fountain_6d1800efa2916e5b.gif-->
+  <div id="wellsubmit">
+    <label for="wellwish"></label>
+    <input id="wellwish" type="text" placeholder="write your wish...">
+    <button id="wellwishbutton">toss my penny</button>
+  </div>
+</div>
+
+<div class="thirdcolumn" id="calendarcolumn" name="calendarColumn" style="display: none; padding: 10px; overflow-y: auto;">
+  <p id="calendarheader">My Wisdom Calendar:</p>
+  <p id ="calendarintro" style="display: inline"><span id="calintroline">Need inspiration with your morning brew? Customize your calendar with your favorite wisdom!<br>Start by choosing a day of the week:</span><a id="savedicon" style="visibility: hidden; color: green;">...calendar saved</a></p><br>
+  <div id="bigcalendarbox" class="calendarbox">
+  </div>
+</div>
+
+<div class="thirdcolumn" id="dashboardcolumn" name="dashboardColumn" style="display: none; padding: 10px; overflow-y: auto;">
+  <a id="dashboardheader">My Dashboard</a>
+  <div id="mydashboard"></div>
+  <div id="dashboardcalendar" style="display: block"></div>
+  <div id="todo-list"></div>
+  <div id="thoughtpad">
+    <p>My <i>auto-saving</i> notepad:</p>
+    <div class="dashboxouter" id="tpouter">
+      <textarea id="tpbox" class="dashboxinner"></textarea>
+    </div>
+  </div>
+  <div id="daily goal">
+    <div id="dgbox">
+      <div id="dgbox-header">My Goal Today:</div>
+      <div id="dgbox-outer" class="dashboxouter">
+        <div id="dgbox-goals" class="dashboxinner">Add one goal :)</div>
+      </div>
+    </div>
+    <div id="dgedit">
+    </div>
+  </div>
+  </div> 
+</div>
+
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  //code provided by Firebase in 'settings'
+  // var firebaseConfig = {
+  //   apiKey: "AIzaSyCPHPfX7XgMliNAY9MT-yZPYuhEWol_FeM",
+  //   authDomain: "twocents-6a4cc.firebaseapp.com",
+  //   databaseURL: "https://twocents-6a4cc.firebaseio.com",
+  //   projectId: "twocents-6a4cc",
+  //   storageBucket: "twocents-6a4cc.appspot.com",
+  //   messagingSenderId: "366930428114",
+  //   appId: "1:366930428114:web:d1dec284d3d7a0399a6d0b",
+  //   measurementId: "G-YTVDEX7L18"
+  // };
+
+  //   // Your web app's Firebase configuration
+  //   firebase.initializeApp(firebaseConfig);
+  //   const auth = firebase.auth();
+
+  // // Firebase.firestore() gives your app access to your database. This is passed to a variable for ease of use.
+  // const db = firebase.firestore()
+</script>
+<script  src="script.js" type="module"></script>
+</div>
+</body>
+</html>
+
+<!-- The focus of this social network is to submit usable wisdom that can be critiqued, endorsed, and tested by other users. -->
+
+<!-- If you disagree with the premise of another user's wisdom, simply do not favorite and do not comment on that wisdom.  -->
