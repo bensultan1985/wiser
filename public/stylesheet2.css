@@ -186,8 +186,8 @@ select {
     box-sizing: border-box;
     font-family: helvetica;
 
-    /* max-width: 500px; */
-    max-width: 33vw !important;
+    max-width: 1000px;
+    /* max-width: 33vw !important; */
     /* max-width: 680px !important; */
     /* width: 500px !important; */
     min-width: 200px;
@@ -755,12 +755,12 @@ h4, #categorytitle {
 }
 
 #favoritescolumn {
-        max-width: 500px;
+        max-width: 1000px;
         overflow-y: auto;
 }
 
 #accountcolumn {
-        max-width: 500px;
+        max-width: 1000px;
 }
 
 #calmsginput {
@@ -850,7 +850,7 @@ background: rgb(38, 157, 255);
 
 #dashboardcolumn {
     /* width: 500px; */
-    max-width: 500px;
+    max-width: 1000px;
 }
 
 #daytoset {
@@ -918,6 +918,7 @@ background: rgb(38, 157, 255);
 }
 
 #wishingwellcolumn {
+    max-width: 1000px;
     padding: 10px;
     overflow-y: auto;
 }
