@@ -1145,7 +1145,7 @@ const getWise = async (catDetails) => {
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}"> "${doc.wisdom}" <br><br><div class="itemauthor" style="display: block">submitted by ${doc.user}</div></div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}"> "${doc.wisdom}" <br><br><div class="itemauthor">submitted by ${doc.user}</div></div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1291,7 +1291,7 @@ subCat: null};
         if (doc.subCat) subText = '/' + doc.subCat;
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}> "${doc.wisdom}" <br><br><div class="itemauthor" style="display: block">submitted by ${doc.user}</div></div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}> "${doc.wisdom}" <br><br><div class="itemauthor">submitted by ${doc.user}</div></div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1367,7 +1367,7 @@ subCat: null};
               if (leftoverDocs[i].subCat) subText = '/' + leftoverDocs[i].subCat;
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
-              item.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}> "${leftoverDocs[i].wisdom}" <br><br><div class="itemauthor" style="display: block">submitted by ${leftoverDocs[i].user}</div></div>`;
+              item.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}> "${leftoverDocs[i].wisdom}" <br><br><div class="itemauthor">submitted by ${leftoverDocs[i].user}</div></div>`;
               if (loggedIn) {
                 db.collection('usersdb').doc(userId).get().then(snapshot => {
                   favInfo = snapshot.data().favWis
