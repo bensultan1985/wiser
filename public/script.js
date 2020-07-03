@@ -85,6 +85,7 @@ let getSubmit = document.getElementById("getsubmit");
 let getName = document.getElementById("getname");
 let getEmail = document.getElementById("getemail")
 let getPass = document.getElementById("getpass");
+let saveLoginInfo = document.getElementById("savelogininfo")
 
 
 let headLogin = document.getElementById("headlogin");
@@ -498,6 +499,18 @@ const loginAfterReg = (thoughtStr, authUserId) => {
 
 //opens the login column
 const openLoginColumn = () => {
+  saveLoginInfo.checked = true;
+  getEmail.value = '';
+  getPass.name = '';
+  getPass.value = '';
+  if (window.localStorage.getItem('savedLocalEmail') && window.localStorage.getItem('savedLocalPass')) {
+    console.log('working')
+    getEmail.value = window.localStorage.getItem('savedLocalEmail');
+    getPass.name = window.localStorage.getItem('savedLocalPass');
+    for (let i = getPass.name.length; i > 0; i--) {
+      getPass.value += '*'
+    }
+  }
   columnToggle(loginColumn)
 }
 
@@ -549,6 +562,15 @@ openMySubmissions()
 const checkLogin = (e) => {
   e.preventDefault();
   let loginFound = false;
+
+  if (saveLoginInfo.checked) {
+    window.localStorage.setItem('savedLocalEmail', getEmail.value)
+    window.localStorage.setItem('savedLocalPass', getPass.name)
+  } else {
+    localStorage.removeItem('savedLocalEmail')
+    localStorage.removeItem('savedLocalPass')
+  }
+
   const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.name);
   promise.catch(e => {
     console.log(e.message)
