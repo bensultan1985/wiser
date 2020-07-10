@@ -16,7 +16,7 @@
     </head>
 </head>
 <body>
-  <div class="mobile-message">The current version of Wiser is not mobile-compatible. Please visit wiser.earth from a tablet or computer.</div>
+  <div class="mobile-message" style="padding: 10px;"><center><div style="color: green;">Wiser</div></center><br><br>The current version of Wiser is not mobile-compatible. Please visit wiser.earth from a tablet or computer.</div>
   <div class="wrapper">
     <!-- <div class="one"><h1>T₵</h1><h4 id="tctag">Two-Cents: the social collection of wisdom</h4></div> -->
     <div class="one" id="leftheader"><h1 id="wiserlogo">Wiser</h1><h4 id="tctag">the social collection of wisdom</h4></div>
@@ -1023,11 +1023,12 @@
   </div>
 
   <div class="addbackground" id="regcolumn" style="display: none">
+    <div id="regheading">Registration</div>
     <div class="indented-div">
     <form class="form" id="regform">
-      <p>This is exciting!</p><p>We'll get you registered right away!:
+      <div id="reg-p-1">
+      <p>This is exciting! We'll get you registered right away:
       </p>
-      <br>
       <br>
       <label for="regname">Choose your username:</label>
       <br>
@@ -1046,27 +1047,28 @@
       <br>
       <br>
       <input type="text" id="regemail" name="regemail" class="default-input">
+      
       <br>
       <br>
-      <br>
-      <br>
-      Optional:<br>
-      <br>
-      Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:
+      <div class="regnav">
+      <button id="regback1" class="regnavbutton inactive-button">Back</button>
+      </span><span id="p11" class="regsquare"></span><span id="p12" class="regsquare-empty"></span><span id="p13" class="regsquare-empty"></span>
+      <button id="regnext1" class="regnavbutton">Next</button>
+      </div>
+    </div>
+
+    <div id="reg-p-2" style="display: none;">
+      <br>Optional: Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:
       <br>
       <br>
       <label for="regsex">sex:</label>
       <br>
-      <br>
-        <input type="radio" id="unspecifiedsex" name="regsex" value="unspecified" class="sexchange">   <label for="unspecifiedsex">unspecified</label><br>
+        <input type="radio" id="unspecifiedsex" name="regsex" value="unspecified" class="sexchange">   <label for="unspecifiedsex">unspecified</label>
         <input type="radio" id="malesex" name="regsex" value="male" class="sexchange">  <label for="malesex">Male</label><br>
-        <input type="radio" id="femalesex" name="regsex" value="female" class="sexchange">   <label for="femalesex">Female</label><br>
+        <input type="radio" id="femalesex" name="regsex" value="female" class="sexchange">   <label for="femalesex">Female</label>
         <input type="radio" id="othersex" name="regsex" value="other" class="sexchange">  <label for="othersex">Other</label>
       <br>
-      <br>
-      age:
-      <br>
-      <br>
+      <div id="regage" >age:</div>
       <input type="radio" id="unspecifiedage" name="regage" value="unspecified" class="agechange">
       <label for="unspecifiedsex">unspecified</label>
       <br>
@@ -1092,6 +1094,16 @@
       <br>
       <input type="radio" id="age8" name="regage" value="100+" class="agechange">
       <label for="age3">100+ (good for you!)</label>
+      <br>
+      <br>
+      <div class="regnav">
+      <button id="regback2" class="regnavbutton ">Back</button>
+      </span><span id="p21" class="regsquare"></span><span id="p22" class="regsquare"></span><span id="p23" class="regsquare-empty"></span>
+      <button id="regnext2" class="regnavbutton">Next</button>
+      </div>
+    </div>
+    <div id="reg-p-3" style="display: none;">
+      <br>Optional: Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:
       <br>
       <br>
       <label for="regcountry">current location:</label>
@@ -1376,8 +1388,6 @@
         <option value="master's degree">master's degree</option>
         <option value="doctorate degree">doctorate degree</option>
       </select>
-      <br>
-      <br>
       <!-- Enter optional advanced demographic information. This info will NEVER appear publicly on this site, and will only be used anonymously for not-for-profit analytics and research.
       <br>
       <br> -->
@@ -1392,11 +1402,15 @@
       <br>
       <br>
       <br>
-      <button type="submit" id="regsubmit" value="submit">register</button>
+      <div class="regnav">
+      <button id="regback3" class="regnavbutton ">Back</button>
+    </span><span id="p31" class="regsquare"></span><span id="p32" class="regsquare"></span><span id="p33" class="regsquare"></span>
+      <button type="submit" id="regsubmit" value="submit">register!</button>
     </form>
   </div>
   </div>
-
+  </div>
+</div>
   </div>
 
 <!-- </div> -->

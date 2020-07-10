@@ -85,7 +85,27 @@ let getSubmit = document.getElementById("getsubmit");
 let getName = document.getElementById("getname");
 let getEmail = document.getElementById("getemail")
 let getPass = document.getElementById("getpass");
-let saveLoginInfo = document.getElementById("savelogininfo")
+let saveLoginInfo = document.getElementById("savelogininfo");
+
+let regBack1 = document.getElementById("regback1");
+let regNext1 = document.getElementById("regnext1");
+let regBack2 = document.getElementById("regback2");
+let regNext2 = document.getElementById("regnext2");
+let regBack3 = document.getElementById("regback3");
+let regNext3 = document.getElementById("regnext3");
+let p11 = document.getElementById("p11");
+let p12 = document.getElementById("p12");
+let p13 = document.getElementById("p13");
+let p21 = document.getElementById("p21");
+let p22 = document.getElementById("p22");
+let p23 = document.getElementById("p23");
+let p31 = document.getElementById("p31");
+let p32 = document.getElementById("p32");
+let p33 = document.getElementById("p33");
+let regP1 = document.getElementById("reg-p-1");
+let regP2 = document.getElementById("reg-p-2");
+let regP3 = document.getElementById("reg-p-3");
+
 
 
 let headLogin = document.getElementById("headlogin");
@@ -1791,6 +1811,25 @@ const backToPrevThird = (e) => {
 }
 
 
+const openReg2 = (e) => {
+  e.preventDefault()
+  regP3.style.display = 'none';
+  regP1.style.display = 'none';
+  regP2.style.display = 'block';
+}
+
+const openReg1 = (e) => {
+  e.preventDefault()
+  regP2.style.display = 'none';
+  regP1.style.display = 'block';
+}
+
+const openReg3 = (e) => {
+  e.preventDefault()
+  regP2.style.display = 'none';
+  regP3.style.display = 'block';
+}
+
 
 
 
@@ -1855,6 +1894,11 @@ category.addEventListener('input', showSubCats);
 getNew.addEventListener('click', getNewest);
 mySubmissionsLink.addEventListener('click', openMySubmissions)
 getPass.addEventListener('input', addAsteriskLogin)
+regNext1.addEventListener('click', openReg2)
+regBack2.addEventListener('click', openReg1)
+regBack3.addEventListener('click', openReg2)
+regNext2.addEventListener('click', openReg3)
+regBack1.addEventListener('click', (e) => {e.preventDefault()})
 
 
 let subcats = document.getElementsByClassName("subcat");

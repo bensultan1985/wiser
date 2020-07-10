@@ -789,11 +789,11 @@ h4, #categorytitle {
 }
 
 #regcolumn {
-    border-radius: 25px 0px 0px 25px;
+    border-radius: 25px 25px 25px 25px;
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
-    height: auto;
+    height: 100%;
 }
 
 .indented-div {
@@ -1237,6 +1237,10 @@ background: rgb(38, 157, 255);
     border-color: rgb(160, 104, 41);
     border-radius: 0px 0px 10px 10px;
     padding: 10px;
+       /* no highlight of text */
+       -webkit-touch-callout: none; /* iOS Safari */
+       -webkit-user-select: none; /* Safari */
+                                     /* supported by Chrome, Edge, Opera and Firefox */
 }
 
 .favorited {
@@ -1250,10 +1254,18 @@ background: rgb(38, 157, 255);
     border-color: rgb(160, 104, 41);
     border-radius: 0px 0px 10px 10px;
     padding: 10px;
+       /* no highlight of text */
+       -webkit-touch-callout: none; /* iOS Safari */
+       -webkit-user-select: none; /* Safari */
+                                     /* supported by Chrome, Edge, Opera and Firefox */
 }
 
 .commentlink {
     cursor: pointer;
+    /* no highlight of text */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+                                  /* supported by Chrome, Edge, Opera and Firefox */
 }
 
 .borderalt1 {
@@ -1483,11 +1495,12 @@ background: rgb(38, 157, 255);
     /* padding: 10px; */
 }
 
-.mobile-message {
-    display: none;
-}
 
-@media screen and (max-device-width: 768px) {
+    .mobile-message {
+        display: none;
+}  
+
+@media screen and (max-device-width: 769px) {
     .wrapper {
         display: none;
     }
@@ -1495,8 +1508,19 @@ background: rgb(38, 157, 255);
         display: none;
     }
     .mobile-message {
-        width: 100%;
-        font-size: 24px;
+        box-sizing: border-box;
+        display: block;
+        color: black;
+        /* margin: 10px; */
+        background-color: white;
+        padding: 20px;
+        height: auto;
+        width: 100vw;
+        font-size: 30px;
+    }
+    body {
+        min-width: 100vw;
+        width: 100vw;
     }
 }
 
@@ -1530,4 +1554,73 @@ background: rgb(38, 157, 255);
     .calendarimage {
         max-height: 800px;
     }
+}
+
+#regheading {
+    box-sizing: border-box;
+    background: green;
+    margin: 0px;
+    min-height: 50px;
+    /* padding: 20px; */
+    color: white;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px 25px 0px 0px;
+    text-align: center;
+}
+
+.regsquare {
+    display: inline-block;
+    background: green;
+    height: 6px;
+    width: 26px;
+    margin-right: 8px;
+}
+
+.regsquare-empty {
+    display: inline-block;
+    background: rgba(100, 128, 100, 0.541);
+    height: 6px;
+    width: 26px;
+    margin-right: 8px;
+}
+
+.regnavbutton {
+    border-radius: 10px;
+    margin-right: 8px;
+}
+
+.regnavbutton:hover {
+    border-radius: 10px;
+    margin-right: 8px;
+}
+
+
+.inactive-button {
+    color: lightgray;
+    background: white;
+    border-color: lightgray;
+}
+
+.inactive-button:hover {
+    color: lightgray;
+    background: white;
+}
+
+.sexchange {
+    display: inline-block;
+    /* margin-left: 10px; */
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.regnav {
+    position: absolute;
+    bottom: 15%;
+}
+
+#regage {
+    margin-top: 10px;
+    margin-bottom: 8px;
 }
