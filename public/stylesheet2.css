@@ -36,7 +36,7 @@ body {
     overflow-y: hidden;
     height: 100vh;
     width: 100vw;
-    min-width:800px;
+    min-width:870px;
 }
 
 h1 {
@@ -85,6 +85,10 @@ ul {
     border: none;
     background: green;
     color: white;
+}
+
+#formcolumn {
+    border-radius: 25px 0px 0px 25px;
 }
 
 #form {
@@ -210,6 +214,7 @@ select {
 }
 
 #viewer {
+    position: relative;
     /* min-width: 250px; */
     /* max-width: 450px; */
     /* background: white; */
@@ -217,8 +222,9 @@ select {
     /* background-color: rgba(255, 153, 0, 0.651); */
 }
 
-#viewerwindow {
+#viewerWindow {
     max-height: 680%;
+    min-width: 335px;
 }
 
 
@@ -322,6 +328,7 @@ h4, #categorytitle {
 .result-li {
     display: block;
     /* position: relative; */
+    min-width: 270px;
     max-width: 90%;
     padding: 10px;
     margin: 10px;
@@ -340,12 +347,13 @@ h4, #categorytitle {
     background: rgb(6, 190, 6);
     padding: 10px;
     margin: 10px;
-    width: 90%;
+    max-width: 90%;
     margin-left: 4px;
     color: rgb(160, 104, 41);
     border: solid;
     border-width: 3px;
     border-color: green;
+    min-width: 270px;
     border-radius: 5%;
 }
 
@@ -354,9 +362,15 @@ h4, #categorytitle {
     justify-items: left;
     cursor: pointer;
     position: relative;
-    padding: 10px;
+    padding: 12px;
+    padding-left: 30px;
+    padding-right: 30px;
     top: -10px;
-    left: 10px;
+    /* left: 10px; */
+}
+
+#makesubmit:hover {
+    color: white;
 }
 
 #headlogin {
@@ -499,15 +513,31 @@ h4, #categorytitle {
     padding: 4px 26px;
 }
 
+.default-input {
+    width: 250px;
+    padding: 5px;
+}
+
 .displaycomment {
-    padding-left: 30px;
+    /* color: rgb(160, 104, 41); */
+    margin: 0px;
+    background-color: #f5f2ef;
+    /* border-color: rgb(179, 179, 179); */
+
+    padding-left: 10px;
 }
 
 .displaycommentuser {
+    margin: 0px;
     /* position: relative; */
+    background-color: #f5f2ef;
+    border-bottom: solid;
+    border-width: 1px;
+    padding-bottom: 4px;
+    /* color: rgb(160, 104, 41); */
     display: block;
     text-align: right;
-    padding-top: 10px;
+    padding-top: 4px;
     /* top: -10px; */
     /* padding-left: 100px; */
 }
@@ -519,10 +549,11 @@ h4, #categorytitle {
     border: solid;
     border-width: 2px;
     border-color: rgb(160, 104, 41);
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
     padding: 10px;
     cursor: pointer;
     font-size: 18px;
+    /* comments have moved to wisbit details */
 }
 
 .fa-bars {
@@ -631,9 +662,21 @@ h4, #categorytitle {
 .favoritestar {
     padding-top: 20px;
     padding-bottom: 20px;
+    cursor: pointer;
 }
 
 .favoritestar:hover {
+    position: relative;
+    color: rgb(230, 92, 92);
+}
+
+.details-favoritestar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+
+.details-favoritestar:hover {
     position: relative;
     color: rgb(230, 92, 92);
 }
@@ -732,6 +775,7 @@ h4, #categorytitle {
 }
 
 #logincolumn {
+    border-radius: 25px;
     box-sizing: border-box;
     padding: 10px;
     width: 100%;
@@ -739,11 +783,13 @@ h4, #categorytitle {
 }
 
 #promptcolumn {
+    border-radius: 25px;
     width: 100%;
     height: 100%;
 }
 
 #regcolumn {
+    border-radius: 25px 0px 0px 25px;
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
@@ -1121,30 +1167,38 @@ background: rgb(38, 157, 255);
 } */
 
 .populatecomments {
-    color: rgb(209, 168, 63);
+    /* color: rgb(209, 168, 63); */
     padding: 8px;
     /* margin: 10px; */
-    margin-top: 0px;
+    margin-top: 5px;
     background: white;
     border: solid;
     border-width: 2px;
-    border-top: none;
+    /* border-top: none; */
     border-color: rgb(160, 104, 41);
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    display: none;
 }
+
+.postcommentbutton {
+    color: unset;
+    border-color: unset;
+}
+
 .populatecomments-notlogged {
     color: rgb(209, 168, 63);
     padding: 8px;
     /* margin: 10px; */
-    margin-top: 0px;
+    margin-top: 5px;
     background: white;
     border: solid;
     border-width: 2px;
     border-color: rgb(160, 104, 41);
     border-radius: 10px 10px 10px 10px;
+    display: none;
 }
-
-.favoritestar {
+/* this is old code from before moving comments to wisbit details */
+/* .favoritestar {
     background-color: white;
     padding: 8px;
     margin-top: 0px;
@@ -1169,6 +1223,37 @@ background: rgb(38, 157, 255);
     border-bottom: none;
     border-color: rgb(160, 104, 41);
     border-radius: 10px 10px 0px 0px;
+} */
+
+.favoritestar {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.849);
+    margin-top: 0px;
+    border-top: none;
+    margin-bottom: 0px;
+    border: solid;
+    border-width: 2px;
+    border-bottom: none;
+    border-color: rgb(160, 104, 41);
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px;
+}
+
+.favorited {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.863);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: solid;
+    border-width: 2px;
+    border-bottom: none;
+    border-color: rgb(160, 104, 41);
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px;
+}
+
+.commentlink {
+    cursor: pointer;
 }
 
 .borderalt1 {
@@ -1248,16 +1333,29 @@ background: rgb(38, 157, 255);
 /* } */
 
 #viewid {
-    position: relative;
+    z-index: 2;
     box-sizing: border-box;
+    position: absolute;
+    display: block;
+    /* background: rgb(65, 121, 224); */
     background: white;
     /* margin: 4px; */
     color: green;
-    border-bottom: solid;
+    font-weight: 500;
     border: solid;
-    border-color: green;
+    /* border-left: solid; */
+    /* border: solid; */
+    border-color: rgb(210, 238, 210);
+    /* border-left-color: rgb(6, 190, 6); */
+    border-left-color: green;
+    border-top-color: green;
     border-width: 3px;
-    border-radius: 25px 0px 0px 0px;
+    border-right: none;
+    /* border-right-width: 2px; */
+    border-left-width: 2px;
+    border-bottom: none;
+    border-right-color: rgb(170, 212, 170);
+    border-radius: 0px 25px 0px 0px;
     /* margin:10px; */
     /* border-radius: 25px 25px 0px 0px; */
     /* cool curves: */
@@ -1267,10 +1365,169 @@ background: rgb(38, 157, 255);
     padding-bottom: 0px;
     min-height: 54px;
     max-height: 100px;
-    width: 98%;
+    width: 70%;
     font-family: helvetica;
-    font-size: 24px;
+    font-size: 22px;
     overflow-x: hidden;
     overflow-y: hidden;
     /* font-weight: 600; */
+    /* max-width: 33vw !important; */
+    max-width: 31%;
+    /* height: 88vh; */
+    float: left;
+    font-family: helvetica;
+    /* max-width: 500px; */
+    /* width: 500px !important; */
+    height: 60px;
+    /* max-width: 550px; */
+    /* width: 33vw; */
+    /* min-width: 200px; */
+    /* border: solid;
+    border-color: green;
+    border-width: 3px; */
+    /* background: rgba(255, 255, 255, 0); */
+    /* background: white; */
+    color: green;
+    padding-right: 20px;
+    margin-left: 0px;
+    margin-right:20px;
+    overflow-y: hidden;
+    min-width: 310px;
+}
+
+#viewidback {
+    z-index: 1;
+    box-sizing: border-box;
+    position: absolute;
+    display: block;
+    /* background: rgb(65, 121, 224); */
+    background: #ffbc59;
+    /* margin: 4px; */
+    color: green;
+    font-weight: 500;
+    border: solid;
+    /* border-left: solid; */
+    /* border: solid; */
+    border-color: r#ffbc59;
+    /* border-left-color: rgb(6, 190, 6); */
+    border-left-color: #ffbc59;
+    border-top-color: #ffbc59;
+    border-width: 3px;
+    border-right: none;
+    /* border-right-width: 2px; */
+    border-left-width: 2px;
+    border-bottom: none;
+    border-right-color: #ffbc59;
+    border-radius: 0px 0px 0px 0px;
+    /* margin:10px; */
+    /* border-radius: 25px 25px 0px 0px; */
+    /* cool curves: */
+    /* border-radius: 10px 100px / 120px; */
+    padding: 10px;
+    padding-top: 14px;
+    padding-bottom: 0px;
+    min-height: 54px;
+    max-height: 100px;
+    width: 70%;
+    font-family: helvetica;
+    font-size: 22px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* font-weight: 600; */
+    /* max-width: 33vw !important; */
+    max-width: 31%;
+    /* height: 88vh; */
+    float: left;
+    font-family: helvetica;
+    /* max-width: 500px; */
+    /* width: 500px !important; */
+    height: 60px;
+    /* max-width: 550px; */
+    /* width: 33vw; */
+    /* min-width: 200px; */
+    /* border: solid;
+    border-color: green;
+    border-width: 3px; */
+    /* background: rgba(255, 255, 255, 0); */
+    /* background: white; */
+    color: green;
+    padding-right: 20px;
+    margin-left: 0px;
+    margin-right:20px;
+    overflow-y: hidden;
+    min-width: 310px;
+}
+
+#linebreak {
+    height: 3px;
+    background: green;
+}
+
+#welcomecolumn > p {
+    line-height: 140%;
+}
+
+.details-populatecomments {
+    border: none;
+    padding: 20px;
+}
+
+.details-populatecomments-notlogged {
+    border: none;
+}
+
+.details-postcommentbutton {
+}
+
+.details-displaycomment {
+    /* padding: 10px; */
+}
+
+.mobile-message {
+    display: none;
+}
+
+@media screen and (max-device-width: 768px) {
+    .wrapper {
+        display: none;
+    }
+    .row {
+        display: none;
+    }
+    .mobile-message {
+        width: 100%;
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .contextlink {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 2500px) {
+    .column {
+        width: 1000px;
+    }
+
+    #retrievedisplay {
+        max-width: 1000px;
+    }
+
+    .thirdcolumn {
+        max-width: 2000px;
+    }
+
+    #dashboardcolumn {
+        max-width: 2000px;
+    }
+
+    #dashboardcalendar {
+        max-height: 1000px;
+    }
+
+    .calendarimage {
+        max-height: 800px;
+    }
 }

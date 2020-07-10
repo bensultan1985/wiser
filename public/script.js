@@ -1,7 +1,6 @@
 
 import isValidEmailAddress from './emailver.js';
 import grabWish from './grabWish.js'
-import createDetails from './createDetails.js'
 
 var firebaseConfig = {
   apiKey: "AIzaSyCPHPfX7XgMliNAY9MT-yZPYuhEWol_FeM",
@@ -71,8 +70,9 @@ let wisDetailsBackButton = document.getElementById("wisdetailsbackbutton");
 let postTags = document.getElementById("posttags");
 let dbCount = document.getElementById("dbcount");
 let regPassReEntry = document.getElementById("regpassreentry");
-let detailsHeadWrapper = document.getElementById("detailsheadwrapper")
-let viewId = document.getElementById('viewid')
+let detailsHeadWrapper = document.getElementById("detailsheadwrapper");
+let viewId = document.getElementById('viewid');
+let viewIdBack = document.getElementById('viewidback');
 
 
 //form elements
@@ -160,7 +160,8 @@ const columnToggle = (selectedColumn) => {
 }
 
   const toggleSecColumn = (selectedColumn) => {
-  
+  viewId.style.display = 'none';
+  viewIdBack.style.display = 'none';
   loginColumn.style.display = 'none';
   promptColumn.style.display = 'none';
   // viewerWindow.style.display = 'block';
@@ -174,6 +175,10 @@ const columnToggle = (selectedColumn) => {
 
 const toggleThirdColumn = (selectedColumn) => {
   checkPrevThird()
+  // if (selectedColumn != wisDetailsColumn) {
+  //   viewId.style.display = 'none';
+  //   viewIdBack.style.display = 'none';
+  // }
   dashboardColumn.style.display = 'none';
   wishingWellColumn.style.display = 'none';
   calendarColumn.style.display = 'none';
@@ -404,7 +409,7 @@ const addAsteriskLogin = (e) => {
 const regNewUser = (e) => {
   e.preventDefault();
 let setAuthUserId = '';
-let thoughtStr = 'This notepad will auto-save with every keystroke. No need to push save! Whatever you write will be here for you the next time you log in! This is ideal for: \n\n-Quick phone call notes.\n-Project ideas\n-appointment reminders\n-creative writing\n\n It\'s like your very own digital Post-It pad! Erase this text and type your own notes to get started!'
+let thoughtStr = 'This notepad will auto-save with every keystroke. Your note will be here the next time you log in! This is ideal for: \n\n-Quick phone call notes.\n-Project ideas\n-appointment reminders\n-creative writing\n\n It\'s like your very own digital Post-It pad! Erase this text and type your own notes to get started!'
 let canReg = true;
 if (!isValidEmailAddress(regEmail.value)) {
   console.log('email not valid');
@@ -1013,6 +1018,8 @@ const submitComment = (event, comment) => {
 
 //last stage in submitting a comment:
 const finalComment = (comment) => {
+  //to pull up the right viewer window. fix later
+  if (lastCategory.mainCat == 'newest wisdom') lastCategory.mainCat = 'New' 
   console.log(`putting to document ${comment.name}`)
   console.log(`data is: ${comment.parentElement.actualcomment.value}`)
   let updateDb = db.collection('wisdomcollection').doc(comment.name)
@@ -1106,6 +1113,7 @@ const editThoughtStr = () => {
 //re-usable function that displays stored wisdom by category
 //cat is passed via the event listener's anonymous function (this is a work-around - event listeners cannot pass params to a declared function)
 const getWise = async (catDetails) => {
+
   lastSecondColumn = viewer;
   console.log(catDetails)
   console.log(catDetails)
@@ -1114,12 +1122,17 @@ const getWise = async (catDetails) => {
   if (lastCategory.mainCat == 'New') return getNewest();
   let commentableArray = false;
   viewer.innerHTML = '';
+    let emptyBlock = document.createElement('div')
+  emptyBlock.style.height = '60px';
+  viewer.appendChild(emptyBlock)
   viewId.innerHTML = lastCategory.mainCat
   if (lastCategory.subCat) {
     viewId.innerHTML += '/' + lastCategory.subCat
   }
-  viewer.appendChild(viewId)
+  // viewer.appendChild(viewId)
   columnToggle(viewer);
+  viewId.style.display = 'block';
+  viewIdBack.style.display = 'block';
   //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
@@ -1167,7 +1180,7 @@ const getWise = async (catDetails) => {
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}"> "${doc.wisdom}" <br><br><div class="itemauthor">submitted by ${doc.user}</div></div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}"> "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1192,34 +1205,90 @@ const getWise = async (catDetails) => {
             let favorited = document.createElement("div");
             item.appendChild(favorited);
             favorited.className= `favorited ${subClass}`;
-            favorited.style.padding ="10px";
             favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
             needStar = true;
           }
     }
+
+
         let populateComments = document.createElement("div")
         // populateComments.style.borderRadius = '0% 0% 10% 10%'
-          doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br>________________<br></p>`)
+          doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
           if (!doc.wisComments[0])  {
             populateComments.className = `populatecomments${subClass}`
             
           } else {
             populateComments.className = `populatecomments-notlogged${subClass}`
           }
-          if (loggedIn) item.appendChild(populateComments);
-          if (!loggedIn && doc.wisComments[0]) item.appendChild(populateComments)
-        if (loggedIn) {
-          populateComments.className = `populatecomments ${subClass}`
-          let postCommentForm = document.createElement("form")
-          postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
-          <input type="text" class="postcommentid" style"visibility: hidden placeholder=${doc.id}><input type="text" class="actualcomment" name="actualcomment"/><button type="submit" class="postcommentbutton" value="submit" style="margin-left: 4px" name=${doc.id}>comment</button></form>`;
-          populateComments.appendChild(postCommentForm)
-          commentableArray = true;
-      }
         //append the viewer column with a new item
         viewer.appendChild(item);
+        let commentLink = document.createElement("div");
+    
+        commentLink.className = `favorited ${subClass} commentlink`
+        commentLink.innerHTML = `comments (${doc.wisComments.length})`
+        item.appendChild(commentLink);
+        commentLink.addEventListener('click', (e) => {
+          e.preventDefault()
+          //to open wisdetails:
+          // let id = commentLink.parentElement.name
+          // if (wisDetailsColumn.style.display == 'block' && tempDetails == commentLink.parentElement.name) {
+          //   columnToggle(prevThird)
+          // } else {
+          //   wisDetailsColumnBody.innerHTML = ''
+          //   columnToggle(wisDetailsColumn)
+          //   detailsHeadWrapper.addEventListener('click', backToPrevThird)
+          //   console.log(commentLink.parentElement.name)
+          //   db.collection('wisdomcollection').doc(commentLink.parentElement.name).get().then((snapshot) => {
+          //     let doc = snapshot.data()
+          //       createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+          //   })
+          // }
+          if (populateComments.style.display == 'block') {
+          populateComments.style.display = 'none';
+          } else {
+          populateComments.style.display = 'block';
+          }
+          tempDetails = commentLink.parentElement.name;
+        })
+        let contextLink = document.createElement("div");
+        contextLink.className = `favorited ${subClass} commentlink contextlink`
+        contextLink.innerHTML = 'more context'
+        item.appendChild(contextLink);
+        contextLink.addEventListener('click', (e) => {
+          e.preventDefault()
+          let id = contextLink.parentElement.name
+            console.log('2',tempDetails, contextLink.parentElement.name)
+            wisDetailsColumnBody.innerHTML = ''
+            columnToggle(wisDetailsColumn)
+            detailsHeadWrapper.addEventListener('click', backToPrevThird)
+            console.log(contextLink.parentElement.name)
+            db.collection('wisdomcollection').doc(contextLink.parentElement.name).get().then((snapshot) => {
+              let doc = snapshot.data()
+                createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+            })
+          tempDetails = contextLink.parentElement.name;
+        })
+        console.log(commentLink.parentElement.name)
+        if (loggedIn) item.appendChild(populateComments);
+        if (!loggedIn && doc.wisComments[0]) item.appendChild(populateComments)
+      if (loggedIn) {
+        populateComments.className = `populatecomments ${subClass}`
+        let postCommentForm = document.createElement("form")
+        postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
+        <input type="text" class="postcommentid" style"visibility: hidden placeholder=${doc.id}><input type="text" class="actualcomment" name="actualcomment"/><button type="submit" class="postcommentbutton" value="submit" style="margin-left: 4px" name=${doc.id}>comment</button></form>`;
+        populateComments.appendChild(postCommentForm)
+        commentableArray = true;
+    }
       }
     })
+
+
+
+
+
+
+
+
     if (relevantDocFound == false) {
       viewer.innerHTML += `<br>This section has no wisdom yet! Click 'submit wisdom' to be the first!`
       return
@@ -1236,7 +1305,6 @@ const getWise = async (catDetails) => {
     }
     let linkBoxes = document.getElementsByClassName("commenttop")
     for (let i = 0; i< linkBoxes.length; i++) {
-      console.log('hi')
       linkBoxes[i].addEventListener('click', openDetailsColumn)
     }
   });
@@ -1256,12 +1324,16 @@ const getNewest = async () => {
 subCat: null};
   let commentableArray = false;
   viewer.innerHTML = '';
-  viewId.innerHTML = lastCategory.mainCat
+  let emptyBlock = document.createElement('div')
+  emptyBlock.style.height = '60px';
+  viewer.appendChild(emptyBlock)
+  viewId.innerHTML = 'Newest Wisbits'
   if (lastCategory.subCat) {
     viewId.innerHTML += '/' + lastCategory.subCat
   }
-  viewer.appendChild(viewId)
   columnToggle(viewer);
+  viewId.style.display = 'block';
+  viewIdBack.style.display = 'block';
   //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
@@ -1269,7 +1341,8 @@ subCat: null};
     let totalDocs = 0;
     let totalWeight = 0;
     snapshot.docs.forEach(doc => {
-      console.log(doc.id)
+      // console.log(doc.id)
+      doc.data().id = doc.id;
       let itemData = doc.data()
       itemData['id'] = doc.id
       itemData['weight'] = 0;
@@ -1302,18 +1375,16 @@ subCat: null};
         //gives element a class name attribute
         item.className = 'result-li'
         item.name = doc.id
-        console.log(item.name)
         item.value = doc.favorites
         let subText = '';
         checkWisColorScheme(doc.weight, totalDocs, totalWeight) ? 
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
-        console.log(subClass)
         if (doc.subCat) subText = '/' + doc.subCat;
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}> "${doc.wisdom}" <br><br><div class="itemauthor">submitted by ${doc.user}</div></div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}> "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1344,13 +1415,60 @@ subCat: null};
           }
     }
         let populateComments = document.createElement("div")
-          doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br>________________<br></p>`)
+          doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
           if (!doc.wisComments[0])  {
             populateComments.className = `populatecomments${subClass}`
             
           } else {
             populateComments.className = `populatecomments-notlogged${subClass}`
           }
+          let commentLink = document.createElement("div");
+    
+          commentLink.className = `favorited ${subClass} commentlink`
+          commentLink.innerHTML = `comments (${doc.wisComments.length})`
+          item.appendChild(commentLink);
+          commentLink.addEventListener('click', (e) => {
+            e.preventDefault()
+            //to open wisdetails:
+            // let id = commentLink.parentElement.name
+            // if (wisDetailsColumn.style.display == 'block' && tempDetails == commentLink.parentElement.name) {
+            //   columnToggle(prevThird)
+            // } else {
+            //   wisDetailsColumnBody.innerHTML = ''
+            //   columnToggle(wisDetailsColumn)
+            //   detailsHeadWrapper.addEventListener('click', backToPrevThird)
+            //   console.log(commentLink.parentElement.name)
+            //   db.collection('wisdomcollection').doc(commentLink.parentElement.name).get().then((snapshot) => {
+            //     let doc = snapshot.data()
+            //       createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+            //   })
+            // }
+            if (populateComments.style.display == 'block') {
+            populateComments.style.display = 'none';
+            } else {
+            populateComments.style.display = 'block';
+            }
+            tempDetails = commentLink.parentElement.name;
+          })
+          let contextLink = document.createElement("div");
+          contextLink.className = `favorited ${subClass} commentlink contextlink`
+          contextLink.innerHTML = 'more context'
+          item.appendChild(contextLink);
+          contextLink.addEventListener('click', (e) => {
+            e.preventDefault()
+            let id = contextLink.parentElement.name
+              console.log('2',tempDetails, contextLink.parentElement.name)
+              wisDetailsColumnBody.innerHTML = ''
+              columnToggle(wisDetailsColumn)
+              detailsHeadWrapper.addEventListener('click', backToPrevThird)
+              console.log(contextLink.parentElement.name)
+              db.collection('wisdomcollection').doc(contextLink.parentElement.name).get().then((snapshot) => {
+                let doc = snapshot.data()
+                  createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+              })
+            tempDetails = contextLink.parentElement.name;
+          })
+          console.log(commentLink.parentElement.name)
           if (loggedIn) item.appendChild(populateComments);
           if (!loggedIn && doc.wisComments[0]) item.appendChild(populateComments)
         if (loggedIn) {
@@ -1363,33 +1481,30 @@ subCat: null};
       }
         //append the viewer column with a new item
         viewer.appendChild(item);
+        console.log(newWisLog)
       }
     })
       if (newWisLog < 19) {
       let wisNeeded = (20 - newWisLog)
       for (let i = 0; i < wisNeeded; i++) {
-        console.log(newWisLog)
-        console.log(i)
             //for each doc, you must append with .data() to retrieve the data
             // follow .data() with an object key to retrieve a value
               let checkFavorited = leftoverDocs[i].wisdom
               //creates new element in the DOM
-              let item = document.createElement("div");
+              let item2 = document.createElement("div");
               //gives element a class name attribute
-              item.className = 'result-li'
-              item.name = leftoverDocs[i].id
-              console.log(item.name)
-              item.value = leftoverDocs[i].favorites
+              item2.className = 'result-li'
+              item2.name = leftoverDocs[i].id
+              item2.value = leftoverDocs[i].favorites
               let subText = '';
               checkWisColorScheme(leftoverDocs[i].weight, totalDocs, totalWeight) ? 
-              item.className = 'result-li-high' : console.log('style normal');
+              item2.className = 'result-li-high' : console.log('style normal');
               let subClass = '';
-              if (item.className == 'result-li-high') subClass = ' borderalt1';
-              console.log(subClass)
+              if (item2.className == 'result-li-high') subClass = ' borderalt1';
               if (leftoverDocs[i].subCat) subText = '/' + leftoverDocs[i].subCat;
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
-              item.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}> "${leftoverDocs[i].wisdom}" <br><br><div class="itemauthor">submitted by ${leftoverDocs[i].user}</div></div>`;
+              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}> "${leftoverDocs[i].wisdom}" <br><br>submitted by ${leftoverDocs[i].user}</div>`;
               if (loggedIn) {
                 db.collection('usersdb').doc(userId).get().then(snapshot => {
                   favInfo = snapshot.data().favWis
@@ -1404,7 +1519,7 @@ subCat: null};
               })
                 if (needStar === true) {
                   let addStar = document.createElement("div");
-                  item.appendChild(addStar);
+                  item2.appendChild(addStar);
                   addStar.className= `favoritestar${subClass}`;
                   addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
                   addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
@@ -1412,23 +1527,74 @@ subCat: null};
                 }
                 if (needStar === false) {
                   let favorited = document.createElement("div");
-                  item.appendChild(favorited);
+                  item2.appendChild(favorited);
                   favorited.className= `favorited${subClass}`;
                   favorited.style.padding ="10px";
                   favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
                   needStar = true;
                 }
           }
+
+          
               let populateComments = document.createElement("div")
-              leftoverDocs[i].wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br>________________<br></p>`)
+              leftoverDocs[i].wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
                 if (!leftoverDocs[i].wisComments[0])  {
                   populateComments.className = `populatecomments${subClass}`
                   
                 } else {
                   populateComments.className = `populatecomments-notlogged${subClass}`
                 }
-                if (loggedIn) item.appendChild(populateComments);
-                if (!loggedIn && leftoverDocs[i].wisComments[0]) item.appendChild(populateComments)
+
+        let commentLink = document.createElement("div");
+    
+        commentLink.className = `favorited ${subClass} commentlink`
+        commentLink.innerHTML = `comments (${leftoverDocs[i].wisComments.length})`
+        item2.appendChild(commentLink);
+        commentLink.addEventListener('click', (e) => {
+          e.preventDefault()
+          //to open wisdetails:
+          // let id = commentLink.parentElement.name
+          // if (wisDetailsColumn.style.display == 'block' && tempDetails == commentLink.parentElement.name) {
+          //   columnToggle(prevThird)
+          // } else {
+          //   wisDetailsColumnBody.innerHTML = ''
+          //   columnToggle(wisDetailsColumn)
+          //   detailsHeadWrapper.addEventListener('click', backToPrevThird)
+          //   console.log(commentLink.parentElement.name)
+          //   db.collection('wisdomcollection').doc(commentLink.parentElement.name).get().then((snapshot) => {
+          //     let doc = snapshot.data()
+          //       createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+          //   })
+          // }
+          if (populateComments.style.display == 'block') {
+          populateComments.style.display = 'none';
+          } else {
+          populateComments.style.display = 'block';
+          }
+          tempDetails = commentLink.parentElement.name;
+        })
+        let contextLink = document.createElement("div");
+        contextLink.className = `favorited ${subClass} commentlink contextlink`
+        contextLink.innerHTML = 'more context'
+        item2.appendChild(contextLink);
+        contextLink.addEventListener('click', (e) => {
+          e.preventDefault()
+          let id = contextLink.parentElement.name
+            console.log('2',tempDetails, contextLink.parentElement.name)
+            wisDetailsColumnBody.innerHTML = ''
+            columnToggle(wisDetailsColumn)
+            detailsHeadWrapper.addEventListener('click', backToPrevThird)
+            console.log(contextLink.parentElement.name)
+            db.collection('wisdomcollection').doc(contextLink.parentElement.name).get().then((snapshot) => {
+              let doc = snapshot.data()
+                createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+            })
+          tempDetails = contextLink.parentElement.name;
+        })
+
+
+                if (loggedIn) item2.appendChild(populateComments);
+                if (!loggedIn && leftoverDocs[i].wisComments[0]) item2.appendChild(populateComments)
               if (loggedIn) {
                 let postCommentForm = document.createElement("form")
                 postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
@@ -1438,8 +1604,9 @@ subCat: null};
                 commentableArray = true;
             }
               //append the viewer column with a new item
-              viewer.appendChild(item);
+              viewer.appendChild(item2);
             }
+            console.log('hi')
 
     }
   //add document object "submitComment" for comment button function
@@ -1453,7 +1620,6 @@ subCat: null};
     }
     let linkBoxes = document.getElementsByClassName("commenttop")
     for (let i = 0; i< linkBoxes.length; i++) {
-      console.log('hi')
       linkBoxes[i].addEventListener('click', openDetailsColumn)
     }
     dbcount.innerHTML = `<b>${dbCounter}</b> wisbits currently in database`;
@@ -1472,11 +1638,152 @@ const openDetailsColumn = (e) => {
   console.log(e.srcElement.attributes['1'].nodeValue)
   db.collection('wisdomcollection').doc(e.srcElement.attributes['1'].nodeValue).get().then((snapshot) => {
     let doc = snapshot.data()
-    wisDetailsColumnBody.innerHTML = createDetails(doc)
+    createDetails(doc, loggedIn, userId, db, favInfo, snapshot.id, wisDetailsColumnBody)
   })
 }
 tempDetails = e.srcElement.attributes['1'].nodeValue
+console.log(e.srcElement.attributes.name.value)
 }
+
+
+
+
+const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody) => {
+  console.log(wisDetailsColumnBody.firstChild)
+  let commentableArray = false;
+  let wisbitDetails = document.createElement("div");
+  wisbitDetails.className = 'details details-header';
+  wisbitDetails.id = 'detailsid'
+  if (document.getElementById('detailsid')) document.getElementById('detailsid').innerHTML = ''
+
+  let checkFavorited = doc.wisdom
+  if (loggedIn) {
+    db.collection('usersdb').doc(userId).get().then(snapshot => {
+      favInfo = snapshot.data().favWis
+    })
+      let needStar = true;
+      favInfo.forEach(element => {
+        if (element.entry == checkFavorited) {
+          // console.log(doc.wisdom)
+          // console.log(element.entry)
+          needStar = false;
+        }
+  })
+    if (needStar === true) {
+      let addStar = document.createElement("div");
+      wisbitDetails.append(addStar);
+      addStar.className= `details-favoritestar`;
+      addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+      addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
+      needStar = true;
+    }
+    if (needStar === false) {
+      let favorited = document.createElement("div");
+      wisbitDetails.appendChild(favorited);
+      favorited.className= `details-favorited`;
+      favorited.style.padding ="10px";
+      favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+      needStar = true;
+    }
+}
+  let wisbitWisdom = document.createElement("div");
+  wisbitWisdom.innerHTML = `created on ${doc.readableDateSubmitted}<br><br>"${doc.wisdom}"<br>`
+  console.log(wisbitWisdom)
+  wisbitDetails.append(wisbitWisdom)
+
+  let wisbitAuthor = document.createElement("div");
+  wisbitAuthor.innerHTML = `submitted by ${doc.user}`;
+  wisbitDetails.append(wisbitAuthor);
+
+  let wisbitMoreContext = document.createElement("div");
+  if (doc.opContext) wisbitMoreContext.innerHTML = `<h5>Wisbit context from the author:</h5>${doc.opContext}<br><br>`
+  wisbitDetails.append(wisbitMoreContext)
+
+  if (doc.opDemo == null) {
+    doc.opDemo = {age: null,
+    sex: null,
+    location: null,
+    ethnicity: null,
+  education: null};
+
+  }
+
+  if (doc.opDemo.age == null) doc.opDemo.age = 'unspecified'
+  if (doc.opDemo.sex == null) doc.opDemo.sex = 'unspecified'
+  if (doc.opDemo.location == null) doc.opDemo.location = 'unspecified'
+  if (doc.opDemo.ethnicity == null) doc.opDemo.ethnicity = 'unspecified'
+  if (doc.opDemo.education == null) doc.opDemo.education = 'unspecified'
+
+  let wisbitOpDetails= document.createElement("div");
+  wisbitOpDetails.innerHTML = `<h5>Demographic Information of Original Poster:</h4>
+    age: ${doc.opDemo.age}<br>
+    sex: ${doc.opDemo.sex}<br>
+    location: ${doc.opDemo.country}<br>
+    ethnicity: ${doc.opDemo.ethnicity}<br>
+    education: ${doc.opDemo.education}
+
+    <br>
+    <br>`;
+  wisbitDetails.append(wisbitOpDetails);
+
+  
+
+
+  if (doc.countryOfOrigin) doc.countryOfOrigin = 'unspecified'
+  if (doc.ethnicity) doc.Ethnicity = 'unspecified'
+
+  let wisbitDemo= document.createElement("div");
+  wisbitDemo.innerHTML = `<h5>Demographic information about this wisbit:</h4>
+    country of origin: ${doc.countryOfOrigin}<br>
+    cultural origin: ${doc.ethnicity}<br>
+
+    <br>
+    <br>`;
+  wisbitDetails.append(wisbitDemo);
+
+
+
+
+    let populateComments = document.createElement("div")
+      doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="details-displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
+      if (!doc.wisComments[0])  {
+        populateComments.className = `details-populatecomments`
+        
+      } else {
+        populateComments.className = `details-populatecomments-notlogged`
+      }
+      let commentsHeader = document.createElement("h5")
+      commentsHeader.innerHTML = 'Comments:'
+      if (loggedIn) {
+        wisbitDetails.appendChild(commentsHeader)
+        wisbitDetails.appendChild(populateComments)
+      };
+      if (!loggedIn && doc.wisComments[0]) {
+      wisbitDetails.appendChild(commentsHeader)
+      wisbitDetails.appendChild(populateComments)
+      }
+
+      wisDetailsColumnBody.appendChild(wisbitDetails)
+    if (loggedIn) {
+      let postCommentForm = document.createElement("form")
+      postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
+      <input type="text" class="postcommentid" style"visibility: hidden placeholder=${id}><input type="text" class="actualcomment" name="actualcomment"/><button type="submit" class="details-postcommentbutton" value="submit" style="margin-left: 4px" id="cb${id}" name=${id}>comment</button></form>`;
+      populateComments.className = `details-populatecomments`
+      populateComments.appendChild(postCommentForm)
+      //add document object "submitComment" for comment button function
+        // console.log('generating comment buttons')
+        let postCommentButton = document.getElementById('cb'+id);
+          postCommentButton.addEventListener('click',(event) => submitComment(event, postCommentButton));
+    
+    
+  }
+//add document object "submitComment" for comment button function
+}
+
+
+
+
+
 
 const backToPrevThird = (e) => {
   e.preventDefault;
@@ -1524,7 +1831,7 @@ getTechnology.addEventListener('click', () => getWise({mainCat: 'Technology', su
 getTransportation.addEventListener('click', () => getWise({mainCat: 'Transportation', subCat: null}));
 getTravel.addEventListener('click', () => getWise({mainCat: 'Travel', subCat: null}));
 getWellness.addEventListener('click', () => getWise({mainCat: 'Wellness', subCat: null}));
-getNew.addEventListener('click', () => getWise({mainCat: 'New', subCat: null}));
+// getNew.addEventListener('click', () => getWise({mainCat: 'New', subCat: null}));
 
 makeSubmit.addEventListener('click', openSubmit);
 headLoginButton.addEventListener('click', openLoginColumn);
@@ -1542,7 +1849,7 @@ leftHeader.addEventListener('click', () => loggedIn? columnToggle(dashboardColum
 leftHeader.addEventListener('click', getNewest)
 wellWishButton.addEventListener('click', submitWish);
 openWishButton.addEventListener('click', () => columnToggle(wishingWellColumn));
-wWImage.addEventListener('click', grabWish);
+wWImage.addEventListener('click',() => grabWish(db));
 tPBox.addEventListener('input', editThoughtStr);
 category.addEventListener('input', showSubCats);
 getNew.addEventListener('click', getNewest);
@@ -1554,11 +1861,8 @@ let subcats = document.getElementsByClassName("subcat");
 
 const addAtt = (e, elem) => {
   e.preventDefault()
-  console.log(elem, e)
   let container = elem.parentElement
-  console.log(container)
   let myelement = document.getElementById(container.id)
-  console.log(myelement)
   let mainCat = myelement.attributes.name.value
   let subCat = null;
   if (elem.attributes.value.value) subCat = elem.attributes.value.value;
@@ -1576,6 +1880,7 @@ for (let i = 0; i < subcats.length; i++) {
   subcats[i].addEventListener('click',(e) => addAtt(e,subcats[i]));
 }
 
+//appends wisbit submission form to include subcategory
 subCatObject['Career'].forEach((element) => {
   let item = document.createElement("option")
   item.innerHTML = element
@@ -1585,3 +1890,51 @@ subCatObject['Career'].forEach((element) => {
 //init welcome column on-load
 columnToggle(welcomeColumn)
 getNewest()
+
+let countObject = {}
+//set up count for each category and subcategory on-load
+db.collection('wisdomcollection').get().then(snapshot => {
+  
+
+
+    snapshot.docs.forEach(doc => {
+      if (!countObject[doc.data().category]) {
+        countObject[doc.data().category] = {count: 1}
+      }
+      
+      if (countObject[doc.data().category].count) countObject[doc.data().category].count = countObject[doc.data().category].count +1
+      if (!countObject[doc.data().category][doc.data().subCat]) {
+        countObject[doc.data().category][doc.data().subCat] = {count: 1}
+      }
+  
+      if ([doc.data().subCat] && countObject[doc.data().category][doc.data().subCat].count) countObject[doc.data().category][doc.data().subCat].count = countObject[doc.data().category][doc.data().subCat].count +1
+    })
+
+  //   console.log(countObject)
+  // console.log(subcats)
+
+  // for (let i = 0; i < subcats.length; i++) {
+    Object.keys(countObject).forEach(key => {
+      if (document.getElementById('pc'+key)) {
+        document.getElementById('pc'+key).innerHTML += `(${countObject[key].count-1})`
+        Object.keys(countObject[key]).forEach(entry => {
+          for (let i = 0; i < subcats.length; i++) {
+            if ((subcats[i].parentElement.attributes.name.value == key) && (subcats[i].attributes.value.value == entry )) subcats[i].innerHTML += ` (${countObject[key][entry].count-1})`
+          }
+          })
+        // if [key] && (subcats[key]) {
+        //   document.getElementById('pc'+key).innerHTML += `(${countObject[key].count})`
+    }
+    })
+    // console.log(subcats[key].parentElement.attributes.name.value, subcats[key].attributes.value.value)
+
+
+  // }
+
+  })
+
+
+// let mainCat = myelement.attributes.name.value
+// let subCat = null;
+// if (elem.attributes.value.value) subCat = elem.attributes.value.value;
+// console.log(mainCat, subCat)

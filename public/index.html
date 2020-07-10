@@ -16,6 +16,7 @@
     </head>
 </head>
 <body>
+  <div class="mobile-message">The current version of Wiser is not mobile-compatible. Please visit wiser.earth from a tablet or computer.</div>
   <div class="wrapper">
     <!-- <div class="one"><h1>T₵</h1><h4 id="tctag">Two-Cents: the social collection of wisdom</h4></div> -->
     <div class="one" id="leftheader"><h1 id="wiserlogo">Wiser</h1><h4 id="tctag">the social collection of wisdom</h4></div>
@@ -52,14 +53,14 @@
       
       <div>
         <h4 id="categoriestitle"> 
-          <button id="makesubmit">submit your wisdom</button>
+          <button id="makesubmit">CREATE A WISBIT</button>
           <br><br>
           Browse Wisdom:</h4>
         <ul id="visitcategory">
 
-          <li class="category-li"><span class="cathead" value="newest wisdom" id="getnew">Newest Wisdom</span></li>
+          <li class="category-li"><span class="cathead" value="newest wisdom" id="getnew">Newest Wisbits</span></li>
 
-          <li class="category-li" value="career"><span class="cathead" value="career" id="getcareer">Career</span>
+          <li class="category-li" value="career"><span class="cathead" value="career" id="getcareer">Career <span id="pcCareer"></span></span>
             <ul name="Career" id="career" class="cattab">
               <li class="subcat" value="career path">
                 career path
@@ -109,7 +110,7 @@
             </ul>
           </li>
 
-          <li class="category-li" ><span class="cathead" value="citizenship" id="getcitizenship">Citizenship</span>
+          <li class="category-li" ><span class="cathead" value="citizenship" id="getcitizenship">Citizenship <span id="pcCitizenship"></span></span>
             <ul name="Citizenship" id="citizenshipcat"class="cattab">
               <li class="subcat" value="activism">
                 activism
@@ -133,7 +134,7 @@
             </ul>
           </li>
           
-          <li class="category-li"><span class="cathead" value="creativity" id="getcreativity">Creativity</span>
+          <li class="category-li"><span class="cathead" value="creativity" id="getcreativity">Creativity <span id="pcCreativity"></span></span>
             <ul name="Creativity" id="creativitycat" class="cattab">
               <li class="subcat" value="arts & crafts">
                 arts & crafts
@@ -168,7 +169,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="education" id="geteducation" >Education</span>
+          <li class="category-li"><span class="cathead" value="education" id="geteducation" >Education <span id="pcEducation"></span></span>
             <ul name="Education" id="educationcat" class="cattab">
               <li class="subcat" value="adult learning">
                 adult learning
@@ -200,7 +201,7 @@
             </ul>
           </li>
 
-          <li class="category-li" value="finance" ><span class="cathead" value="finance" id="getfinance">Finance</span>
+          <li class="category-li" value="finance" ><span class="cathead" value="finance" id="getfinance">Finance <span id="pcFinance"></span></span>
             <ul name="Finance" id="financecat" class="cattab">
               <li class="subcat" value="budgeting">
                 budgeting
@@ -234,7 +235,7 @@
             </ul>
           </li>
 
-          <li class="category-li" ><span class="cathead" value="hardship" id="gethardship">Hardship</span>
+          <li class="category-li" ><span class="cathead" value="hardship" id="gethardship">Hardship <span id="pcHardship"></span></span>
             <ul name="Hardship" id="hardshipcat" class="cattab">
               <li class="subcat" value="anxiety">
                 anxiety
@@ -259,7 +260,7 @@
             </ul>
           </li>
 
-          <li class="category-li" ><span class="cathead" value="health & fitness" id="gethealthandfitness">Health & Fitness</span>
+          <li class="category-li" ><span class="cathead" value="health & fitness" id="gethealthandfitness">Health & Fitness <span id="pcHealth & Fitness"></span></span>
             <ul name="Health & Fitness" id="healthandfitnesscat" class="cattab">
               <li class="subcat" value="adulthood">
                 adulthood
@@ -306,7 +307,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="home" id="gethome">Home</span>
+          <li class="category-li"><span class="cathead" value="home" id="gethome">Home <span id="pcHome"></span></span>
             <ul name="Home" id="homecat" class="cattab">
               <li class="subcat" value="appliances">
                 appliances
@@ -341,7 +342,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="life" id="getlife">Life</span>
+          <li class="category-li"><span class="cathead" value="life" id="getlife">Life <span id="pcLife"></span></span>
             <ul name="Life" id="lifecat" class="cattab">
               <li class="subcat" value="adulthood">
                 adulthood
@@ -385,7 +386,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="love" id="getlove">Love</span>
+          <li class="category-li"><span class="cathead" value="love" id="getlove">Love <span id="pcLove"></span></span>
             <ul name="Love" id="lovecat" class="cattab">
               <li class="subcat" value="dating">
                 dating
@@ -408,7 +409,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="routine" id="getroutine">Routine</span>
+          <li class="category-li"><span class="cathead" value="routine" id="getroutine">Routine <span id="pcRoutine"></span></span>
             <ul name="Routine" id="routinecat" class="cattab">
               <li class="subcat" value="bedtime routine">
                 bedtime routine
@@ -431,7 +432,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="social" id="getsocial">Social</span>
+          <li class="category-li"><span class="cathead" value="social" id="getsocial">Social <span id="pcSocial"></span></span>
             <ul name="Social" id="socialcat" class="cattab">
               <li class="subcat" value="activities">
                 activities
@@ -478,7 +479,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="technology" id="gettechnology">Technology</span>
+          <li class="category-li"><span class="cathead" value="technology" id="gettechnology">Technology <span id="pcTechnology"></span></span>
             <ul name="Technology" id="technologycat" class="cattab">
               <li class="subcat" value="computers">
                 computers
@@ -504,7 +505,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="transportation" id="gettransportation">Transportation</span>
+          <li class="category-li"><span class="cathead" value="transportation" id="gettransportation">Transportation <span id="pcTransportation"></span></span>
             <ul name="Transportation" id="transportationcat" class="cattab">
               <li class="subcat" value="air travel">
                 air travel
@@ -542,7 +543,7 @@
             </ul>
           </li>
           
-          <li class="category-li"><span class="cathead" value="travel" id="gettravel">Travel</span>
+          <li class="category-li"><span class="cathead" value="travel" id="gettravel">Travel <span id="pcTravel"></span></span>
             <ul name="Travel" id="travelcat" class="cattab">
               <li class="subcat" value="attractions">
                 attractions
@@ -580,7 +581,7 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="wellness" id="getwellness">Wellness</span>
+          <li class="category-li"><span class="cathead" value="wellness" id="getwellness">Wellness <span id="pcWellness"></span></span>
             <ul name="Wellness" id="wellnesscat" class="cattab">
               <li class="subcat" value="beauty">
                 beauty
@@ -597,12 +598,12 @@
             </ul>
           </li>
 
-          <li class="category-li"><span class="cathead" value="other" id="getother">Other</span></li>
+          <li class="category-li"><span class="cathead" value="other" id="getother">Other <span id="pcOther"></span></span></li>
         </ul>
       </div>
       <button id="retrieve" style="display: none;">view all submissions</button>
   </div>
-    <button id="openarticlesbutton">open articles</button>
+    <!-- <button id="openarticlesbutton">open articles</button> -->
     <button id="openwishbutton">wishing well</button>
   </div>
 
@@ -615,6 +616,7 @@
 <!-- <div id="two2"> -->
 
   <div class="secondcolumn" id="viewerWindow">
+    <div id="viewidback"></div>
     <div id="viewid"></div>
     <div id="viewer"></div>
     <div class=" addbackground" id="formcolumn" style="display: none">
@@ -1003,11 +1005,11 @@
       <label for="getemail">Enter your email:</label>
       <br>
       <br>
-      <input type="text" id="getemail" name="getemail" type="password">
+      <input type="text" id="getemail" name="getemail" type="password" class="default-input">
       <br><br>
       <label for="getpass">Enter your password:</label>
       <br><br>
-      <input type="text" id="getpass" name="">
+      <input type="text" id="getpass" name="" class="default-input">
       <br>
       <br>
       <input type="checkbox" id="savelogininfo" name="savelogininfo" value="1">
@@ -1030,20 +1032,20 @@
       <label for="regname">Choose your username:</label>
       <br>
       <br>
-      <input type="text" id="regname" name="regname">
+      <input type="text" id="regname" name="regname" class="default-input">
       <br><br>
       <label for="regpass">Choose your password (6 character min.):</label>
       <br><br>
-      <input type="text" id="regpass" name="">
+      <input type="text" id="regpass" name="" class="default-input">
       <br><br>
       <label for="regpassreentry">re-enter your password:</label>
       <br><br>
-      <input type="text" id="regpassreentry" name="">
+      <input type="text" id="regpassreentry" name="" class="default-input">
       <br><br>
       <label for="regemail">Enter your email address:</label>
       <br>
       <br>
-      <input type="text" id="regemail" name="regemail">
+      <input type="text" id="regemail" name="regemail" class="default-input">
       <br>
       <br>
       <br>
@@ -1095,7 +1097,7 @@
       <label for="regcountry">current location:</label>
       <br>
       <br>
-      <select id="regcountry" name="regcountry">
+      <select id="regcountry" name="regcountry" class="default-input">
         <option value="unspecified">unspecified</option>
         <option value="United States of America">United States of America</option>
         <option value="Afganistan">Afghanistan</option>
@@ -1350,7 +1352,7 @@
       <label for="regethnic">ethnicity:</label>
       <br>
       <br>
-      <select id="regethnic" name="regethnic">
+      <select id="regethnic" name="regethnic" class="default-input">
         <option value ="unspecified">unspecified</option>
         <option value="Caucasian">Caucasian</option>
         <option value="African-American / Black">African-American / Black</option>
@@ -1365,7 +1367,7 @@
       <label for="regedu">highest degree:</label>
       <br>
       <br>
-      <select id="regedu" name="regedu">
+      <select id="regedu" name="regedu" class="default-input">
         <option value ="unspecified">unspecified</option>
         <option value ="less than high school diploma">less than high school diploma</option>
         <option value="high school diploma or equivalent">high school diploma or equivalent</option>
@@ -1431,25 +1433,27 @@
 <div class="thirdcolumn" id="welcomecolumn" name="welcomeColumn" style="display: none; padding: 10px; overflow-y: auto;">
   <p id="welcome">
     <img id="spock" src="flower-nature-shape-abstract-bloom-floral_161-512.png" /><b>WISER BETA-Test Updates:</b>
+    <br>
     <p>
-    - Registration and login are secure and 100% functional. However, if you fill in registration incorrectly, your form may not submit and you will not receive an error message (error messages will be added soon).
+    - Registration and login are secure and functional, but some error messages will not display.
+    <!-- <br>
+    <br>
+    - "articles section" not active yet. -->
     <br>
     <br>
-    - "articles section" not active yet.
-    <br>
-    <br>
-    - When you click on a wisbit, the details page will be blank (details coming soon).
+    - "Wisbit details" window opens, but will be blank (feature coming soon).
     </p>
+    <div id="linebreak"></div>
     <br>
     <br>
     <b>Welcome to Wiser, the social network for wisdom!</b></br></p>
-  <p>Browse the categories to your left to view wisdom submitted by registered users. To "favorite" or submit wisdom, register above!</p>
-  <p><b>Our Mission:</b></p><p>At Wiser, we believe the key to growth is learning from ourselves and others. Nobody here is perfect, but everyone comes with valuable insights. Perhaps buying your first car taught you an important lesson. Perhaps you found the secret to maintaining a loving marriage. We want to hear it! Or, if you'd like to share a famous motto that you live by, we want to know! Together, our community will spotlight the most user-tested, success-achieving wisdom.
+  <p>Browse the categories to your left to view wisdom (AKA wisbits) submitted by registered users. Green wisbits are the most popular user picks.</p>
+  <p><b>Our Mission:</b></p><p>At Wiser, we believe the key to growth is learning from ourselves and others. Nobody here is perfect, but everyone has valuable insights. Perhaps buying your first car taught you an important lesson. Perhaps you found the secret to maintaining a loving marriage. We want to hear it! Or, if you'd like to share a famous motto that you live by, we want to know! Together, our community will spotlight the most user-tested, success-achieving wisdom.
     <br>
     <br>
     <b>Commenting Guidelines:</b>
   <br>
-  <br>Comments should be courteous and well-thought-out. Unlike other social media platforms, argumentative discourse is not encouraged. A wisdom bit (or "wisbit") is weighted by the amount of favorites and comments it receives. If you disagree with the wisdom, your best course of action is to submit your own alternative wisbit, which may gain traction and win in the battle of ideas! Lastly, while spiritual wisdom is acceptable, no religion or religious figures should be named or promoted.
+  <br>Comments should be courteous and well-thought-out. A wisbit is weighted by the amount of favorites and comments it receives, so even leaving a negative comment will boost a wisbit's overall ranking. Therefore, if you disagree with the wisdom, your best course of action is to submit your own alternative wisbit, which may gain traction and win in the battle of ideas! Lastly, while spiritual wisdom is acceptable, no religion or religious figures should be named or promoted.
 </p>
 </div>
 
@@ -1492,7 +1496,7 @@
       <textarea id="tpbox" class="dashboxinner"></textarea>
     </div>
   </div>
-  <div id="daily goal">
+  <!-- <div id="daily goal">
     <div id="dgbox">
       <div id="dgbox-header">My Goal Today:</div>
       <div id="dgbox-outer" class="dashboxouter">
@@ -1500,7 +1504,7 @@
       </div>
     </div>
     <div id="dgedit">
-    </div>
+    </div> -->
   </div>
   </div> 
 </div>

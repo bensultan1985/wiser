@@ -1,0 +1,93 @@
+.column {
+    max-width: 33vw !important;
+    box-sizing: border-box;
+    /* height: 88vh; */
+    /* width: 33vw; */
+    float: left;
+    font-family: helvetica;
+    /* max-width: 500px; */
+    /* max-width: 680px !important; */
+    /* width: 500px !important; */
+    height: 100%;
+    min-width: 300px;
+    /* margin-left: 12px; */
+    border: solid;
+    border-left: none;
+    border-bottom: none;
+    border-color: green;
+    border-width: 3px;
+    background: white;
+    color: green;
+    overflow-y: auto;
+    border-radius: 0px 12px 12px 0px;
+  }
+
+.secondcolumn {
+    max-width: 33vw !important;
+    /* height: 88vh; */
+    box-sizing: border-box;
+    float: left;
+    font-family: helvetica;
+    /* max-width: 500px; */
+    /* width: 500px !important; */
+    height: 100%;
+    /* max-width: 550px; */
+    width: 33vw;
+    min-width: 200px;
+    /* border: solid;
+    border-color: green;
+    border-width: 3px; */
+    /* background: rgba(255, 255, 255, 0); */
+    /* background: white; */
+    color: green;
+
+    margin-left: 5px;
+    margin-right:10px;
+    overflow-y: auto;
+  }
+
+  .addbackground {
+      background: white;
+  }
+
+  .thirdcolumn {
+      /* display: block;
+    box-sizing: border-box;
+    font-family: helvetica;
+    float: right;
+    max-width: 580px ;
+    min-width: 300px;
+    border: solid;
+    border-color: green;
+    border-width: 4px;
+    width: 100%;
+    height: 88vh;
+    background: white;
+    color: black;
+    margin-left: 20px;
+    overflow-y: auto;
+    border-radius: 13px;
+    margin-right: 12px; */
+
+          display: block;
+    box-sizing: border-box;
+    font-family: helvetica;
+
+    max-width: 1000px;
+    /* max-width: 33vw !important; */
+    /* max-width: 680px !important; */
+    /* width: 500px !important; */
+    min-width: 200px;
+    border: solid;
+    border-color: green;
+    border-width: 4px;
+    border-right: none;
+    height: 100%;
+    background: white;
+    color: black;
+    margin-left: 20px;
+    border-bottom: none;
+    overflow-y: auto;
+    border-radius: 7px 0px 0px 0px;
+    /* margin-right: 12px; */
+  }

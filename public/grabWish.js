@@ -2,7 +2,8 @@
 
 let coinContents = document.getElementById("coincontents");
 
-export const grabWish = () => {
+
+export const grabWish = (db) => {
     coinContents.innerHTML = 'searching...'
     let wishList = []
     //grabs all wishes
