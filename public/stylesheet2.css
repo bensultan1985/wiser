@@ -88,13 +88,16 @@ ul {
 }
 
 #formcolumn {
-    border-radius: 25px 0px 0px 25px;
+    border-radius: 25px 25px 25px 25px;
 }
 
 #form {
     text-align: center;
     /* column-width: 250px; */
     color: green;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 option {
@@ -571,6 +574,7 @@ h4, #categorytitle {
 }
 
 .dropdown-content {
+    box-sizing: border-box;
     display: none;
     position: relative;
     background-color: #f1f1f1;
@@ -581,6 +585,7 @@ h4, #categorytitle {
 
   /* Links inside the dropdown */
 .dropdown-content a {
+    box-sizing: border-box;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -590,10 +595,12 @@ h4, #categorytitle {
   /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
+    box-sizing: border-box;
   }
   
   /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
+    box-sizing: border-box;
     position: relative;
     right: -0px;
     background-color: #ffffff;
@@ -604,9 +611,14 @@ h4, #categorytitle {
   
   /* Links inside the dropdown */
   .dropdown-content a {
+    border-width: 2px;
+    border: solid;
+    border-color: white;
+    box-sizing: border-box;
       display: block;
     color: black;
     padding: 12px 16px;
+    width: 160px;
     text-decoration: none;
     /* color: rgb(214, 177, 81); */
     color: green;
@@ -615,8 +627,13 @@ h4, #categorytitle {
   
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {
-      background-color: rgb(214, 177, 81);
-      color: white;
+      /* font-weight: 600; */
+      box-sizing: border-box;
+      border-width: 2px;
+      border: solid;
+      border-color: white;
+      background-color: rgb(235, 247, 235);
+      color: green;
       display: block;
 }
   
@@ -1186,14 +1203,16 @@ background: rgb(38, 157, 255);
 }
 
 .populatecomments-notlogged {
-    color: rgb(209, 168, 63);
+    color: unset;
+    border-color: unset;
+    /* color: rgb(209, 168, 63); */
     padding: 8px;
     /* margin: 10px; */
     margin-top: 5px;
     background: white;
     border: solid;
     border-width: 2px;
-    border-color: rgb(160, 104, 41);
+    /* border-color: rgb(160, 104, 41); */
     border-radius: 10px 10px 10px 10px;
     display: none;
 }
@@ -1616,11 +1635,62 @@ background: rgb(38, 157, 255);
 }
 
 .regnav {
-    position: absolute;
-    bottom: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
+
 }
 
 #regage {
     margin-top: 10px;
     margin-bottom: 8px;
+    text-align: center;
+}
+
+#reg-p-1 {
+    height: 450px;
+    text-align: center;
+}
+
+#reg-p-2 {
+    height: 450px;
+    text-align: center;
+}
+
+#reg-p-3 {
+    height: 450px;
+    text-align: center;
+}
+
+@media screen and (max-width: 1100px) {
+    .regsquare {
+        display: none;
+    }
+    .regsquare-empty{
+        display: none;
+    }
+    .regnavbutton {
+        /* margin-left: auto;
+        margin-right: auto; */
+    }
+}
+
+#wiserlogo {
+    padding-left: 6px;
+}
+
+#submitheading {
+    box-sizing: border-box;
+    background: green;
+    margin: 0px;
+    min-height: 50px;
+    /* padding: 20px; */
+    color: white;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px 25px 0px 0px;
+    text-align: center;
 }

@@ -19,7 +19,7 @@
   <div class="mobile-message" style="padding: 10px;"><center><div style="color: green;">Wiser</div></center><br><br>The current version of Wiser is not mobile-compatible. Please visit wiser.earth from a tablet or computer.</div>
   <div class="wrapper">
     <!-- <div class="one"><h1>T₵</h1><h4 id="tctag">Two-Cents: the social collection of wisdom</h4></div> -->
-    <div class="one" id="leftheader"><h1 id="wiserlogo">Wiser</h1><h4 id="tctag">the social collection of wisdom</h4></div>
+    <div class="one" id="leftheader"><img src="earthlogo4.png" style="display: inline; max-height: 32px; position: relative; top: 4px; right: -5px; padding-left: 7px"/><h1 id="wiserlogo">Wiser.earth</h1><h4 id="tctag">the social collection of wisdom</h4></div>
     <!-- <div class="two"></div> -->
     <div class="three">
       <div id="headlogin">
@@ -620,17 +620,13 @@
     <div id="viewid"></div>
     <div id="viewer"></div>
     <div class=" addbackground" id="formcolumn" style="display: none">
+      <div id="submitheading">Creat a Wisbit</div>
       <form id="form">
         <br>
         So, you've lived some life and you want to share a bit of wisdom!
-          Give us your very best:
           <br>
-          <br>
-          (Fields with * are required)
         <br>
-        <br>
-        <br>
-        <label for="category">*Select a category:</label>
+        <label for="category"><b>*Select a category:</b></label>
         <br>
         <select id="category" name="category">
           <option value="Career">Career</option>
@@ -652,23 +648,21 @@
           <option value="Other">Other</option>
         </select>
         <div id="subcatdiv">
-          <label for="subcategory">*Select a sub-category</label>
+          <label for="subcategory"><b>*Select a sub-category</b></label>
           <br>
         <select id="subcategory" name="subcategory"></select>
         </div>
-        <br><br>
-        <label for="wisdom">*Enter your widsom:</label>
+        <br>
+        <label for="wisdom"><b>*Enter your widsom:</b></label>
         <br>
         <br>
         <textarea type="text" id="wisdom" name="wisdom"></textarea>
         <br>
         <br>
-        <label for="origauthor">if the original author is not you, give their name:</label>
+        <label for="origauthor" >if the original author is not you, enter the author:</label>
         <br>
         <br>
         <input type="text" id="origauthor" name="origauthor">
-        <br>
-        <br>
         <br>
         <br>
         <label for="postethnic">If this wisdom has known cultural roots, please specify:</label>
@@ -947,12 +941,10 @@
         </select>
         <br>
         <br>
-        <label for="posttags">Tag three words or phrases related to improve searches (separate by commas):</label>
+        <label for="posttags">Tag three words or phrases related to this wisbit to help improve searches (separate by commas):</label>
         <br>
         <br>
         <input type="text" id="posttags" name="posttags"/>
-        <br>
-        <br>
         <br>
         <br>
         <input type="checkbox" id="includemydemo" name="includemydemo" value="includemydemo">
@@ -960,7 +952,7 @@
         <br>
         <br>
         <br>
-        <label for="opcontext">Share more context about this wisdom; cite sources if applicable, or share your personal experience:</label>
+        <label for="opcontext">Share more context about this wisdom. Cite sources if applicable, or share your personal experience:</label>
         <br>
         <br>
         <textarea type="text" id="opcontext" name="opcontext"></textarea>
@@ -990,6 +982,14 @@
         <button class="errorlogin" id="regbutton">register</button>
       </div>
     </div>
+
+    <!-- <div class="secondcolumn" id="favdetailscolumn" name="favDetailsColumn" style="display: none">
+      <div id="favdetailsheadwrapper">
+      <i id="favwisdetailsbackbutton" class="fa fa-times"></i>
+      <span id="favwisdetailsheader">WisBit Details</span>
+    </div>
+      <div id="favwisdetailscolumnbody"></div>
+    </div> -->
     
   <div class="addbackground" id="logincolumn" style="display: none">
     <div class="indented-div">
@@ -1047,19 +1047,11 @@
       <br>
       <br>
       <input type="text" id="regemail" name="regemail" class="default-input">
-      
-      <br>
-      <br>
-      <div class="regnav">
-      <button id="regback1" class="regnavbutton inactive-button">Back</button>
-      </span><span id="p11" class="regsquare"></span><span id="p12" class="regsquare-empty"></span><span id="p13" class="regsquare-empty"></span>
-      <button id="regnext1" class="regnavbutton">Next</button>
-      </div>
+
     </div>
 
     <div id="reg-p-2" style="display: none;">
-      <br>Optional: Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:
-      <br>
+      <p>Optional: Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:</p>
       <br>
       <label for="regsex">sex:</label>
       <br>
@@ -1096,15 +1088,9 @@
       <label for="age3">100+ (good for you!)</label>
       <br>
       <br>
-      <div class="regnav">
-      <button id="regback2" class="regnavbutton ">Back</button>
-      </span><span id="p21" class="regsquare"></span><span id="p22" class="regsquare"></span><span id="p23" class="regsquare-empty"></span>
-      <button id="regnext2" class="regnavbutton">Next</button>
-      </div>
     </div>
     <div id="reg-p-3" style="display: none;">
-      <br>Optional: Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:
-      <br>
+      <p>Optional: Enter your basic demographic information. This is kept private unless you choose to attach it to submitted wisdom. This improves context and analytics:</p>
       <br>
       <label for="regcountry">current location:</label>
       <br>
@@ -1402,12 +1388,22 @@
       <br>
       <br>
       <br>
-      <div class="regnav">
-      <button id="regback3" class="regnavbutton ">Back</button>
-    </span><span id="p31" class="regsquare"></span><span id="p32" class="regsquare"></span><span id="p33" class="regsquare"></span>
-      <button type="submit" id="regsubmit" value="submit">register!</button>
-    </form>
   </div>
+  <div class="regnav" id="regnav2" style="display: none">
+    <button id="regback2" class="regnavbutton ">Back</button>
+    </span><span id="p21" class="regsquare"></span><span id="p22" class="regsquare"></span><span id="p23" class="regsquare-empty"></span>
+    <button id="regnext2" class="regnavbutton">Next</button>
+    </div>
+    <div class="regnav" id="regnav1" >
+      <button id="regback1" class="regnavbutton inactive-button">Back</button>
+      </span><span id="p11" class="regsquare"></span><span id="p12" class="regsquare-empty"></span><span id="p13" class="regsquare-empty"></span>
+      <button id="regnext1" class="regnavbutton">Next</button>
+      </div>
+  <div class="regnav" id="regnav3" style="display: none">
+  <button id="regback3" class="regnavbutton ">Back</button>
+</span><span id="p31" class="regsquare"></span><span id="p32" class="regsquare"></span><span id="p33" class="regsquare"></span>
+  <button type="submit" id="regsubmit" value="submit">register!</button>
+</form>
   </div>
   </div>
 </div>
@@ -1446,7 +1442,7 @@
 
 <div class="thirdcolumn" id="welcomecolumn" name="welcomeColumn" style="display: none; padding: 10px; overflow-y: auto;">
   <p id="welcome">
-    <img id="spock" src="flower-nature-shape-abstract-bloom-floral_161-512.png" /><b>WISER BETA-Test Updates:</b>
+    <img id="spock" src="flower-nature-shape-abstract-bloom-floral_161-512.png" /><b>Wiser BETA-test updates:</b>
     <br>
     <p>
     - Registration and login are secure and functional, but some error messages will not display.

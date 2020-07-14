@@ -105,6 +105,9 @@ let p33 = document.getElementById("p33");
 let regP1 = document.getElementById("reg-p-1");
 let regP2 = document.getElementById("reg-p-2");
 let regP3 = document.getElementById("reg-p-3");
+let regNav1 = document.getElementById("regnav1");
+let regNav2 = document.getElementById("regnav2");
+let regNav3 = document.getElementById("regnav3")
 
 
 
@@ -1813,6 +1816,9 @@ const backToPrevThird = (e) => {
 
 const openReg2 = (e) => {
   e.preventDefault()
+  regNav1.style.display = 'none';
+  regNav3.style.display = 'none';
+  regNav2.style.display = 'block';
   regP3.style.display = 'none';
   regP1.style.display = 'none';
   regP2.style.display = 'block';
@@ -1820,12 +1826,16 @@ const openReg2 = (e) => {
 
 const openReg1 = (e) => {
   e.preventDefault()
+  regNav1.style.display = 'block';
+  regNav2.style.display = 'none'
   regP2.style.display = 'none';
   regP1.style.display = 'block';
 }
 
 const openReg3 = (e) => {
   e.preventDefault()
+  regNav3.style.display = 'block';
+  regNav2.style.display = 'none';
   regP2.style.display = 'none';
   regP3.style.display = 'block';
 }
