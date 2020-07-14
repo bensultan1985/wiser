@@ -289,8 +289,11 @@ li:hover > .wisouterborder{
 /* } */
 
 .subcat:hover {
-    color: green;
-    background: rgb(186, 255, 223);
+    color: white;
+    /* background: rgb(186, 255, 223); */
+    background: #65adeb;
+    /* background: rgba(230, 240, 230, 0.74);
+    text-shadow: 0.4px 1px 0.25px white; */
     cursor: pointer;
 }
 
@@ -455,6 +458,8 @@ h4, #categorytitle {
       /* position: absolute; */
       padding-top: 18px;
       padding-bottom: 12px;
+      /* cool possibility for the future */
+      /* background-color: rgb(215, 234, 241); */
       background-color: rgba(255, 153, 0, 0.651);
       height: auto;
       grid-column: 1 / 3;
