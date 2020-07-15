@@ -1699,3 +1699,17 @@ background: rgb(38, 157, 255);
     border-radius: 25px 25px 0px 0px;
     text-align: center;
 }
+
+#wisdetailscolumnbody {
+    padding: 20px;
+}
+
+.wisdetails-heading {
+    color: green;
+    font-size: 15px;
+}
+
+
+.bold-detail {
+    font-style: oblique;
+}

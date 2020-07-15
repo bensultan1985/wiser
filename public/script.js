@@ -559,14 +559,25 @@ const openMySubmissions = () => {
             <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
             </div>
             <div>
-            <button class="mysubmissionsdetails">view details</button>
+            <button class="mysubmissionsdetails" name=${element.id}>view details</button>
             <button name=${element.id} class="mysubmissionsdelete">delete</button>
             </div>
           </div>`;
+          //this creates a delete button for each of your submitted wisdom on the "my submissions page"
           let mySubmissionsDelete = document.getElementsByClassName("mysubmissionsdelete")
           console.log(mySubmissionsDelete)
           for (let i = 0; i < mySubmissionsDelete.length; i++) {
             mySubmissionsDelete[i].addEventListener('click', deleteMySubmission)
+
+          //this brings the user to the wisbit details for their submitted wisdom
+          }
+          let mySubmissionsDetails = document.getElementsByClassName("mysubmissionsdetails")
+          for (let i = 0; i < mySubmissionsDetails.length; i++) {
+            let id = mySubmissionsDetails[i].name
+            console.log(id)
+            console.log(mySubmissionsDetails[0])
+            console.log(element)
+              mySubmissionsDetails[i].addEventListener('click', openDetailsColumn)
           }
         }
       })
@@ -583,6 +594,19 @@ const deleteMySubmission = (e) => {
 });
 openMySubmissions()
 }
+
+// const deleteMyFav = (e) => {
+//   e.preventDefault
+//   let forDelete = e.path[0].name
+//   for (let i = 0; i < favInfo.length; i++) {
+//     if (favInfo[i] == forDelete) db.collection("usersdb").doc(userId).favWis[i].delete().then(function() {
+//     console.log("Document successfully deleted!");
+// }).catch(function(error) {
+//     console.error("Error removing document: ", error);
+// });
+// openMySubmissions()
+// }
+
 
 
 
@@ -1710,16 +1734,28 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
     }
 }
   let wisbitWisdom = document.createElement("div");
-  wisbitWisdom.innerHTML = `created on ${doc.readableDateSubmitted}<br><br>"${doc.wisdom}"<br>`
+  let wisbitDate = document.createElement("div");
+  wisbitDate.innerHTML = `created on ${doc.readableDateSubmitted}<br><br>`
+  wisbitWisdom.innerHTML = `"${doc.wisdom}"<br><br>`
+  wisbitWisdom.className = 'bold-detail'
   console.log(wisbitWisdom)
+  wisbitDetails.append(wisbitDate)
   wisbitDetails.append(wisbitWisdom)
+
+  if (doc.originalAuthor) {
+    let wisbitOrigAuthDiv = document.createElement("div")
+    wisbitOrigAuthDiv.innerHTML = `-${doc.originalAuthor}<br><br>`
+    wisbitDetails.append(wisbitOrigAuthDiv)
+    wisbitOrigAuthDiv.className = 'bold-detail'
+  }
 
   let wisbitAuthor = document.createElement("div");
   wisbitAuthor.innerHTML = `submitted by ${doc.user}`;
+  // wisbitAuthor.className = 'bold-detail'
   wisbitDetails.append(wisbitAuthor);
 
   let wisbitMoreContext = document.createElement("div");
-  if (doc.opContext) wisbitMoreContext.innerHTML = `<h5>Wisbit context from the author:</h5>${doc.opContext}<br><br>`
+  if (doc.opContext) wisbitMoreContext.innerHTML = `<h5 class="wisdetails-heading">Wisbit context from the author:</h5>${doc.opContext}<br><br>`
   wisbitDetails.append(wisbitMoreContext)
 
   if (doc.opDemo == null) {
@@ -1738,7 +1774,7 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
   if (doc.opDemo.education == null) doc.opDemo.education = 'unspecified'
 
   let wisbitOpDetails= document.createElement("div");
-  wisbitOpDetails.innerHTML = `<h5>Demographic Information of Original Poster:</h4>
+  wisbitOpDetails.innerHTML = `<h5 class="wisdetails-heading">Demographic Information of Original Poster:</h4>
     age: ${doc.opDemo.age}<br>
     sex: ${doc.opDemo.sex}<br>
     location: ${doc.opDemo.country}<br>
@@ -1756,7 +1792,7 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
   if (doc.ethnicity) doc.Ethnicity = 'unspecified'
 
   let wisbitDemo= document.createElement("div");
-  wisbitDemo.innerHTML = `<h5>Demographic information about this wisbit:</h4>
+  wisbitDemo.innerHTML = `<h5 class="wisdetails-heading">Demographic information about this wisbit:</h4>
     country of origin: ${doc.countryOfOrigin}<br>
     cultural origin: ${doc.ethnicity}<br>
 
@@ -1777,6 +1813,7 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
       }
       let commentsHeader = document.createElement("h5")
       commentsHeader.innerHTML = 'Comments:'
+      commentsHeader.className = 'wisdetails-heading'
       if (loggedIn) {
         wisbitDetails.appendChild(commentsHeader)
         wisbitDetails.appendChild(populateComments)
@@ -1790,13 +1827,15 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
     if (loggedIn) {
       let postCommentForm = document.createElement("form")
       postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
-      <input type="text" class="postcommentid" style"visibility: hidden placeholder=${id}><input type="text" class="actualcomment" name="actualcomment"/><button type="submit" class="details-postcommentbutton" value="submit" style="margin-left: 4px" id="cb${id}" name=${id}>comment</button></form>`;
+      <input type="text" class="postcommentid" style"visibility: hidden placeholder=${id}><input type="text" class="actualcomment" name="actualcomment"/><button type="submit" class="details-postcommentbutton buttonclass" style="margin-left: 4px" name=${id}>comment</button></form>`;
       populateComments.className = `details-populatecomments`
       populateComments.appendChild(postCommentForm)
       //add document object "submitComment" for comment button function
         // console.log('generating comment buttons')
-        let postCommentButton = document.getElementById('cb'+id);
-          postCommentButton.addEventListener('click',(event) => submitComment(event, postCommentButton));
+        let postCommentButton = document.getElementsByClassName("buttonclass");
+          for (let i = 0; i < postCommentButton.length; i++) {
+            postCommentButton[i].addEventListener('click',(event) => submitComment(event, postCommentButton[i]));
+          }
     
     
   }
