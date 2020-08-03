@@ -893,7 +893,7 @@ const submitCalDayFunction = (event, calMsgInput, attachImg, dayToSet) => {
 const openCalendar = (day) => {
   //generate basic temporary calendar
   bigCalendarBox.innerHTML = '';
-  calintroline.innerHTML = 'Need inspiration with your morning brew? Customize your calendar with your favorite wisdom!<br>Start by choosing a day of the week:';
+  calintroline.innerHTML = 'Need inspiration with your morning brew? Customize your weekly calendar with your favorite wisdom!<br>Start by choosing a day of the week:';
   bigCalendarBox.innerHTML = tempCalendar(day)
   //will give value such as "Monday"
   let dayToSet = document.getElementById("daytoset");
