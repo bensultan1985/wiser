@@ -86,6 +86,7 @@ let getName = document.getElementById("getname");
 let getEmail = document.getElementById("getemail")
 let getPass = document.getElementById("getpass");
 let saveLoginInfo = document.getElementById("savelogininfo");
+let stayLogged = document.getElementById("staylogged")
 
 let regBack1 = document.getElementById("regback1");
 let regNext1 = document.getElementById("regnext1");
@@ -241,6 +242,8 @@ let currentSecColumn = '';
 let currentThirdColumn = '';
 let lastSecondColumn = '';
 let prevThird = welcomeColumn;
+let totalDocs = 0;
+let totalWeight = 0;
 //firebase authorized Id verification, obtained by signing into the secured database:
 let authUserId = '';
 //universalDayName is necessary for some calendar functions. Will create bugs if the date changes while user is editing a calendar. Must fix later:
@@ -528,6 +531,7 @@ const loginAfterReg = (thoughtStr, authUserId) => {
 //opens the login column
 const openLoginColumn = () => {
   saveLoginInfo.checked = true;
+  staylogged.checked = true;
   getEmail.value = '';
   getPass.name = '';
   getPass.value = '';
@@ -612,15 +616,21 @@ openMySubmissions()
 
 //finds and verifies login information by sending user input to Firebase to see if there is a match.
 const checkLogin = (e) => {
-  e.preventDefault();
+  if (e) e.preventDefault();
   let loginFound = false;
 
-  if (saveLoginInfo.checked) {
+  if (saveLoginInfo.checked || stayLogged) {
     window.localStorage.setItem('savedLocalEmail', getEmail.value)
     window.localStorage.setItem('savedLocalPass', getPass.name)
   } else {
     localStorage.removeItem('savedLocalEmail')
     localStorage.removeItem('savedLocalPass')
+  }
+
+  if (stayLogged.checked) {
+    window.localStorage.setItem('stayLogged', true)
+  } else {
+    window.localStorage.setItem('stayLogged', false)
   }
 
   const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.name);
@@ -715,6 +725,7 @@ const logoutFunction = (e) => {
   headUsername.innerHTML = ``;
   headUsername.style.display = 'none';
   test2.style.display = 'none';
+  window.localStorage.setItem('stayLogged', false)
   location.reload();
   firebase.auth().signOut
 }
@@ -1084,7 +1095,67 @@ const finalComment = async (comment) => {
   await updateDb.update({wisComments: firebase.firestore.FieldValue.arrayUnion({commentkey: comment.parentElement.actualcomment.value,
     userkey: saveduser, commentId: commentId, commentUser: userId, timestamp: Date.now()})
     })
-    getWise(lastCategory);
+    
+  // await db.collection('wisdomcollection').doc(comment.name).get().then(doc => {
+  //   console.log(doc, 'this is doc')
+  //   // comment.parentElement.parentElement.outerHTML = '';
+  //   let populateComments = document.createElement('div')
+  //   let elemCount = 0;
+  //   let item = document.createElement('div')
+  //   checkWisColorScheme(doc.data().weight, totalDocs, totalWeight) ? 
+  //   item.className = 'result-li-high' : console.log('style normal');
+  //   let subClass = '';
+  //   if (item.className == 'result-li-high') subClass = ' borderalt1';
+  //         doc.data().wisComments.forEach(element => {
+  //           console.log('element of wiscomments')
+  //           let currentComment = document.createElement("div");
+  //           currentComment.innerHTML = `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`
+  //           populateComments.appendChild(currentComment)
+  //           currentComment.id = element.commentId;
+  //           if (element.commentUser == userId) {
+  //             let delComButton = document.createElement("BUTTON")
+  //             delComButton.name = doc.data().id;
+  //             delComButton.value = element.commentId
+  //             delComButton.placeholder = element.id;
+  //             delComButton.innerHTML = 'delete comment';
+  //             delComButton.className = 'delcombutton';
+  //             populateComments.append(delComButton)
+  //             let commentData = element
+  //             console.log(commentData, 'this is comment data')
+  //             delComButton.addEventListener('click', (e) => delComment(e, commentData))
+  //             elemCount ++
+  //           }
+  //           })
+  //           populateComments.style.display = 'block';
+  //           populateComments.className = `populatecomments${subClass}`
+            
+     
+  //         comment.parentElement.parentElement.parentElement.appendChild(populateComments)
+  //       })
+
+    
+    // comment.parentElement.parentElement.childNodes[parentElement.parentElement.childNodes.length] = comment.parentElement.parentElement.childNodes[parentElement.parentElement.childNodes.length-1]
+    // let newComment = document.createElement('div')
+    // console.log('this is the comment', comment.parentElement.parentElement.childNodes)
+    // getWise(lastCategory);
+
+    // let newComment = document.createElement('div')
+    let newComment = `<div class="displaycomment">${comment.parentElement.actualcomment.value}</div><div class="displaycommentuser">comment by ${saveduser}</div><br>your comment has been posted`
+    // newComment.className = `displaycomment`
+    let tempDiv = document.createElement('form')
+    let parentEl = comment.parentElement.parentElement
+    tempDiv.innerHTML = comment.parentElement.parentElement.childNodes[comment.parentElement.parentElement.childNodes.length-1].outerHTML
+    console.log(tempDiv)
+    comment.parentElement.parentElement.childNodes[comment.parentElement.parentElement.childNodes.length-1].outerHTML = newComment;
+    console.log(parentEl)
+    let tempElement = document.createElement('div')
+    // tempElement.innerHTML = 'hello'
+    // comment.parentElement.parentElement.append(tempElement)
+    // parentEl.append(tempDiv)
+    // parentEl.append('your comment has been posted')
+
+
+
 };
 
 
@@ -1197,8 +1268,8 @@ const getWise = async (catDetails) => {
     // viewer.innerHTML = '';
     let sortedDocs = []
     let relevantDocFound = false;
-    let totalDocs = 0;
-    let totalWeight = 0;
+    totalDocs = 0;
+    totalWeight = 0;
     snapshot.docs.forEach(doc => {
       let id = doc.id;
       sortedDocs.push(doc.data())
@@ -1416,8 +1487,8 @@ subCat: null};
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
     let sortedDocs = []
-    let totalDocs = 0;
-    let totalWeight = 0;
+    totalDocs = 0;
+    totalWeight = 0;
     snapshot.docs.forEach(doc => {
       // console.log(doc.id)
       doc.data().id = doc.id;
@@ -2115,3 +2186,21 @@ db.collection('wisdomcollection').get().then(snapshot => {
 // let subCat = null;
 // if (elem.attributes.value.value) subCat = elem.attributes.value.value;
 // console.log(mainCat, subCat)
+
+if (window.localStorage.getItem('stayLogged') == 'true') {
+  console.log('found login info')
+  if (window.localStorage.getItem('savedLocalEmail') && window.localStorage.getItem('savedLocalPass')) {
+    console.log('working')
+    getEmail.value = window.localStorage.getItem('savedLocalEmail');
+    getPass.name = window.localStorage.getItem('savedLocalPass');
+    for (let i = getPass.name.length; i > 0; i--) {
+      getPass.value += '*'
+    }
+  }
+  if (window.localStorage.getItem('stayLogged') == 'true')
+  stayLogged.checked = true;
+  saveLoginInfo.checked = true;
+  checkLogin()
+  stayLogged.checked = true;
+  saveLoginInfo.checked = true;
+}
