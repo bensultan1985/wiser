@@ -751,8 +751,30 @@ const openFavorites = () => {
         if (checkWisColorScheme()) item.style.color = '#006400';
   //displays readable data for the user
         item.innerHTML = `<div class="displayfav"> "${element.entry}"<br>submitted by ${element.author}</div>`;
+        let delButton = document.createElement('button')
+        delButton.innerHTML = 'remove favorite'
+        delButton.name = element.originalId
+        item.appendChild(delButton)
+        delButton.addEventListener('click', (e) => delFavorite(e, item, element))
     })
   })
+}
+
+const delFavorite = (e, item, element) => {
+  e.preventDefault()
+  db.collection('usersdb').doc(userId).update({
+    favWis: firebase.firestore.FieldValue.arrayRemove({
+      author: element.author,
+      entry: element.entry,
+      originalId: element.originalId
+    })
+  })
+  const decrement = firebase.firestore.FieldValue.increment(-1);
+
+// Update read count
+db.collection('wisdomcollection').doc(element.originalId).update({ favorites: decrement });
+  item.style.display = 'none'
+
 }
 
 
