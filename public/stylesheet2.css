@@ -318,6 +318,7 @@ button:hover {
     background: green;
     color: white;
     cursor: pointer;
+    -webkit-text-fill-color: white;
 }
 
 #dashboardcalendar {
@@ -1712,4 +1713,22 @@ background: rgb(38, 157, 255);
 
 .bold-detail {
     font-style: oblique;
+}
+
+.delcombutton {
+    padding-right: 0px;
+    font-size: 13px;
+    display: block;
+    margin-left: auto;
+    border: none;
+}
+
+.delcombutton:hover {
+    padding-right: 0px;
+    font-size: 13px;
+    background-color: white;
+    display: block;
+    border: none;
+    margin-left: auto;
+    -webkit-text-fill-color: green;
 }

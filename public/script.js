@@ -1062,17 +1062,29 @@ const submitComment = (event, comment) => {
     finalComment(comment);
 }
 
+const commentIdGen = () => {
+  let id = [];
+  let digits = [1, 2, 3, 4, 5, 6]
+  let alpha = [1, 2, 3, 4, 5, 6, 7, 8]
+  digits.forEach(element => id.push(Math.floor(Math.random() * 10)))
+  alpha.forEach(element => id.push(String.fromCharCode(97 + (Math.floor(Math.random() * 26)))))
+  id.sort(() => Math.random() - 0.5);
+  return id.join('').toString()
+}
+
 
 //last stage in submitting a comment:
-const finalComment = (comment) => {
+const finalComment = async (comment) => {
   //to pull up the right viewer window. fix later
   if (lastCategory.mainCat == 'newest wisdom') lastCategory.mainCat = 'New' 
   console.log(`putting to document ${comment.name}`)
   console.log(`data is: ${comment.parentElement.actualcomment.value}`)
   let updateDb = db.collection('wisdomcollection').doc(comment.name)
-  updateDb.update({wisComments: firebase.firestore.FieldValue.arrayUnion({commentkey: comment.parentElement.actualcomment.value,
-    userkey: saveduser})
-    }).then(getWise(lastCategory))
+  let commentId = commentIdGen();
+  await updateDb.update({wisComments: firebase.firestore.FieldValue.arrayUnion({commentkey: comment.parentElement.actualcomment.value,
+    userkey: saveduser, commentId: commentId, commentUser: userId, timestamp: Date.now()})
+    })
+    getWise(lastCategory);
 };
 
 
@@ -1260,7 +1272,26 @@ const getWise = async (catDetails) => {
 
         let populateComments = document.createElement("div")
         // populateComments.style.borderRadius = '0% 0% 10% 10%'
-          doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
+        let elemCount = 0;
+          doc.wisComments.forEach(element => {
+            let currentComment = document.createElement("div");
+            currentComment.innerHTML = `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`
+            populateComments.appendChild(currentComment)
+            currentComment.id = element.commentId;
+            if (element.commentUser == userId) {
+              let delComButton = document.createElement("BUTTON")
+              delComButton.name = doc.id;
+              delComButton.value = element.commentId
+              delComButton.placeholder = element.id;
+              delComButton.innerHTML = 'delete comment';
+              delComButton.className = 'delcombutton';
+              populateComments.append(delComButton)
+              let commentData = element
+              console.log(commentData, 'this is comment data')
+              delComButton.addEventListener('click', (e) => delComment(e, commentData))
+              elemCount ++
+            }
+            })
           if (!doc.wisComments[0])  {
             populateComments.className = `populatecomments${subClass}`
             
@@ -1462,7 +1493,26 @@ subCat: null};
           }
     }
         let populateComments = document.createElement("div")
-          doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
+        let elemCount = 0;
+        doc.wisComments.forEach(element => {
+          let currentComment = document.createElement("div");
+          currentComment.innerHTML = `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`
+          populateComments.appendChild(currentComment)
+          currentComment.id = element.commentId;
+            if (element.commentUser == userId) {
+              let delComButton = document.createElement("BUTTON")
+              delComButton.name = doc.id;
+              delComButton.value = element.commentId
+              delComButton.placeholder = element.id;
+              delComButton.innerHTML = 'delete comment';
+              delComButton.className = 'delcombutton';
+              populateComments.append(delComButton)
+              let commentData = element
+              console.log(commentData, 'this is comment data')
+              delComButton.addEventListener('click', (e) => delComment(e, commentData))
+              elemCount ++
+            }
+          })
           if (!doc.wisComments[0])  {
             populateComments.className = `populatecomments${subClass}`
             
@@ -1584,7 +1634,26 @@ subCat: null};
 
           
               let populateComments = document.createElement("div")
-              leftoverDocs[i].wisComments.forEach(element => populateComments.innerHTML += `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
+              let elemCount = 0;
+              leftoverDocs[i].wisComments.forEach(element => {
+                let currentComment = document.createElement("div");
+                currentComment.innerHTML = `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`
+                populateComments.appendChild(currentComment)
+                currentComment.id = element.commentId;
+              if (element.commentUser == userId) {
+                let delComButton = document.createElement("BUTTON")
+                delComButton.name = leftoverDocs[i].id;
+                delComButton.value = element.commentId
+                delComButton.placeholder = element.id;
+                delComButton.innerHTML = 'delete comment';
+                delComButton.className = 'delcombutton';
+                populateComments.append(delComButton)
+                let commentData = element
+                console.log(commentData, 'this is comment data')
+                delComButton.addEventListener('click', (e) => delComment(e, commentData))
+                elemCount ++
+              }
+            })
                 if (!leftoverDocs[i].wisComments[0])  {
                   populateComments.className = `populatecomments${subClass}`
                   
@@ -1804,6 +1873,7 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
 
 
     let populateComments = document.createElement("div")
+    let elemCount = 0;
       doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="details-displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
       if (!doc.wisComments[0])  {
         populateComments.className = `details-populatecomments`
@@ -1841,6 +1911,20 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
   }
 //add document object "submitComment" for comment button function
 }
+
+
+    const delComment = async (e, commentData) => {
+      e.preventDefault()
+      console.log(e)
+      let currentWisbit = e.srcElement.name.toString('')
+      console.log(currentWisbit, e.srcElement.value)
+  await db.collection("wisdomcollection").doc(currentWisbit).update({
+    'wisComments': firebase.firestore.FieldValue.arrayRemove(commentData)
+    })
+    let deletedComment = document.getElementById(commentData.commentId)
+    deletedComment.nextElementSibling.style.display = 'none';
+    deletedComment.style.display = 'none';
+  }
 
 
 
