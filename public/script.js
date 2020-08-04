@@ -130,6 +130,7 @@ let test1 = document.getElementById("test1");
 let test2 = document.getElementById("test2");
 let resEmail = document.getElementById("res-email")
 let sendPass = document.getElementById("sendpass")
+let saveLoginInfoReg = document.getElementById("savelogininfo-reg")
 
 //menu button elements
 let logoutLink = document.getElementById("logoutlink");
@@ -507,6 +508,11 @@ promise.then((response) => {
   //form disappears once form information is collected
   regColumn.style.display = 'none';
   loginAfterReg(thoughtStr, authUserId)
+  if (saveLoginInfoReg.checked == true) {
+    window.localStorage.setItem('stayLogged', true);
+    window.localStorage.setItem('savedLocalEmail', regEmail.value);
+    window.localStorage.setItem('savedLocalPass', regPass.name);
+  }
   }
   )
 };
