@@ -805,6 +805,14 @@ h4, #categorytitle {
     height: 100%;
 }
 
+#forgotcolumn {
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
 #promptcolumn {
     border-radius: 25px;
     width: 100%;
@@ -1731,4 +1739,8 @@ background: rgb(38, 157, 255);
     border: none;
     margin-left: auto;
     -webkit-text-fill-color: green;
+}
+
+.err-msg {
+    color: red;
 }

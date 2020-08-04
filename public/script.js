@@ -73,6 +73,9 @@ let regPassReEntry = document.getElementById("regpassreentry");
 let detailsHeadWrapper = document.getElementById("detailsheadwrapper");
 let viewId = document.getElementById('viewid');
 let viewIdBack = document.getElementById('viewidback');
+let forgotPass = document.getElementById('forgotpass');
+let resetForm = document.getElementById('resetform');
+let formErr = document.getElementById("formerr")
 
 
 //form elements
@@ -125,6 +128,8 @@ let headRegButton = document.getElementById("headregbutton");
 let topMenu = document.getElementById("topmenu");
 let test1 = document.getElementById("test1");
 let test2 = document.getElementById("test2");
+let resEmail = document.getElementById("res-email")
+let sendPass = document.getElementById("sendpass")
 
 //menu button elements
 let logoutLink = document.getElementById("logoutlink");
@@ -150,7 +155,8 @@ let leftHeader = document.getElementById("leftheader");
 let calendarPreview = document.getElementById("calendarpreview");
 let savedIcon = document.getElementById("savedicon");
 let calIntroLine = document.getElementById("calintroline");
-let viewerWindow = document.getElementById("viewerWindow")
+let viewerWindow = document.getElementById("viewerWindow");
+let forgotColumn = document.getElementById("forgotcolumn");
 
 //wishing well
 let wishingWellColumn = document.getElementById("wishingwellcolumn");
@@ -165,7 +171,7 @@ let tPBox = document.getElementById("tpbox");
 
 
 // let index = document.getElementById("index");
-let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn]
+let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn]
 let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn];
 //this can't include wisDetails Column for backtracking:
 let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn];
@@ -192,6 +198,7 @@ const columnToggle = (selectedColumn) => {
   viewer.style.display = 'none';
   formColumn.style.display = 'none';
   regColumn.style.display = 'none';
+  forgotColumn.style.display = 'none';
 
   if (selectedColumn) selectedColumn.style.display = 'block';
   currentSecColumn = selectedColumn;
@@ -986,7 +993,9 @@ const openCalendar = (day) => {
       }
       dayToSet.addEventListener("click",listQ)})
   submitCalDay.addEventListener('click', () => submitCalDayFunction(event, calMsgInput, attachImg, dayToSet))
+  
   columnToggle(calendarColumn);
+  prevThird = calendarColumn
 }
 
 
@@ -1047,7 +1056,10 @@ const submitWis = (e) => {
   let newestExpire =  new Date();
   newestExpire.setDate(newestExpire.getDate() + 10);
     //check validity of wisdom string
-    if (checkWisInput(wisdom.value) == false) return false;
+    if (checkWisInput(wisdom.value) == false) {
+      formErr.innerHTML = 'wisdom exceeds max length of 299 characters'
+      return false;
+    };
     
     //adds a wisdom object to the wisdomcollection collection on Firebase
     db.collection('wisdomcollection').add(
@@ -1219,7 +1231,12 @@ const finalFavorite = (data) => {
 originalId: originalDocId})
     }).then(getFavInfo()).then(data.innerHTML = 'Favorited <i class="fa fa-star"></i>')
   }
-  )
+  ).then(() => {
+    console.log('column:', prevThird)
+  if (prevThird == calendarColumn) {
+    openCalendar(universalDayName)
+  }
+  })
 }
 
 const submitWish = () => {
@@ -1461,7 +1478,7 @@ const getWise = async (catDetails) => {
 
 
     if (relevantDocFound == false) {
-      viewer.innerHTML += `<br>This section has no wisdom yet! Click 'submit wisdom' to be the first!`
+      viewer.innerHTML += `<br>This section has no wisdom yet! Click 'CREATE A WISBIT' to be the first!`
       return
     }
   }).then(async () => {
@@ -2066,7 +2083,7 @@ const openReg3 = (e) => {
 const checkWisInput = (str) => {
   console.log(str.length)
   if (typeof str != 'string') return false;
-  if (str.length > 240) {
+  if (str.length > 299) {
     return false
   }
   return true
@@ -2226,3 +2243,38 @@ if (window.localStorage.getItem('stayLogged') == 'true') {
   stayLogged.checked = true;
   saveLoginInfo.checked = true;
 }
+
+const forgotPassFunction = (e) => {
+  e.preventDefault()
+  console.log('reset check');
+  firebase.auth().sendPasswordResetEmail(resEmail.value);
+  resetForm.style.display = 'none';
+  let resetMsg = document.getElementById("resetmsg");
+  resetMsg.innerHTML = 'Reset link sent. Check your email and follow the instructions.'
+  resetMsg.style.color = 'blue'
+
+}
+
+
+// const forgotPassFunction = () => {
+//   let displayName = saveduser;
+//   let email = getEmail.value;
+//   const userEmail = getEmail.value;
+//   firebase.auth().generatePasswordResetLink(userEmail)
+//     .then((link) => {
+//       // Construct password reset email template, embed the link and send
+//       // using custom SMTP server.
+//       return sendCustomPasswordResetEmail(email, displayName, link);
+//     })
+//     .catch((error) => {
+//       // Some error occurred.
+//     });
+// }
+
+// // Admin SDK API to generate the password reset link.
+forgotPass.addEventListener('click',() => {
+  columnToggle(forgotColumn)
+  if (getEmail.value) resEmail.value = getEmail.value
+})
+sendPass.addEventListener('click', forgotPassFunction)
+

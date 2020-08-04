@@ -964,6 +964,7 @@
 
         <input type="submit" id="submit" value="submit">
       </form>
+      <div id="formerr" class="err-msg"></div>
       <br>
       <br>
     </div>
@@ -1023,7 +1024,39 @@
       <button type="submit" id="getsubmit" value="submit">log in</button>
     </form>
   </div>
+  <br>
+  <a id="forgotpass" style="cursor: pointer; display: block; margin: 20px; margin-top: 8px;">forgot your password?</a>
   </div>
+
+
+
+  <div class="addbackground" id="forgotcolumn" style="display: none">
+    <div class="indented-div">
+      <br>
+      1. Enter the email address associated with your account. Then click "reset my password".<br><br>
+      2. Check your inbox for the reset email. Open it and follow the reset link.<br>
+      <br>
+      <br>
+      <form id="resetform">
+      <label for="res-email">Enter your email:</label>
+      <br>
+      <br>
+      <input type="text" id="res-email" name="res-email" class="default-input">
+      <br>
+      <br>
+  <button id="sendpass" style="cursor: pointer; display: block; margin: 20px; margin-top: 8px;">reset my password</button>
+</form>
+    <div id="resetmsg"></div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
 
   <div class="addbackground" id="regcolumn" style="display: none">
     <div id="regheading">Registration</div>
