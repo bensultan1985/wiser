@@ -92,6 +92,7 @@ let getPass = document.getElementById("getpass");
 let saveLoginInfo = document.getElementById("savelogininfo");
 let stayLogged = document.getElementById("staylogged")
 let loginErrMsg = document.getElementById("login-err-msg")
+let wisdomCount = document.getElementById("wisdom-count");
 
 let regBack1 = document.getElementById("regback1");
 let regNext1 = document.getElementById("regnext1");
@@ -1074,6 +1075,16 @@ const showSubCats = (e) => {
   
 }
 
+let charCount = 299;
+wisdomCount.innerHTML = `${charCount} characters left`;
+wisdom.addEventListener('input',(e) => {
+  e.preventDefault()
+  console.log('counting')
+  charCount = 299 - wisdom.value.length
+  if (charCount >= 0) wisdomCount.innerHTML = `${charCount} characters left`
+  if (charCount < 0) wisdomCount.innerHTML = 'exceeds character limit';
+});
+
 
 //function to submit wisdom
 const submitWis = (e) => {
@@ -1081,6 +1092,7 @@ const submitWis = (e) => {
   e.preventDefault();
   let postTagsObject = {unspecifiedsearchquery: 'unspecifiedsearchquery'};
   let postTagsArray = []
+
   postTagsArray = postTags.value.split(',');
   if (postTagsArray.length > 1) {postTagsArray.forEach(element => {
       postTagsObject[element] = element;

@@ -82,7 +82,11 @@ ul {
 
 #submit:hover,
 #submit:focus {
-    border: none;
+    border: solid;
+    border-width: 2px;
+    border-color: white;
+    -webkit-text-fill-color: white;
+    border-radius: 25px;
     background: green;
     color: white;
 }
