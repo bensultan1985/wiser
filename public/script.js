@@ -75,7 +75,8 @@ let viewId = document.getElementById('viewid');
 let viewIdBack = document.getElementById('viewidback');
 let forgotPass = document.getElementById('forgotpass');
 let resetForm = document.getElementById('resetform');
-let formErr = document.getElementById("formerr")
+let formErr = document.getElementById("formerr");
+let regErr = document.getElementById("reg-err")
 
 
 //form elements
@@ -448,16 +449,33 @@ let thoughtStr = 'This notepad will auto-save with every keystroke. Your note wi
 let canReg = true;
 if (!isValidEmailAddress(regEmail.value)) {
   console.log('email not valid');
+  RegInvalidMsg('email not valid')
   regName.value = '';
   regPass.value = '';
   regEmail.value = '';
   regPass.name = '';
   canReg = false;
 }
-if (regPass.name != regPassReEntry.name) canReg = false;
-if (regPass.name.length < 6) canReg = false;
+if (regPass.name != regPassReEntry.name) {
+  canReg = false;
+  RegInvalidMsg('passwords do not match')
+};
+if (regPass.name.length < 6) {
+  canReg = false;
+  RegInvalidMsg('password must be at least 6 characters')
+}
+if(regName < 3 || regName > 28) {
+  canReg = false;
+  RegInvalidMsg('username must be between 3 and 28 characters')
+}
 if (canReg == false) return false;
-const promise = auth.createUserWithEmailAndPassword(regEmail.value, regPass.name)
+const promise = auth.createUserWithEmailAndPassword(regEmail.value, regPass.name);
+promise.catch(e => {
+  console.log(e.message)
+  //if login is invalid, display a message to user to try again
+  RegInvalidMsg(e.message)
+  return;
+})
 let sexChangeData = 'unspecified';
 let ageChangeData = 'unspecified';
 for (let i = 0; i < regSex.length; i++) {
@@ -693,6 +711,18 @@ const loginInvalidMsg = (error) => {
   setTimeout(() => nodeMsg.style.display = 'none', 4000);
   namePassReset()
 }
+
+const RegInvalidMsg = (error) => {
+  let nodeMsg = document.createElement("div")
+  nodeMsg.style.color = 'red';
+  nodeMsg.id = 'failedreg';
+  regErr.style.display = 'block';
+  if (error) nodeMsg.innerHTML = error
+  regErr.append(nodeMsg);
+  setTimeout(() => nodeMsg.style.display = 'none', 4000);
+  namePassReset()
+}
+
 
 
 
