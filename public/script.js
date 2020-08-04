@@ -1990,7 +1990,30 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
 
     let populateComments = document.createElement("div")
     let elemCount = 0;
-      doc.wisComments.forEach(element => populateComments.innerHTML += `<p class="details-displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`)
+      doc.wisComments.forEach(element => {
+        elemCount ++
+        console.log(element)
+        populateComments.innerHTML += `<p class="details-displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`
+      if (element.commentUser == userId) {
+        let delComButton = document.createElement("BUTTON")
+        delComButton.name = doc.id;
+        delComButton.value = element.commentId
+        delComButton.placeholder = element.id;
+        delComButton.innerHTML = 'delete comment';
+        delComButton.className = 'delcombutton';
+        populateComments.append(delComButton)
+        let commentData = element
+        console.log(commentData, 'this is comment data')
+        delComButton.addEventListener('click', (e) => {
+          delComment(e, commentData, id);
+          doc.wisComments = doc.wisComments.splice(elemCount, 1)
+          console.log(doc.wisComments, 'these are the remaining comments')
+          createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody);
+          console.log(doc)
+        }
+        )
+      }
+    })
       if (!doc.wisComments[0])  {
         populateComments.className = `details-populatecomments`
         
@@ -2029,17 +2052,22 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
 }
 
 
-    const delComment = async (e, commentData) => {
+    const delComment = async (e, commentData, delDetail) => {
       e.preventDefault()
       console.log(e)
-      let currentWisbit = e.srcElement.name.toString('')
+      let currentWisbit = '';
+      if (e.srcElement.name) currentWisbit = e.srcElement.name.toString('');
+      if (delDetail) currentWisbit = delDetail;
       console.log(currentWisbit, e.srcElement.value)
   await db.collection("wisdomcollection").doc(currentWisbit).update({
     'wisComments': firebase.firestore.FieldValue.arrayRemove(commentData)
     })
-    let deletedComment = document.getElementById(commentData.commentId)
+    let deletedComment = null;
+   if (commentData.commentId) deletedComment = document.getElementById(commentData.commentId)
+    if (deletedComment != null) {
     deletedComment.nextElementSibling.style.display = 'none';
     deletedComment.style.display = 'none';
+    }
   }
 
 
