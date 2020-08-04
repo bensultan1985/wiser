@@ -1751,3 +1751,17 @@ background: rgb(38, 157, 255);
 #regback1 {
     -webkit-text-fill-color: gray;
 }
+
+.favDel {
+    margin-top: 16px;
+    font-size: 14px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.favDel:hover {
+    margin-top: 16px;
+    font-size: 14px;
+    padding-left: 7px;
+    padding-right: 7px;
+}

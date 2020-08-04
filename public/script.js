@@ -90,6 +90,7 @@ let getEmail = document.getElementById("getemail")
 let getPass = document.getElementById("getpass");
 let saveLoginInfo = document.getElementById("savelogininfo");
 let stayLogged = document.getElementById("staylogged")
+let loginErrMsg = document.getElementById("login-err-msg")
 
 let regBack1 = document.getElementById("regback1");
 let regNext1 = document.getElementById("regnext1");
@@ -650,7 +651,7 @@ const checkLogin = (e) => {
   promise.catch(e => {
     console.log(e.message)
     //if login is invalid, display a message to user to try again
-    loginInvalidMsg()
+    loginInvalidMsg(e.message)
     return;
   }).then(response => 
   db.collection('usersdb').get().then((snapshot) => {
@@ -681,13 +682,15 @@ const namePassReset = () => {
   getEmail.value = '';
 }
 
-const loginInvalidMsg = () => {
+const loginInvalidMsg = (error) => {
   let nodeMsg = document.createElement("div")
   nodeMsg.innerHTML = 'email/password not found. try again.'
   nodeMsg.style.color = 'red';
   nodeMsg.id = 'failedlogin';
-  currentColumn.appendChild(nodeMsg);
-  setTimeout(() => nodeMsg.style.display = 'none', 2000);
+  loginErrMsg.style.display = 'block';
+  if (error) nodeMsg.innerHTML = error
+  loginErrMsg.append(nodeMsg);
+  setTimeout(() => nodeMsg.style.display = 'none', 4000);
   namePassReset()
 }
 
@@ -765,6 +768,7 @@ const openFavorites = () => {
   //displays readable data for the user
         item.innerHTML = `<div class="displayfav"> "${element.entry}"<br>submitted by ${element.author}</div>`;
         let delButton = document.createElement('button')
+        delButton.className = 'favDel'
         delButton.innerHTML = 'remove favorite'
         delButton.name = element.originalId
         item.appendChild(delButton)
@@ -1882,11 +1886,12 @@ console.log(e.srcElement.attributes.name.value)
 
 const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody) => {
   console.log(wisDetailsColumnBody.firstChild)
+  console.log(doc)
   let commentableArray = false;
   let wisbitDetails = document.createElement("div");
   wisbitDetails.className = 'details details-header';
   wisbitDetails.id = 'detailsid'
-  if (document.getElementById('detailsid')) document.getElementById('detailsid').innerHTML = ''
+  if (document.getElementById('detailsid')) document.getElementById('detailsid').innerHTML = '';
 
   let checkFavorited = doc.wisdom
   if (loggedIn) {
@@ -1918,9 +1923,20 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
       needStar = true;
     }
 }
+
+let category = document.createElement('div');
+const findThisCat = () => {
+  let resultString = '<br>'
+  if (doc.category) resultString += doc.category;
+  if (doc.subCat) resultString += '/' + doc.subCat;
+  return resultString
+}
+category.innerHTML = findThisCat()
+wisbitDetails.append(category)
+
   let wisbitWisdom = document.createElement("div");
   let wisbitDate = document.createElement("div");
-  wisbitDate.innerHTML = `created on ${doc.readableDateSubmitted}<br><br>`
+  wisbitDate.innerHTML = `<br>created on ${doc.readableDateSubmitted}<br><br>`
   wisbitWisdom.innerHTML = `"${doc.wisdom}"<br><br>`
   wisbitWisdom.className = 'bold-detail'
   console.log(wisbitWisdom)
