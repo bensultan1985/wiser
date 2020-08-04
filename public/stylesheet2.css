@@ -301,12 +301,14 @@ button {
     all: unset;
     /* color: rgb(209, 168, 63); */
     color: green;
+    -webkit-text-fill-color: green;
     background: white;
     padding: 4px 26px;
     border: solid;
     border-width: 2px;
     border-radius: 25px;
     border-color: green;
+    font-family: "helvetica";
 }
 
 button:hover {
@@ -319,6 +321,7 @@ button:hover {
     color: white;
     cursor: pointer;
     -webkit-text-fill-color: white;
+    font-family: "helvetica";
 }
 
 #dashboardcalendar {
@@ -1743,4 +1746,8 @@ background: rgb(38, 157, 255);
 
 .err-msg {
     color: red;
+}
+
+#regback1 {
+    -webkit-text-fill-color: gray;
 }
