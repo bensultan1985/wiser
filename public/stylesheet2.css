@@ -1402,7 +1402,7 @@ background: rgb(38, 157, 255);
     border-left-color: green;
     border-top-color: green;
     border-width: 3px;
-    /* border-right: none; */
+    border-right: none;
     border-right-width: 2px;
     border-left-width: 2px;
     border-bottom: none;
@@ -1445,9 +1445,9 @@ background: rgb(38, 157, 255);
     margin-right:20px;
     overflow-y: hidden;
     min-width: 310px;
-    -webkit-box-shadow: 0px 2px 2px 0px green;
--moz-box-shadow: 0px 2px 2px 0px green;
-box-shadow: 0px 2px 2px 0px green;
+    /* -webkit-box-shadow: 0px 2px 1px 0px green;
+-moz-box-shadow: 0px 2px 1px 0px green;
+box-shadow: 0px 2px 1px 0px green; */
 }
 
 #viewidback {
