@@ -76,7 +76,9 @@ let viewIdBack = document.getElementById('viewidback');
 let forgotPass = document.getElementById('forgotpass');
 let resetForm = document.getElementById('resetform');
 let formErr = document.getElementById("formerr");
-let regErr = document.getElementById("reg-err")
+let regErr = document.getElementById("reg-err");
+let howDoesHeadWrapper = document.getElementById("howdoesheadwrapper")
+let howDoesDash = document.getElementById("howdoes-dash");
 
 
 //form elements
@@ -161,6 +163,8 @@ let savedIcon = document.getElementById("savedicon");
 let calIntroLine = document.getElementById("calintroline");
 let viewerWindow = document.getElementById("viewerWindow");
 let forgotColumn = document.getElementById("forgotcolumn");
+let howDoesColumn = document.getElementById("howdoescolumn");
+let howDoes = document.getElementById("howdoes")
 
 //wishing well
 let wishingWellColumn = document.getElementById("wishingwellcolumn");
@@ -176,9 +180,9 @@ let tPBox = document.getElementById("tpbox");
 
 // let index = document.getElementById("index");
 let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn]
-let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn];
+let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
 //this can't include wisDetails Column for backtracking:
-let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn];
+let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, howDoesColumn];
 
 
 
@@ -222,6 +226,7 @@ const toggleThirdColumn = (selectedColumn) => {
   favoritesColumn.style.display = 'none';
   mySubmissionsColumn.style.display = 'none';
   wisDetailsColumn.style.display = 'none';
+  howDoesColumn.style.display = 'none';
 
   if (selectedColumn) selectedColumn.style.display = 'block';
   currentThirdColumn = selectedColumn;
@@ -731,7 +736,7 @@ const RegInvalidMsg = (error) => {
 const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo) => {
   loggedIn = true;
   saveduser = name;
-
+  howDoesDash.style.display = 'block';
   loginColumn.style.display = 'none';
   console.log(name + ' is logged in');
   userId = id;
@@ -2244,6 +2249,9 @@ regBack2.addEventListener('click', openReg1)
 regBack3.addEventListener('click', openReg2)
 regNext2.addEventListener('click', openReg3)
 regBack1.addEventListener('click', (e) => {e.preventDefault()})
+howDoes.addEventListener('click', () => columnToggle(howDoesColumn))
+howDoesHeadWrapper.addEventListener('click',() => columnToggle(prevThird))
+howDoesDash.addEventListener('click', () => columnToggle(howDoesColumn))
 
 
 let subcats = document.getElementsByClassName("subcat");

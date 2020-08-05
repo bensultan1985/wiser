@@ -1769,3 +1769,71 @@ background: rgb(38, 157, 255);
     padding-left: 7px;
     padding-right: 7px;
 }
+
+#howdoes {
+    font-family: "helvetica";
+    font-size: 18px;
+    color: rgb(0, 111, 214);
+    margin: 10px;
+    cursor: pointer;
+}
+
+.linebreak-sub {
+    height: 2px;
+    background: green;
+    width: 200px;
+}
+
+#howdoesinfo {
+    font-family: "helvetica";
+    font-size: 20px;
+}
+
+.howdetail {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 10px;
+    line-height: 20px;
+}
+
+#howdoesheadwrapper {
+    /* border-bottom: solid; */
+    /* border-width: 3px; */
+    /* border-color: green; */
+    font-size: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    -webkit-text-fill-color: green;
+    background-color: white;
+    cursor: pointer;
+}
+
+#howdoesbackbutton {
+    cursor: pointer;
+}
+
+#howdoesheader {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+#howdoes-dash {
+    font-family: "helvetica";
+    font-size: 18px;
+    color: rgb(0, 111, 214);
+    margin: 10px;
+    cursor: pointer;
+}
+
+.howdetail-head {
+    padding: 30px;
+    padding-top: 10px;
+    margin: 30px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
