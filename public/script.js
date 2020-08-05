@@ -1598,6 +1598,7 @@ subCat: null};
     })
 
     let leftoverDocs = sortedDocs
+    console.log(leftoverDocs, 'leftoverdocs')
 
     let newWisLog = 0
     sortedDocs = sortedDocs.sort((a, b) => b.weight-a.weight);
@@ -1741,7 +1742,16 @@ subCat: null};
         //append the viewer column with a new item
         viewer.appendChild(item);
         console.log(newWisLog)
+        for (let i = 0; i < leftoverDocs.length; i++) {
+          console.log(leftoverDocs)
+          if (leftoverDocs[i].id == doc.id) {
+            console.log(leftoverDocs)
+            return leftoverDocs.splice(i, 1)
+          }
+        }
       }
+    
+
     })
       if (newWisLog < 19) {
       let wisNeeded = (20 - newWisLog)
