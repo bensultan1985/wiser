@@ -235,7 +235,7 @@ const toggleThirdColumn = (selectedColumn) => {
 const checkPrevThird = () => {
   thirdColumnPrevCheck.forEach(element => {
     if (element.style.display == 'block') {
-      prevThird =  element
+      if (element != howDoesColumn) prevThird =  element
     }
   })
 }
