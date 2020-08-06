@@ -1433,10 +1433,12 @@ const getWise = async (catDetails) => {
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
+        let originalAuthorInsert = '';
+        if (doc.originalAuthor) originalAuthorInsert = 'quoted from: ' + doc.originalAuthor + '<br>';
         let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
 color: rgb(6, 190, 6);">popular wisdom</span><br>`
         if (item.className == 'result-li') popularWatermark = '';
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <div class="authdiv">${originalAuthorInsert}~ ${doc.user}</div></div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1658,13 +1660,15 @@ subCat: null};
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
+        let originalAuthorInsert = '';
+        if (doc.originalAuthor) originalAuthorInsert = 'quoted from: ' + doc.originalAuthor + '<br>';
         if (doc.subCat) subText = '/' + doc.subCat;
         let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
 color: rgb(6, 190, 6);">popular wisdom</span><br>`
         if (item.className == 'result-li') popularWatermark = ''
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}>${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}>${popularWatermark} "${doc.wisdom}" <div class="authdiv">${originalAuthorInsert}~ ${doc.user}</div></div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1809,13 +1813,15 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
               item2.className = 'result-li-high' : console.log('style normal');
               let subClass = '';
               if (item2.className == 'result-li-high') subClass = ' borderalt1';
+              let originalAuthorInsert = '';
+              if (leftoverDocs[i].originalAuthor) originalAuthorInsert = 'quoted from: ' + leftoverDocs[i].originalAuthor + '<br>';
               if (leftoverDocs[i].subCat) subText = '/' + leftoverDocs[i].subCat;
               let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
 color: rgb(6, 190, 6);">popular wisdom</span><br>`
               if (item2.className == 'result-li') popularWatermark = '';
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
-              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}>${popularWatermark} "${leftoverDocs[i].wisdom}" <div class="authdiv">~ ${leftoverDocs[i].user}</div></div>`;
+              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}>${popularWatermark} "${leftoverDocs[i].wisdom}" <div class="authdiv">${originalAuthorInsert}~ ${leftoverDocs[i].user}</div></div>`;
               if (loggedIn) {
                 db.collection('usersdb').doc(userId).get().then(snapshot => {
                   favInfo = snapshot.data().favWis
@@ -1987,6 +1993,23 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
   wisbitDetails.id = 'detailsid'
   if (document.getElementById('detailsid')) document.getElementById('detailsid').innerHTML = '';
 
+  let category = document.createElement('div');
+const findThisCat = () => {
+  let resultString = '<br>'
+  if (doc.category) resultString += doc.category;
+  if (doc.subCat) resultString += '/' + doc.subCat;
+  return resultString
+}
+category.innerHTML = findThisCat()
+category.style.color = '#008B8B';
+wisbitDetails.append(category)
+
+  let wisbitDate = document.createElement("div");
+  wisbitDate.innerHTML = `created on ${doc.readableDateSubmitted}`
+  wisbitDate.style.color = '#5F9EA0'
+    wisbitDetails.append(wisbitDate)
+
+
   let checkFavorited = doc.wisdom
   if (loggedIn) {
     db.collection('usersdb').doc(userId).get().then(snapshot => {
@@ -2004,7 +2027,7 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
       let addStar = document.createElement("div");
       wisbitDetails.append(addStar);
       addStar.className= `details-favoritestar`;
-      addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+      addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i><br><br>';
       addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
       needStar = true;
     }
@@ -2013,38 +2036,31 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
       wisbitDetails.appendChild(favorited);
       favorited.className= `details-favorited`;
       favorited.style.padding ="6px";
-      favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+      favorited.innerHTML = 'Favorited <i class="fa fa-star"></i><br><br>';
       needStar = true;
     }
 }
 
-let category = document.createElement('div');
-const findThisCat = () => {
-  let resultString = '<br>'
-  if (doc.category) resultString += doc.category;
-  if (doc.subCat) resultString += '/' + doc.subCat;
-  return resultString
-}
-category.innerHTML = findThisCat()
-wisbitDetails.append(category)
-
   let wisbitWisdom = document.createElement("div");
-  let wisbitDate = document.createElement("div");
-  wisbitDate.innerHTML = `<br>created on ${doc.readableDateSubmitted}<br><br>`
-  wisbitWisdom.innerHTML = `"${doc.wisdom}"<br><br>`
+
+    wisbitWisdom.innerHTML = `"${doc.wisdom}"<br><br>`
   wisbitWisdom.className = 'bold-detail'
   console.log(wisbitWisdom)
-  wisbitDetails.append(wisbitDate)
+
   wisbitDetails.append(wisbitWisdom)
 
   if (doc.originalAuthor) {
-    let wisbitOrigAuthDiv = document.createElement("div")
-    wisbitOrigAuthDiv.innerHTML = `-${doc.originalAuthor}<br><br>`
+    let wisbitOrigAuthDiv = document.createElement("div");
+    wisbitOrigAuthDiv.style.color = '#008B8B';
+    wisbitOrigAuthDiv.style.textAlign = 'right';
+    wisbitOrigAuthDiv.innerHTML = `-${doc.originalAuthor}<br><br>`;
     wisbitDetails.append(wisbitOrigAuthDiv)
     wisbitOrigAuthDiv.className = 'bold-detail'
   }
 
   let wisbitAuthor = document.createElement("div");
+  wisbitAuthor.style.color = '#008B8B';
+  wisbitAuthor.style.textAlign = 'right';
   wisbitAuthor.innerHTML = `submitted by ${doc.user}`;
   // wisbitAuthor.className = 'bold-detail'
   wisbitDetails.append(wisbitAuthor);
