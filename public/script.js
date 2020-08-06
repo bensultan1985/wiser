@@ -1436,7 +1436,7 @@ const getWise = async (catDetails) => {
         let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
 color: rgb(6, 190, 6);">popular wisdom</span><br>`
         if (item.className == 'result-li') popularWatermark = '';
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1664,7 +1664,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
         if (item.className == 'result-li') popularWatermark = ''
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}>${popularWatermark} "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}>${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1815,7 +1815,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
               if (item2.className == 'result-li') popularWatermark = '';
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
-              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}>${popularWatermark} "${leftoverDocs[i].wisdom}" <br><br>submitted by ${leftoverDocs[i].user}</div>`;
+              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}>${popularWatermark} "${leftoverDocs[i].wisdom}" <div class="authdiv">~ ${leftoverDocs[i].user}</div></div>`;
               if (loggedIn) {
                 db.collection('usersdb').doc(userId).get().then(snapshot => {
                   favInfo = snapshot.data().favWis
