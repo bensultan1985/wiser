@@ -570,7 +570,7 @@ h4, #categorytitle {
     border: solid;
     border-width: 2px;
     border-color: rgb(160, 104, 41);
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 10px 0px;
     padding: 10px;
     cursor: pointer;
     font-size: 18px;
