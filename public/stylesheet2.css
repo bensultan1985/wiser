@@ -119,13 +119,15 @@ select {
 #retrievedisplay {
     color: green;
     text-align: center;
-    max-width: 400px;
+    width: 100%;
+    /* max-width: 450px; */
     /* width: 480px; */
     /* column-width: 250px; */
 }
 
 .column {
-    max-width: 33vw !important;
+    min-width: 23vw !important;
+    max-width: 28.5vw !important;
     box-sizing: border-box;
     /* height: 88vh; */
     /* width: 33vw; */
@@ -253,7 +255,7 @@ select {
 #visitcategory, li{
     color: green;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
 
 .cathead {
