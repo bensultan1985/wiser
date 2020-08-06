@@ -147,7 +147,7 @@ select {
   }
 
 .secondcolumn {
-    max-width: 33vw !important;
+    max-width: 40vw !important;
     /* height: 88vh; */
     box-sizing: border-box;
     float: left;
@@ -156,7 +156,7 @@ select {
     /* width: 500px !important; */
     height: 100%;
     /* max-width: 550px; */
-    width: 33vw;
+    width: 36vw;
     min-width: 200px;
     /* border: solid;
     border-color: green;
@@ -344,7 +344,7 @@ h4, #categorytitle {
     /* position: relative; */
     min-width: 270px;
     max-width: 90%;
-    padding: 10px;
+    padding: 7px;
     margin: 10px;
     margin-left: 4px;
     color: rgb(160, 104, 41);
@@ -359,7 +359,7 @@ h4, #categorytitle {
     display: block;
     /* position: relative; */
     background: rgb(6, 190, 6);
-    padding: 10px;
+    padding: 7px;
     margin: 10px;
     max-width: 90%;
     margin-left: 4px;
@@ -1279,7 +1279,7 @@ background: rgb(38, 157, 255);
     border-bottom: none;
     border-color: rgb(160, 104, 41);
     border-radius: 0px 0px 10px 10px;
-    padding: 10px;
+    padding: 6px;
        /* no highlight of text */
        -webkit-touch-callout: none; /* iOS Safari */
        -webkit-user-select: none; /* Safari */
@@ -1296,7 +1296,7 @@ background: rgb(38, 157, 255);
     border-bottom: none;
     border-color: rgb(160, 104, 41);
     border-radius: 0px 0px 10px 10px;
-    padding: 10px;
+    padding: 6px;
        /* no highlight of text */
        -webkit-touch-callout: none; /* iOS Safari */
        -webkit-user-select: none; /* Safari */
@@ -1427,7 +1427,7 @@ background: rgb(38, 157, 255);
     overflow-y: hidden;
     /* font-weight: 600; */
     /* max-width: 33vw !important; */
-    max-width: 31%;
+    max-width: 34%;
     /* height: 88vh; */
     float: left;
     font-family: helvetica;
@@ -1493,7 +1493,7 @@ box-shadow: 0px 2px 1px 0px green; */
     overflow-y: hidden;
     /* font-weight: 600; */
     /* max-width: 33vw !important; */
-    max-width: 31%;
+    max-width: 34%;
     /* height: 88vh; */
     float: left;
     font-family: helvetica;

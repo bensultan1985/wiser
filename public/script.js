@@ -1587,7 +1587,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
 
 const checkWisColorScheme = (weight, totalDocs, totalWeight) => {
   console.log('color check:', weight, (totalDocs/totalWeight))
-  if (weight > (totalDocs / totalWeight)) {
+  if (weight > (totalDocs / totalWeight) + 1) {
   return true;
   } else {
   return false;
@@ -1689,7 +1689,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let favorited = document.createElement("div");
             item.appendChild(favorited);
             favorited.className= `favorited${subClass}`;
-            favorited.style.padding ="10px";
+            favorited.style.padding ="6px";
             favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
             needStar = true;
           }
@@ -1840,7 +1840,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
                   let favorited = document.createElement("div");
                   item2.appendChild(favorited);
                   favorited.className= `favorited${subClass}`;
-                  favorited.style.padding ="10px";
+                  favorited.style.padding ="6px";
                   favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
                   needStar = true;
                 }
@@ -2012,7 +2012,7 @@ const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnB
       let favorited = document.createElement("div");
       wisbitDetails.appendChild(favorited);
       favorited.className= `details-favorited`;
-      favorited.style.padding ="10px";
+      favorited.style.padding ="6px";
       favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
       needStar = true;
     }
