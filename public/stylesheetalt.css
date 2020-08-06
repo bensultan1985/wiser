@@ -470,7 +470,7 @@ h4, #categorytitle {
       /* background-color: rgb(215, 234, 241); */
       /* real background: */
       background-color: rgba(255, 153, 0, 0.651);
-      /* background-color: rgba(209, 209, 209, 0.651); */
+      background-color: rgba(209, 209, 209, 0.651);
           /* background-color: rgb(243, 243, 243); */
       height: auto;
       grid-column: 1 / 3;
@@ -1459,23 +1459,24 @@ box-shadow: 0px 2px 1px 0px green; */
     position: absolute;
     display: block;
     /* background: rgb(65, 121, 224); */
-    background: #ffbc59;
+    /* background: #ffbc59; */
+    background-color: rgba(209, 209, 209, 0.651);
     /* margin: 4px; */
     color: green;
     font-weight: 500;
     border: solid;
     /* border-left: solid; */
     /* border: solid; */
-    border-color: r#ffbc59;
+    border-color: rrgba(209, 209, 209, 0.651);
     /* border-left-color: rgb(6, 190, 6); */
-    border-left-color: #ffbc59;
-    border-top-color: #ffbc59;
+    border-left-color: rgba(209, 209, 209, 0.651);
+    border-top-color: rgba(209, 209, 209, 0.651);
     border-width: 3px;
     border-right: none;
     /* border-right-width: 2px; */
     border-left-width: 2px;
     border-bottom: none;
-    border-right-color: #ffbc59;
+    border-right-color: rgba(209, 209, 209, 0.651);
     border-radius: 0px 0px 0px 0px;
     /* margin:10px; */
     /* border-radius: 25px 25px 0px 0px; */
@@ -1845,33 +1846,9 @@ box-shadow: 0px 2px 1px 0px green; */
 }
 
 .subpop-yes {
-    background: rgb(255, 241, 209);
+
 }
 
 .subpop-no {
     -webkit-text-fill-color: rgb(160, 104, 41);
-    color: rgb(160, 104, 41);
-    border-color: rgb(160, 104, 41);
-    background: rgb(255, 241, 209);
-}
-
-.subpop-yes-button {
-    background: rgb(255, 241, 209);
-}
-
-.subpop-no-button {
-    -webkit-text-fill-color: rgb(160, 104, 41);
-    color: rgb(160, 104, 41);
-    border-color: rgb(160, 104, 41);
-    background: rgb(255, 241, 209);
-}
-
-.fa-envira {
-    position: relative;
-    display: inline-block;
-    /* color: rgb(209, 168, 63); */
-    /* color: green; */
-    font-size: 28px;
-    -webkit-text-fill-color: rgb(6, 190, 6);
-    color: rgb(6, 190, 6);
 }

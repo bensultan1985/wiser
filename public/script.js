@@ -587,24 +587,47 @@ const openLoginColumn = () => {
 const openMySubmissions = () => {
   columnToggle(mySubmissionsColumn)
     db.collection('wisdomcollection').get().then(snapshot => {
+
       mysubmissionslist.innerHTML = '';
         snapshot.docs.forEach(element => {
           if (element.data().opId == userId) {
           let item = document.createElement("li")
           mySubmissionsList.appendChild(item)
-          item.className = 'fav-li'
           item.name = element.id;
-          if (checkWisColorScheme()) item.style.color = '#006400';
+          let tempWeight = element.data().favorites + element.data().endorsements.length;
+          console.log('////////test', tempWeight, totalDocs, totalWeight)
+          if (checkWisColorScheme(tempWeight, totalDocs, totalWeight)) {
+            item.className = 'fav-li subpop-yes';
+          } else {
+            item.className = 'fav-li subpop-no';
+          }
     //displays readable data for the user
-          item.innerHTML =
+          if (item.className == 'fav-li subpop-yes') {
+            item.innerHTML =
           `<div class="displayfav">
+          <i tyle="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span style="-webkit-text-fill-color: rgb(6, 190, 6);
+          color: rgb(6, 190, 6);">popular wisdom</span><br><br>
             <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
             </div>
             <div>
+            <br>
             <button class="mysubmissionsdetails" name=${element.id}>view details</button>
             <button name=${element.id} class="mysubmissionsdelete">delete</button>
             </div>
           </div>`;
+          }
+          if (item.className == 'fav-li subpop-no') {
+            item.innerHTML =
+          `<div class="displayfav">
+            <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
+            </div>
+            <div>
+            <br>
+            <button class="mysubmissionsdetails" style="color: rgb(160, 104, 41); -webkit-text-fill-color: rgb(160, 104, 41); border-color: rgb(160, 104, 41);" name=${element.id}>view details</button>
+            <button name=${element.id} style="color: rgb(160, 104, 41); -webkit-text-fill-color: rgb(160, 104, 41); border-color: rgb(160, 104, 41);" class="mysubmissionsdelete">delete</button>
+            </div>
+          </div>`;
+          }
           //this creates a delete button for each of your submitted wisdom on the "my submissions page"
           let mySubmissionsDelete = document.getElementsByClassName("mysubmissionsdelete")
           console.log(mySubmissionsDelete)
@@ -1556,6 +1579,7 @@ const getWise = async (catDetails) => {
 };
 
 const checkWisColorScheme = (weight, totalDocs, totalWeight) => {
+  console.log('color check:', weight, (totalDocs/totalWeight))
   if (weight > (totalDocs / totalWeight)) {
   return true;
   } else {
