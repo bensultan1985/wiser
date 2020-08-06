@@ -1361,6 +1361,10 @@ const editThoughtStr = () => {
 //   5.   /////////////DISPLAY STORED-DATA CODE
 //re-usable function that displays stored wisdom by category
 //cat is passed via the event listener's anonymous function (this is a work-around - event listeners cannot pass params to a declared function)
+
+
+
+
 const getWise = async (catDetails) => {
 
   lastSecondColumn = viewer;
@@ -1429,7 +1433,10 @@ const getWise = async (catDetails) => {
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}"> "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
+        let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
+color: rgb(6, 190, 6);">popular wisdom</span><br>`
+        if (item.className == 'result-li') popularWatermark = '';
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1652,9 +1659,12 @@ subCat: null};
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
         if (doc.subCat) subText = '/' + doc.subCat;
+        let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
+color: rgb(6, 190, 6);">popular wisdom</span><br>`
+        if (item.className == 'result-li') popularWatermark = ''
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
-        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}> "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name=${doc.id}>${popularWatermark} "${doc.wisdom}" <br><br>submitted by ${doc.user}</div>`;
         if (loggedIn) {
           db.collection('usersdb').doc(userId).get().then(snapshot => {
             favInfo = snapshot.data().favWis
@@ -1800,9 +1810,12 @@ subCat: null};
               let subClass = '';
               if (item2.className == 'result-li-high') subClass = ' borderalt1';
               if (leftoverDocs[i].subCat) subText = '/' + leftoverDocs[i].subCat;
+              let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
+color: rgb(6, 190, 6);">popular wisdom</span><br>`
+              if (item2.className == 'result-li') popularWatermark = '';
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
-              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}> "${leftoverDocs[i].wisdom}" <br><br>submitted by ${leftoverDocs[i].user}</div>`;
+              item2.innerHTML = `<div class="wisouterborder">${leftoverDocs[i].category}${subText}</div><div class="commenttop${subClass}" name=${leftoverDocs[i].id}>${popularWatermark} "${leftoverDocs[i].wisdom}" <br><br>submitted by ${leftoverDocs[i].user}</div>`;
               if (loggedIn) {
                 db.collection('usersdb').doc(userId).get().then(snapshot => {
                   favInfo = snapshot.data().favWis
