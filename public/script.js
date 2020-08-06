@@ -605,7 +605,7 @@ const openMySubmissions = () => {
           if (item.className == 'fav-li subpop-yes') {
             item.innerHTML =
           `<div class="displayfav">
-          <i tyle="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span style="-webkit-text-fill-color: rgb(6, 190, 6);
+          <i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span style="-webkit-text-fill-color: rgb(6, 190, 6);
           color: rgb(6, 190, 6);">popular wisdom</span><br><br>
             <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
             </div>
@@ -623,8 +623,8 @@ const openMySubmissions = () => {
             </div>
             <div>
             <br>
-            <button class="mysubmissionsdetails" style="color: rgb(160, 104, 41); -webkit-text-fill-color: rgb(160, 104, 41); border-color: rgb(160, 104, 41);" name=${element.id}>view details</button>
-            <button name=${element.id} style="color: rgb(160, 104, 41); -webkit-text-fill-color: rgb(160, 104, 41); border-color: rgb(160, 104, 41);" class="mysubmissionsdelete">delete</button>
+            <button class="mysubmissionsdetails subpop-no-button" name=${element.id}>view details</button>
+            <button name=${element.id} class="mysubmissionsdelete subpop-no-button">delete</button>
             </div>
           </div>`;
           }

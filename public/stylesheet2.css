@@ -1863,7 +1863,14 @@ box-shadow: 0px 2px 1px 0px green; */
     -webkit-text-fill-color: rgb(160, 104, 41);
     color: rgb(160, 104, 41);
     border-color: rgb(160, 104, 41);
-    background: rgb(255, 241, 209);
+    /* background: rgb(255, 241, 209); */
+}
+.subpop-no-button:hover {
+    /* -webkit-text-fill-color: rgb(160, 104, 41);
+    color: rgb(160, 104, 41); */
+    border-color: white;
+    background-color: rgb(160, 104, 41);
+    /* background: rgb(255, 241, 209); */
 }
 
 .fa-envira {
