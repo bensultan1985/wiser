@@ -143,6 +143,7 @@ let accountLink = document.getElementById("accountlink")
 let calendarLink = document.getElementById("calendarlink");
 let dashboardLink = document.getElementById("dashboardlink");
 let favoritesLink = document.getElementById("favoriteslink");
+let editCalDash = document.getElementById("edit-cal-dash")
 
 
 let favoritesHeader = document.getElementById("favoritesheader");
@@ -1965,7 +1966,6 @@ const openDetailsColumn = (e) => {
   wisDetailsColumnBody.innerHTML = ''
   columnToggle(wisDetailsColumn)
   detailsHeadWrapper.addEventListener('click', backToPrevThird)
-  console.log(e.srcElement.attributes['1'].nodeValue)
   db.collection('wisdomcollection').doc(e.srcElement.attributes['1'].nodeValue).get().then((snapshot) => {
     let doc = snapshot.data()
     createDetails(doc, loggedIn, userId, db, favInfo, snapshot.id, wisDetailsColumnBody)
@@ -2280,6 +2280,7 @@ logoutLink.addEventListener('click', logoutFunction);
 accountLink.addEventListener('click', openAccount);
 favoritesLink.addEventListener('click', openFavorites);
 calendarLink.addEventListener('click', () => openCalendar(universalDayName));
+editCalDash.addEventListener('click', () => openCalendar(universalDayName));
 dashboardLink.addEventListener('click', openDashboard);
 leftHeader.addEventListener('click', () => loggedIn? columnToggle(dashboardColumn) : columnToggle(welcomeColumn));
 leftHeader.addEventListener('click', getNewest)

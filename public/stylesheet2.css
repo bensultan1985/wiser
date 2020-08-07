@@ -724,7 +724,6 @@ h4, #categorytitle {
 }
 
 .calendarbox h4 {
-    padding: 10px;
     position: relative;
     color: rgb(0, 140, 255);
     text-align: center;
@@ -732,12 +731,14 @@ h4, #categorytitle {
 }
 
 #bigcalendarbox {
+    width: 94%;
     position: relative;
     color: rgb(0, 140, 255);
     text-align: center;
     border: solid;
     border-width: 2px;
     margin-top: 6px;
+    margin-right: 0px;
     background: white;
 }
 
