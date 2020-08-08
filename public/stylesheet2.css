@@ -871,11 +871,11 @@ h4, #categorytitle {
     top: 10px;
     color: rgb(38, 157, 255);
     color: green;
+    overflow-x: hidden;
 }
 
 #calmsginput option {
     color: green;
-    max-width: 300px;
     overflow-x: hidden;
 }
 
@@ -1928,6 +1928,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #cal-next {
     display: inline;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 5px;
@@ -1942,6 +1943,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #cal-next:hover {
     display: inline;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
     /* float: right; */
@@ -1958,6 +1960,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #cal-back {
     display: inline;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 5px;
@@ -1971,6 +1974,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #cal-back:hover {
     display: inline;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 2px;
@@ -1986,6 +1990,7 @@ box-shadow: 0px 2px 1px 0px green; */
 #cal-edit {
     display: inline;
     text-align: center;
+    width: 130px;
     /* flex-grow: 0; */
     margin: auto;
     border-radius: 2px;
@@ -2006,6 +2011,7 @@ box-shadow: 0px 2px 1px 0px green; */
 #cal-edit:hover {
     display: inline;
     text-align: center;
+    width: 130px;
     /* flex-grow: 0; */
     padding-left: 5px;
     padding-right: 5px;
