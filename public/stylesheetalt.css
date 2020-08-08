@@ -1535,12 +1535,6 @@ box-shadow: 0px 2px 1px 0px green; */
     border: none;
 }
 
-.details-postcommentbutton {
-}
-
-.details-displaycomment {
-    /* padding: 10px; */
-}
 
 
     .mobile-message {
@@ -1699,10 +1693,6 @@ box-shadow: 0px 2px 1px 0px green; */
     .regsquare-empty{
         display: none;
     }
-    .regnavbutton {
-        /* margin-left: auto;
-        margin-right: auto; */
-    }
 }
 
 #wiserlogo {
@@ -1845,9 +1835,7 @@ box-shadow: 0px 2px 1px 0px green; */
     margin-bottom: 10px;
 }
 
-.subpop-yes {
 
-}
 
 .subpop-no {
     -webkit-text-fill-color: rgb(160, 104, 41);

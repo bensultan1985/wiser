@@ -140,7 +140,7 @@ let saveLoginInfoReg = document.getElementById("savelogininfo-reg")
 //menu button elements
 let logoutLink = document.getElementById("logoutlink");
 let accountLink = document.getElementById("accountlink")
-// let calendarLink = document.getElementById("calendarlink");
+let calendarLink = document.getElementById("calendarlink");
 let dashboardLink = document.getElementById("dashboardlink");
 let favoritesLink = document.getElementById("favoriteslink");
 
@@ -165,10 +165,6 @@ let viewerWindow = document.getElementById("viewerWindow");
 let forgotColumn = document.getElementById("forgotcolumn");
 let howDoesColumn = document.getElementById("howdoescolumn");
 let howDoes = document.getElementById("howdoes")
-let calBack = document.getElementById("cal-back");
-let calNext = document.getElementById("cal-next");
-let calEdit = document.getElementById("cal-edit");
-let calEditor = document.getElementById("cal-editor")
 
 //wishing well
 let wishingWellColumn = document.getElementById("wishingwellcolumn");
@@ -777,7 +773,7 @@ const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo) => {
   console.log(calInfo)
   getFavInfo()
   console.log(`this is your favorites: ${favInfo}`)
-  getCal(calInfo);
+  dashboardCalendar.innerHTML = getCal(calInfo);
   columnToggle(dashboardColumn);
   tPBox.value = thoughtStr
   lastTPValue = thoughtStr;
@@ -788,7 +784,7 @@ const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo) => {
 const getFavInfo = () => {
   db.collection('usersdb').doc(userId).get().then(snapshot => {
     favInfo = snapshot.data().favWis;
-    // console.log(snapshot.data().favWis);
+    console.log(snapshot.data().favWis);
     return favInfo
   })
 }
@@ -858,23 +854,17 @@ db.collection('wisdomcollection').doc(element.originalId).update({ favorites: de
 }
 
 
-let dateOffset = 0;
+
 const getCal = () => {
   console.log(calInfo)
   let dayName = '';
   let dayInMonth = '';
   let month = '';
+  let today = new Date
+  let num = today.getDay();
+  dayInMonth = today.getDate();
   var months    = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  let initDate = new Date;
-  const currentDate = new Date(initDate)
-  currentDate.setDate(currentDate.getDate() + dateOffset)
-  console.log(currentDate, 'today')
-  let num = currentDate.getDay();
-  console.log(num, 'num')
-  dayInMonth = currentDate.getDate();
-  console.log(dayInMonth, 'dayInMonth')
-    month = months[currentDate.getMonth()];
-console.log(month, 'month')
+  month = months[today.getMonth()];
   if(num == 1) {dayName = 'Monday'};
   if(num == 2) {dayName = 'Tuesday'};
   if(num == 3) {dayName = 'Wednesday'};
@@ -885,16 +875,11 @@ console.log(month, 'month')
   console.log(dayName)
   universalDayName = dayName;
   let calImg = "https://www.publicdomainpictures.net/pictures/310000/velka/tree-sunset-silhouette.jpg";
-  let calMsg = 'Click the edit button below to create your wisdom calendar!'
+  let calMsg = 'Click the "edit calendar" tab in the menu to customize your daily calendar!'
   if (calInfo[dayName].entry) calMsg = calInfo[dayName].entry;
   if (calInfo[dayName].imgsrc) calImg = calInfo[dayName].imgsrc;
-  let genCalendar = `<h4 id="monthday">${dayName} ${month} ${dayInMonth}</h4><div id="calbox"><p id="realmsg">" ${calMsg} "</p><img class="calendarimage" src=${calImg} /></div>`;
-  dashboardCalendar.innerHTML = genCalendar;
-  console.log(calMsg.length, 'length')
-  if (calMsg.length > 72) document.getElementById("realmsg").style.fontSize = '28px';
-  if (calMsg.length > 100) document.getElementById("realmsg").style.fontSize = '20px';
-  calEdit.innerHTML = `edit ${dayName}s`
-  // return genCalendar;
+  let genCalendar = `<h4 id="monthday">${dayName} ${month} ${dayInMonth}</h4><div id="calbox"><p>" ${calMsg} "</p><img class="calendarimage" src=${calImg} /></div>`;
+  return genCalendar;
   }
   //<h4 id="dayname"></h4> optional to put at beginning of genCalendar
 
@@ -907,10 +892,8 @@ console.log(month, 'month')
     let genCalendar = `
     <h4 id="tempdayname">
       <form>
-
         <label for="daytoset"></label>
-        <div id="tempCalDay" name="${day}">${day}s</div>
-        <select id="daytoset" name="tempweekday" style="display: none">
+        <select id="daytoset" name="tempweekday">
           <option value="${day}" disabled selected hidden>${day}</option>
           <option value="Monday">Monday</option>
           <option value="Tuesday">Tuesday</option>
@@ -932,8 +915,8 @@ console.log(month, 'month')
     <label class="tempcallabel" for="attachimg" style="display: block">Add an image (optional)</label>
     <br>
         <input type="text" id="attachimg"/>
-        <br><br>
-        <br><button id="cancelcal">cancel</button>
+        <br>
+        <br>
       <button type="submit" class="submit" id="submitcalday" name="submitcalday">save</button>
       </form>
       <br>
@@ -944,15 +927,11 @@ console.log(month, 'month')
 
 
 
-const submitCalDayFunction = (event, calMsgInput, attachImg) => {
+const submitCalDayFunction = (event, calMsgInput, attachImg, dayToSet) => {
   event.preventDefault()
-  // console.log(`this is the day to set: ${dayToSet.options[dayToSet.selectedIndex].value}`)
-  let tempDaySubmit = document.getElementById("tempCalDay")
-  console.log(tempDaySubmit)
-  let thisDay = tempDaySubmit.getAttribute("name")
-  console.log(thisDay, 'thisDay')
+  console.log(`this is the day to set: ${dayToSet.options[dayToSet.selectedIndex].value}`)
+  let thisDay = dayToSet.options[dayToSet.selectedIndex].value
   let thisMessage = calMsgInput.options[calMsgInput.selectedIndex].text
-  console.log(thisMessage, 'message')
   let address = 'myCal.' + thisDay + '.entry';
   let addressImg = 'myCal.' + thisDay +'.imgsrc';
     if (attachImg.value) {
@@ -964,7 +943,6 @@ const submitCalDayFunction = (event, calMsgInput, attachImg) => {
       }
     refreshCal()
     animateSaved()
-    setTimeout(openDashboard, 200)
     // openCalendar(thisDay) - this piece of code didn't work here, and I'm not completely sure why. revisit this
   }
 
@@ -989,10 +967,9 @@ const submitCalDayFunction = (event, calMsgInput, attachImg) => {
 
 
 const openCalendar = (day) => {
-  calEditor.style.display = 'block';
   //generate basic temporary calendar
   bigCalendarBox.innerHTML = '';
-  calintroline.innerHTML = 'Need inspiration with your morning brew? Customize your weekly calendar with your favorite wisdom!';
+  calintroline.innerHTML = 'Need inspiration with your morning brew? Customize your weekly calendar with your favorite wisdom!<br>Start by choosing a day of the week:';
   bigCalendarBox.innerHTML = tempCalendar(day)
   //will give value such as "Monday"
   let dayToSet = document.getElementById("daytoset");
@@ -1003,7 +980,6 @@ const openCalendar = (day) => {
   let attachImg = document.getElementById("attachimg");
   console.log(`this is calmsginput: ${calMsgInput.innerHTML}`)
   let submitCalDay = document.getElementById("submitcalday");
-  let cancelCal = document.getElementById("cancelcal");
   //establish temporary local favorites array:
   let wisArray = [];
   //check for need to create placeholder values in form fields.
@@ -1047,47 +1023,44 @@ const openCalendar = (day) => {
       }
       }).then(() => {
         var lastIndex = "";
-      //   function listQ(){
-      //   if(dayToSet.selectedIndex > 0){
-      //     if(dayToSet.selectedIndex != lastIndex) {
-      //       if("Monday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Monday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //       if("Tuesday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Tuesday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //       if("Wednesday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Wednesday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //       if("Thursday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Thursday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //       if("Friday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Friday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //       if("Saturday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Saturday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //       if("Sunday" == dayToSet.options[dayToSet.selectedIndex].value) {
-      //         openCalendar('Sunday')
-      //       lastIndex = dayToSet.selectedIndex;
-      //       }
-      //     }
-      //     else {
-      //       lastIndex = ""
-      //     }
-      //   }
-      // }
-      // dayToSet.addEventListener("click",listQ)
-    })
-    dayToSet = day;
-    cancelCal.addEventListener('click', openDashboard)
+        function listQ(){
+        if(dayToSet.selectedIndex > 0){
+          if(dayToSet.selectedIndex != lastIndex) {
+            if("Monday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Monday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+            if("Tuesday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Tuesday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+            if("Wednesday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Wednesday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+            if("Thursday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Thursday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+            if("Friday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Friday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+            if("Saturday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Saturday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+            if("Sunday" == dayToSet.options[dayToSet.selectedIndex].value) {
+              openCalendar('Sunday')
+            lastIndex = dayToSet.selectedIndex;
+            }
+          }
+          else {
+            lastIndex = ""
+          }
+        }
+      }
+      dayToSet.addEventListener("click",listQ)})
   submitCalDay.addEventListener('click', () => submitCalDayFunction(event, calMsgInput, attachImg, dayToSet))
   
   columnToggle(calendarColumn);
@@ -1098,7 +1071,7 @@ const openCalendar = (day) => {
 
 const openDashboard = () => {
   columnToggle(dashboardColumn);
-  getCal();
+  dashboardCalendar.innerHTML = getCal();
 }
 
 
@@ -1119,7 +1092,7 @@ const openSubmit = () => {
 const showSubCats = (e) => {
   e.preventDefault()
   let topValue = category.options[category.selectedIndex].value
-  // console.log(topValue)
+  console.log(topValue)
   subCategory.innerHTML = ''
   subCatObject[topValue].forEach((element) => {
   let item = document.createElement("option")
@@ -1134,7 +1107,7 @@ let charCount = 299;
 wisdomCount.innerHTML = `${charCount} characters left`;
 wisdom.addEventListener('input',(e) => {
   e.preventDefault()
-  // console.log('counting')
+  console.log('counting')
   charCount = 299 - wisdom.value.length
   if (charCount >= 0) wisdomCount.innerHTML = `${charCount} characters left`
   if (charCount < 0) wisdomCount.innerHTML = 'exceeds character limit';
@@ -1286,9 +1259,9 @@ const finalComment = async (comment) => {
     let tempDiv = document.createElement('form')
     let parentEl = comment.parentElement.parentElement
     tempDiv.innerHTML = comment.parentElement.parentElement.childNodes[comment.parentElement.parentElement.childNodes.length-1].outerHTML
-    // console.log(tempDiv)
+    console.log(tempDiv)
     comment.parentElement.parentElement.childNodes[comment.parentElement.parentElement.childNodes.length-1].outerHTML = newComment;
-    // console.log(parentEl)
+    console.log(parentEl)
     let tempElement = document.createElement('div')
     // tempElement.innerHTML = 'hello'
     // comment.parentElement.parentElement.append(tempElement)
@@ -1395,7 +1368,8 @@ const editThoughtStr = () => {
 const getWise = async (catDetails) => {
 
   lastSecondColumn = viewer;
-  // console.log(catDetails)
+  console.log(catDetails)
+  console.log(catDetails)
   //hides the form column if it is open
   lastCategory = catDetails;
   if (lastCategory.mainCat == 'New') return getNewest();
@@ -1612,7 +1586,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
 };
 
 const checkWisColorScheme = (weight, totalDocs, totalWeight) => {
-  // console.log('color check:', weight, (totalDocs/totalWeight))
+  console.log('color check:', weight, (totalDocs/totalWeight))
   if (weight > (totalDocs / totalWeight) + 1) {
   return true;
   } else {
@@ -1660,7 +1634,7 @@ subCat: null};
     })
 
     let leftoverDocs = sortedDocs
-    // console.log(leftoverDocs, 'leftoverdocs')
+    console.log(leftoverDocs, 'leftoverdocs')
 
     let newWisLog = 0
     sortedDocs = sortedDocs.sort((a, b) => b.weight-a.weight);
@@ -1793,7 +1767,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
               })
             tempDetails = contextLink.parentElement.name;
           })
-          // console.log(commentLink.parentElement.name)
+          console.log(commentLink.parentElement.name)
           if (loggedIn) item.appendChild(populateComments);
           if (!loggedIn && doc.wisComments[0]) item.appendChild(populateComments)
         if (loggedIn) {
@@ -1806,11 +1780,11 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
       }
         //append the viewer column with a new item
         viewer.appendChild(item);
-        // console.log(newWisLog)
+        console.log(newWisLog)
         for (let i = 0; i < leftoverDocs.length; i++) {
-          // console.log(leftoverDocs)
+          console.log(leftoverDocs)
           if (leftoverDocs[i].id == doc.id) {
-            // console.log(leftoverDocs)
+            console.log(leftoverDocs)
             return leftoverDocs.splice(i, 1)
           }
         }
@@ -1889,7 +1863,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
                 delComButton.className = 'delcombutton';
                 populateComments.append(delComButton)
                 let commentData = element
-                // console.log(commentData, 'this is comment data')
+                console.log(commentData, 'this is comment data')
                 delComButton.addEventListener('click', (e) => delComment(e, commentData))
                 elemCount ++
               }
@@ -1936,11 +1910,11 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
         contextLink.addEventListener('click', (e) => {
           e.preventDefault()
           let id = contextLink.parentElement.name
-            // console.log('2',tempDetails, contextLink.parentElement.name)
+            console.log('2',tempDetails, contextLink.parentElement.name)
             wisDetailsColumnBody.innerHTML = ''
             columnToggle(wisDetailsColumn)
             detailsHeadWrapper.addEventListener('click', backToPrevThird)
-            // console.log(contextLink.parentElement.name)
+            console.log(contextLink.parentElement.name)
             db.collection('wisdomcollection').doc(contextLink.parentElement.name).get().then((snapshot) => {
               let doc = snapshot.data()
                 createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
@@ -1962,6 +1936,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
               //append the viewer column with a new item
               viewer.appendChild(item2);
             }
+            console.log('hi')
 
     }
   //add document object "submitComment" for comment button function
@@ -2003,8 +1978,8 @@ console.log(e.srcElement.attributes.name.value)
 
 
 const createDetails = (doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody) => {
-  // console.log(wisDetailsColumnBody.firstChild)
-  // console.log(doc)
+  console.log(wisDetailsColumnBody.firstChild)
+  console.log(doc)
   let commentableArray = false;
   let wisbitDetails = document.createElement("div");
   wisbitDetails.className = 'details details-header';
@@ -2063,7 +2038,7 @@ wisbitDetails.append(category)
 
     wisbitWisdom.innerHTML = `"${doc.wisdom}"<br><br>`
   wisbitWisdom.className = 'bold-detail'
-  // console.log(wisbitWisdom)
+  console.log(wisbitWisdom)
 
   wisbitDetails.append(wisbitWisdom)
 
@@ -2303,7 +2278,7 @@ headRegButton.addEventListener('click', openReg);
 logoutLink.addEventListener('click', logoutFunction);
 accountLink.addEventListener('click', openAccount);
 favoritesLink.addEventListener('click', openFavorites);
-// calendarLink.addEventListener('click', () => openCalendar(universalDayName));
+calendarLink.addEventListener('click', () => openCalendar(universalDayName));
 dashboardLink.addEventListener('click', openDashboard);
 leftHeader.addEventListener('click', () => loggedIn? columnToggle(dashboardColumn) : columnToggle(welcomeColumn));
 leftHeader.addEventListener('click', getNewest)
@@ -2459,17 +2434,3 @@ forgotPass.addEventListener('click',() => {
 })
 sendPass.addEventListener('click', forgotPassFunction)
 
-const calBackFunction = () => {
-  dateOffset--
-  getCal()
-}
-
-const calNextFunction = () => {
-  dateOffset++
-  getCal()
-}
-
-
-calBack.addEventListener('click', calBackFunction)
-calNext.addEventListener('click', calNextFunction)
-calEdit.addEventListener('click', () => openCalendar(universalDayName))

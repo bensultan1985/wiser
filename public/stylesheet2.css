@@ -330,7 +330,7 @@ button:hover {
     font-family: "helvetica";
 }
 
-#dashboardcalendar {
+.dashboardcalendar {
     width: 100%;
 }
 
@@ -735,11 +735,12 @@ h4, #categorytitle {
     position: relative;
     color: rgb(0, 140, 255);
     text-align: center;
-    border: solid;
-    border-width: 2px;
+    /* border: solid; */
+    /* border-width: 2px; */
     margin-top: 6px;
     margin-right: 0px;
     background: white;
+    overflow-x: hidden;
 }
 
 #dayname {
@@ -767,13 +768,14 @@ h4, #categorytitle {
 }
 
 #calbox {
+    /* height: 300px; */
     display: grid;
     width: 100%;
-    grid-auto-rows: max-content auto;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
     margin-top: 0px;
     border-top: none;
-    height: auto;
+    height: 500px;
     background: linear-gradient(white, rgb(253, 255, 159));
     border-color: rgb(38, 157, 255);
     font-size: 20px;
@@ -784,7 +786,7 @@ h4, #categorytitle {
 }
 
 #calbox p {
-    height: fit-content;
+    max-height: 200px;
     width: 100%;
     display: block;
     grid-column: 1;
@@ -794,13 +796,15 @@ h4, #categorytitle {
     font-size: 30px;
     margin-bottom: 10px;
     margin-top: 10px;
+    -ms-text-size-adjust: auto;
+    overflow-y: auto;
 }
 
 
 .calendarimage {
     display: block;
     max-width: auto;
-    max-height: 300px;
+    max-height: 280px;
     position: relative;
     /* max-width: 100%;
     max-height: 100%; */
@@ -808,6 +812,7 @@ h4, #categorytitle {
     grid-column: 1;
     grid-row-start: 2; 
     grid-row-end: 3;
+    margin-bottom: 35px;
 }
 
 #logincolumn {
@@ -870,6 +875,8 @@ h4, #categorytitle {
 
 #calmsginput option {
     color: green;
+    max-width: 300px;
+    overflow-x: hidden;
 }
 
 #addcalimg {
@@ -929,6 +936,8 @@ h4, #categorytitle {
 #submitcalday {
     border-color: rgb(38, 157, 255);
     color: rgb(38, 157, 255);
+    -webkit-text-fill-color: rgb(38, 157, 255);
+    
     font-family: helvetica;
 }
 
@@ -936,7 +945,26 @@ h4, #categorytitle {
 border-color: white;
 color: white;
 background: rgb(38, 157, 255);
+-webkit-text-fill-color: white;
 }
+
+#cancelcal {
+        border-color: rgb(38, 157, 255);
+        color: rgb(38, 157, 255);
+        -webkit-text-fill-color: rgb(38, 157, 255);
+        
+        font-family: helvetica;
+        margin-right: 20px;
+}
+
+#cancelcal:hover {
+    border-color: white;
+    color: white;
+    background: rgb(38, 157, 255);
+    -webkit-text-fill-color: white;
+    }
+
+
 
 #dashboardcolumn {
     /* width: 500px; */
@@ -1538,13 +1566,6 @@ box-shadow: 0px 2px 1px 0px green; */
     border: none;
 }
 
-.details-postcommentbutton {
-}
-
-.details-displaycomment {
-    /* padding: 10px; */
-}
-
 
     .mobile-message {
         display: none;
@@ -1597,7 +1618,7 @@ box-shadow: 0px 2px 1px 0px green; */
         max-width: 2000px;
     }
 
-    #dashboardcalendar {
+    .dashboardcalendar {
         max-height: 1000px;
     }
 
@@ -1701,10 +1722,6 @@ box-shadow: 0px 2px 1px 0px green; */
     }
     .regsquare-empty{
         display: none;
-    }
-    .regnavbutton {
-        /* margin-left: auto;
-        margin-right: auto; */
     }
 }
 
@@ -1897,4 +1914,127 @@ box-shadow: 0px 2px 1px 0px green; */
 .authdiv {
     text-align: right;
     margin-top: 5px;
+}
+
+.fa-star {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.fa-star-o {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#cal-next {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    /* float: right; */
+    border-radius: 2px;
+    margin-right: 3px;
+    border: none;
+    font-size: 22px;
+    color: green;
+    -webkit-text-fill-color: green;
+}
+
+#cal-next:hover {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* float: right; */
+    border-radius: 2px;
+    margin-right: 3px;
+    /* background: white; */
+    background-color: rgb(147, 180, 147);
+    /* color: rgb(160, 104, 41);
+    -webkit-text-fill-color: rgb(160, 104, 41);
+    border-color: rgb(160, 104, 41); */
+    color: white;
+    -webkit-text-fill-color: white;
+}
+
+#cal-back {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    margin-right: 3px;
+    border: none;
+    font-size: 22px;
+    color: green;
+    -webkit-text-fill-color: green;
+}
+
+#cal-back:hover {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    margin-right: 3px;
+    background-color: rgb(147, 180, 147);
+    /* color: rgb(160, 104, 41);
+    -webkit-text-fill-color: rgb(160, 104, 41);
+    border-color: rgb(160, 104, 41); */
+    color: white;
+    -webkit-text-fill-color: white;
+}
+
+#cal-edit {
+    display: inline;
+    text-align: center;
+    /* flex-grow: 0; */
+    margin: auto;
+    border-radius: 2px;
+    border: none;
+    margin-right: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+    cursor: pointer;
+}
+
+#cal-edit:hover {
+    display: inline;
+    text-align: center;
+    /* flex-grow: 0; */
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: auto;
+    /* border-radius:2px; */
+    border: none;
+    margin-right: 3px;
+    background-color: rgb(147, 180, 147);
+    color: white;
+    -webkit-text-fill-color: white;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#buttonrack {
+    display: block;
+    margin: 0px;
+    margin: auto;
+    text-align: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
