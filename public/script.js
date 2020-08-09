@@ -618,8 +618,7 @@ const openMySubmissions = () => {
             </div>
             <div>
             <br>
-            <button class="mysubmissionsdetails" name=${element.id}>view details</button>
-            <button name=${element.id} class="mysubmissionsdelete">delete</button>
+            <button class="mysubmissionsdetails" name=${element.id}>view details</button><button name=${element.id} class="mysubmissionsdelete">delete</button>
             </div>
           </div>`;
           }
@@ -630,8 +629,7 @@ const openMySubmissions = () => {
             </div>
             <div>
             <br>
-            <button class="mysubmissionsdetails subpop-no-button" name=${element.id}>view details</button>
-            <button name=${element.id} class="mysubmissionsdelete subpop-no-button">delete</button>
+            <button class="mysubmissionsdetails subpop-no-button" name=${element.id}>view details</button><button name=${element.id} class="mysubmissionsdelete subpop-no-button">delete</button>
             </div>
           </div>`;
           }
@@ -824,35 +822,46 @@ const openAccount = () => {
 
 
 const openFavorites = () => {
+  favoritesList.innerHTML = '';
   columnToggle(favoritesColumn)
   db.collection('usersdb').doc(userId).get().then(snapshot => {
-    
-    favoritesList.innerHTML = '';
+  
     let favArray = snapshot.data().favWis;
-      favArray.forEach(element => {
+      favArray.forEach(async element => {
         let item = document.createElement("li")
-        favoritesList.appendChild(item)
-        item.className = 'fav-li'
+        item.className = 'fav-li subpop-no'
         item.name = element.id;
-        if (checkWisColorScheme()) item.style.color = '#006400';
-  //displays readable data for the user
-        item.innerHTML = `<div class="displayfav"> "${element.entry}"<br>submitted by ${element.author}</div>`;
-        let delButton = document.createElement('button')
-        delButton.className = 'favDel'
-        delButton.innerHTML = 'remove favorite'
-        delButton.name = element.originalId
-        let viewButton = document.createElement("button");
-        viewButton.className = 'favDel'
-        viewButton.innerHTML = 'view wisbit'
-        let id = '';
+                let id = '';
         let doc1 = {};
-        db.collection('wisdomcollection').doc(element.originalId).get().then(doc => {
+        let delButton = document.createElement('button')
+        let viewButton = document.createElement("button");
+        await db.collection('wisdomcollection').doc(element.originalId).get().then(doc => {
           doc1 = doc.data()
           id = doc.id
+          let weight = doc.data().favorites + doc.data().wisComments.length
+          console.log(weight, 'weight')
+          if (checkWisColorScheme(weight, totalDocs, totalWeight)) {
+            item.style.color = item.className = 'fav-li subpop-yes';
+            viewButton.className = 'mysubmissionsdetails ';
+            delButton.className = 'mysubmissionsdelete ';
+          }else {
+            viewButton.className = 'mysubmissionsdetails subpop-no-button';
+            delButton.className = 'mysubmissionsdelete subpop-no-button';
+          }
         })
+
+  //displays readable data for the user
+        item.innerHTML = `<div class="displayfav"> "${element.entry}"<br>submitted by ${element.author}</div><br>`;
+
+        delButton.innerHTML = 'remove favorite'
+        delButton.name = element.originalId
+
+        viewButton.innerHTML = 'view wisbit'
+
         console.log('wisfavid', id)
         item.append(viewButton)
         item.appendChild(delButton)
+        favoritesList.appendChild(item)
         viewButton.addEventListener('click', () => {
           // createDetails(doc1, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody);
           openDetailsColumn(doc1, id)

@@ -6,21 +6,21 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px green; 
+  box-shadow: inset 0 0 5px rgb(0, 111, 214); 
   border-radius: 10px;
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:  green; 
-  /* background-image: url("https://i.pinimg.com/236x/0f/b9/3a/0fb93a489850b93bea2e16d9e35128a3--blue-green-sea-green.jpg"); */
-  /* background-image: url("https://image.shutterstock.com/image-illustration/abstract-green-background-vintage-grunge-260nw-1452604097.jpg"); */
+  background:  rgb(0, 111, 214); 
+  /* background-image: url("https://i.pinimg.com/236x/0f/b9/3a/0fb93a489850b93bea2e16d9e35128a3--blue-rgb(0, 111, 214)-sea-rgb(0, 111, 214).jpg"); */
+  /* background-image: url("https://image.shutterstock.com/image-illustration/abstract-rgb(0, 111, 214)-background-vintage-grunge-260nw-1452604097.jpg"); */
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: green(209, 168, 63); 
+  background: rgb(0, 111, 214); 
 }
 
 
@@ -30,8 +30,8 @@ body {
     position:relative;
     margin:0;
     /*background-color: rgb(218, 241, 255);*/
-    /* background-color: rgba(0, 110, 24, 0.055); */
-    background-color: rgba(255, 153, 0, 0.651);
+    background-color: rgba(0, 110, 24, 0.055);
+    /* background-color: rgb(245, 245, 245);; */
     overflow-x: auto;
     overflow-y: hidden;
     height: 100vh;
@@ -42,7 +42,7 @@ body {
 h1 {
     position: relative;
     display: inline;
-    color: green;
+    color: rgb(0, 111, 214);
     /*background-color: lightskyblue;*/
     background-color: white;
     font-family: "verdana";
@@ -58,17 +58,17 @@ ul {
     position: relative;
     display: inline;
     font-family: "verdana";
-    color: green;
+    color: rgb(0, 111, 214);
     background-color: white;
     left: 8px;
 }
 
 #submit {
     all: unset;
-    color: green;
+    color: rgb(0, 111, 214);
     border: solid;
     border-width: 2px;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-radius: 25px;
     padding: 0.5rem 2rem;
     margin: 0;
@@ -87,7 +87,7 @@ ul {
     border-color: white;
     -webkit-text-fill-color: white;
     border-radius: 25px;
-    background: green;
+    background: rgb(0, 111, 214);
     color: white;
 }
 
@@ -98,26 +98,26 @@ ul {
 #form {
     text-align: center;
     /* column-width: 250px; */
-    color: green;
+    color: rgb(0, 111, 214);
     padding: 10px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
 option {
-    color: green;
+    color: rgb(0, 111, 214);
 }
 
 input {
-    color: green;
+    color: rgb(0, 111, 214);
 }
 
 select {
-    color: green;
+    color: rgb(0, 111, 214);
 }
 
 #retrievedisplay {
-    color: green;
+    color: rgb(0, 111, 214);
     text-align: center;
     width: 100%;
     /* max-width: 450px; */
@@ -140,10 +140,10 @@ select {
     min-width: 300px;
     margin-left: 12px;
     border: solid;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-width: 3px;
     background: white;
-    color: green;
+    color: rgb(0, 111, 214);
     overflow-y: auto;
     border-radius: 12px;
   }
@@ -161,11 +161,11 @@ select {
     width: 36vw;
     min-width: 200px;
     /* border: solid;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-width: 3px; */
     /* background: rgba(255, 255, 255, 0); */
     /* background: white; */
-    color: green;
+    color: rgb(0, 111, 214);
 
     margin-left: 5px;
     margin-right:10px;
@@ -184,7 +184,7 @@ select {
     max-width: 580px ;
     min-width: 300px;
     border: solid;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-width: 4px;
     width: 100%;
     height: 88vh;
@@ -205,7 +205,7 @@ select {
     /* width: 500px !important; */
     min-width: 200px;
     border: solid;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-width: 4px;
     height: 100%;
     background: white;
@@ -228,7 +228,7 @@ select {
     /* max-width: 450px; */
     /* background: white; */
     overflow-y: auto;
-    /* background-color: rgba(255, 153, 0, 0.651); */
+    /* background-color: rgb(245, 245, 245);; */
 }
 
 #viewerWindow {
@@ -253,7 +253,7 @@ select {
 }
 
 #visitcategory, li{
-    color: green;
+    color: rgb(0, 111, 214);
     padding: 5px;
     margin-bottom: 7px;
 }
@@ -274,7 +274,7 @@ select {
 
 .category-li:hover > .cathead {
     /* background: rgba(255, 235, 147, 0.89); */
-    background: green;
+    background: rgb(0, 111, 214);
     color: white;
 }
 
@@ -306,14 +306,14 @@ li:hover > .wisouterborder{
 button {
     all: unset;
     /* color: rgb(209, 168, 63); */
-    color: green;
-    -webkit-text-fill-color: green;
+    color: rgb(0, 111, 214);
+    -webkit-text-fill-color: rgb(0, 111, 214);
     background: white;
     padding: 4px 26px;
     border: solid;
     border-width: 2px;
     border-radius: 25px;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     font-family: "helvetica";
 }
 
@@ -323,7 +323,7 @@ button:hover {
     border: solid;
     border-width: 2px;
     border-radius: 25px;
-    background: green;
+    background: rgb(0, 111, 214);
     color: white;
     cursor: pointer;
     -webkit-text-fill-color: white;
@@ -337,7 +337,7 @@ button:hover {
 h4, #categorytitle {
     font-family: "helvetica";
     padding-left: 10px;
-    color: green;
+    color: rgb(0, 111, 214);
     text-align: left;
 }
 
@@ -352,25 +352,29 @@ h4, #categorytitle {
     color: rgb(160, 104, 41);
     border: solid;
     border-width: 3px;
-    border-color: rgb(160, 104, 41);
+    /* border-color: rgb(160, 104, 41); */
+    border-color: gray;
     border-radius: 5%;
-    background-color: rgb(207, 142, 67);
+    background-color: rgb(223, 223, 223);
+    -webkit-text-fill-color: black;
 }
 
 .result-li-high {
     display: block;
     /* position: relative; */
-    background: rgb(6, 190, 6);
+    background: rgb(231, 216, 132);
     padding: 7px;
     margin: 10px;
     max-width: 90%;
     margin-left: 4px;
     color: rgb(160, 104, 41);
+    -webkit-text-fill-color: black;
     border: solid;
     border-width: 3px;
-    border-color: green;
+    border-color: gray;
     min-width: 270px;
     border-radius: 5%;
+
 }
 
 #makesubmit {
@@ -416,17 +420,17 @@ h4, #categorytitle {
     /* border-bottom: solid;
     border-width: 1px;
     border-collapse: separate; 
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-radius: 50%, 50%, 50%, 50%;
-    box-shadow: 0px 2px 2px green; */
+    box-shadow: 0px 2px 2px rgb(0, 111, 214); */
   }
   .one {
     border-bottom: solid;
     border-width: 4px;
     border-collapse: separate; 
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-radius: 50%, 50%, 50%, 50%;
-    box-shadow: 0px 0px 0px green;
+    box-shadow: 0px 0px 0px rgb(0, 111, 214);
     border-right: none;
     cursor: pointer;
     grid-column: 1 / 1;
@@ -440,9 +444,9 @@ h4, #categorytitle {
     border-bottom: solid;
     border-width: 4px;
     border-collapse: separate; 
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-radius: 50%, 50%, 50%, 50%;
-    box-shadow: 0px 0px 0px green;
+    box-shadow: 0px 0px 0px rgb(0, 111, 214);
     grid-column: 2 / 2;
     grid-row: 1 / 1;
   }
@@ -471,9 +475,9 @@ h4, #categorytitle {
       /* cool possibility for the future */
       /* background-color: rgb(215, 234, 241); */
       /* real background: */
-      background-color: rgba(255, 153, 0, 0.651);
+      /* background-color: rgb(245, 245, 245);; */
       /* background-color: rgba(209, 209, 209, 0.651); */
-          /* background-color: rgb(243, 243, 243); */
+          background-color: rgb(245, 245, 245);
       height: auto;
       grid-column: 1 / 3;
       grid-row: 2 / 2;
@@ -488,13 +492,13 @@ h4, #categorytitle {
 
   .promptline1 {
       padding: 20px;
-      color: green;
+      color: rgb(0, 111, 214);
       height: 30px;
   }
 
   .promptline2 {
       padding: 20px;
-    color: green;
+    color: rgb(0, 111, 214);
     height: 30px;
   }
 
@@ -503,7 +507,7 @@ h4, #categorytitle {
     font-family: "verdana";
     font-weight: bold;
     font-size: 16px;
-    color: green;
+    color: rgb(0, 111, 214);
     display: block;
     height: 10px;
     padding-left: 0px;
@@ -516,7 +520,7 @@ h4, #categorytitle {
     font-family: "verdana";
     font-weight: bold;
     font-size: 16px;
-    color: green;
+    color: rgb(0, 111, 214);
     display: inline-block;
     align-self: left;
     /* height: 10px; */
@@ -566,10 +570,11 @@ h4, #categorytitle {
 .commenttop {
     /* background: rgb(255, 210, 97);
     color: white; */
-    background: rgb(255, 241, 209);
+    background: white;
     border: solid;
     border-width: 2px;
-    border-color: rgb(160, 104, 41);
+    border-color: black;
+    border-color: gray;
     border-radius: 10px 10px 10px 0px;
     padding: 10px;
     cursor: pointer;
@@ -581,7 +586,7 @@ h4, #categorytitle {
     position: relative;
     display: inline-block;
     /* color: rgb(209, 168, 63); */
-    color: green;
+    color: rgb(0, 111, 214);
     font-size: 28px;
 }
 .fa-bars:after {
@@ -639,7 +644,7 @@ h4, #categorytitle {
     width: 160px;
     text-decoration: none;
     /* color: rgb(214, 177, 81); */
-    color: green;
+    color: rgb(0, 111, 214);
     font-family: helvetica;
   }
   
@@ -651,7 +656,7 @@ h4, #categorytitle {
       border: solid;
       border-color: white;
       background-color: rgb(235, 247, 235);
-      color: green;
+      color: rgb(0, 111, 214);
       display: block;
 }
   
@@ -870,12 +875,12 @@ h4, #categorytitle {
     font-size: 20px;
     top: 10px;
     color: rgb(38, 157, 255);
-    color: green;
+    color: rgb(0, 111, 214);
     overflow-x: hidden;
 }
 
 #calmsginput option {
-    color: green;
+    color: rgb(0, 111, 214);
     overflow-x: hidden;
 }
 
@@ -889,7 +894,7 @@ h4, #categorytitle {
     border-width: 2px;
     font-style: bold;
     font-size: 20px;
-    color: green;
+    color: rgb(0, 111, 214);
     margin-top: 20px;
 }
 
@@ -926,11 +931,11 @@ h4, #categorytitle {
 
 #tempweekday{
     font-size: 20px;
-    color: green;
+    color: rgb(0, 111, 214);
 }
 
 #tempweekday option {
-    color: green;
+    color: rgb(0, 111, 214);
 }
 
 #submitcalday {
@@ -975,7 +980,7 @@ background: rgb(38, 157, 255);
     height: 40px;
     width: 160px;
     font-size: 24px;
-    color: green;
+    color: rgb(0, 111, 214);
     border-width: 2px;
     border-color: rgb(38, 157, 255);
 }
@@ -984,7 +989,7 @@ background: rgb(38, 157, 255);
     border-style: solid;
     width: 300px;
     height: 20px;
-    color: green;
+    color: rgb(0, 111, 214);
     border-width: 2px;
     border-color: rgb(38, 157, 255);
 }
@@ -1062,7 +1067,7 @@ background: rgb(38, 157, 255);
     text-align: bottom;
     font-size: 20px;
     padding-left: 4px;
-    color: green(209, 168, 63)
+    color: rgb(0, 111, 214)(209, 168, 63)
 }
 
 #wellwishbutton {
@@ -1154,7 +1159,7 @@ background: rgb(38, 157, 255);
     font-size: 16px;
     font-family: helvetica;
     resize: vertical;
-    color: green;
+    color: rgb(0, 111, 214);
 }
 
 #tpouter {
@@ -1218,9 +1223,9 @@ background: rgb(38, 157, 255);
     border-bottom: solid;
     border-width: 1px;
     border-collapse: separate; 
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-radius: 50%, 50%, 50%, 50%;
-    box-shadow: 0px 2px 2px green;
+    box-shadow: 0px 2px 2px rgb(0, 111, 214);
 }
 
 #one2 {
@@ -1307,9 +1312,11 @@ background: rgb(38, 157, 255);
     border-top: none;
     margin-bottom: 0px;
     border: solid;
+    border-top: none;
     border-width: 2px;
     border-bottom: none;
     border-color: rgb(160, 104, 41);
+    border-color: gray;
     border-radius: 0px 0px 10px 10px;
     padding: 6px;
        /* no highlight of text */
@@ -1324,9 +1331,11 @@ background: rgb(38, 157, 255);
     margin-top: 0px;
     margin-bottom: 0px;
     border: solid;
+    border-top: none;
     border-width: 2px;
     border-bottom: none;
     border-color: rgb(160, 104, 41);
+    border-color: gray;
     border-radius: 0px 0px 10px 10px;
     padding: 6px;
        /* no highlight of text */
@@ -1341,11 +1350,13 @@ background: rgb(38, 157, 255);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
                                   /* supported by Chrome, Edge, Opera and Firefox */
+                                  border-left: none;
 }
 
 .borderalt1 {
-    border-color: green;
-    color: green;
+    /* border-color: rgb(0, 111, 214); */
+    border-color: gray;
+    /* color: rgb(0, 111, 214); */
 }
 
 #wisdetailsbackbutton {
@@ -1368,8 +1379,8 @@ background: rgb(38, 157, 255);
 #detailsheadwrapper {
     border-bottom: solid;
     border-width: 3px;
-    border-color: green;
-    background-color: green;
+    border-color: rgb(0, 111, 214);
+    background-color: rgb(0, 111, 214);
     cursor: pointer;
 }
 
@@ -1385,7 +1396,7 @@ background: rgb(38, 157, 255);
     color: white;
 
     /* outline-style: solid;
-    outline-color: green;
+    outline-color: rgb(0, 111, 214);
     outline-width: 1px; */
     padding: 10px;
     font-size: 30px;
@@ -1396,10 +1407,10 @@ background: rgb(38, 157, 255);
 }
 
 /* #detailsheadwrapper:hover > #wisdetailsheader {
-    color: green;
+    color: rgb(0, 111, 214);
 
     /* outline-style: solid;
-    outline-color: green;
+    outline-color: rgb(0, 111, 214);
     outline-width: 1px; }*/
 
 .vtclass {
@@ -1411,7 +1422,7 @@ background: rgb(38, 157, 255);
     box-sizing: border-box;
     background: white;
     margin: 4px;
-    color: green;
+    color: rgb(0, 111, 214);
     border: solid;
     border-radius: 25px 25px 0px 0px;
     /* cool curves: */
@@ -1427,21 +1438,21 @@ background: rgb(38, 157, 255);
     /* background: rgb(65, 121, 224); */
     background: white;
     /* margin: 4px; */
-    color: green;
+    color: rgb(0, 111, 214);
     font-weight: 500;
     border: solid;
     /* border-left: solid; */
     /* border: solid; */
     border-color: rgb(210, 238, 210);
     /* border-left-color: rgb(6, 190, 6); */
-    border-left-color: green;
-    border-top-color: green;
+    border-left-color: rgb(0, 111, 214);
+    border-top-color: rgb(0, 111, 214);
     border-width: 3px;
     border-right: none;
     border-right-width: 2px;
     border-left-width: 2px;
     border-bottom: none;
-    border-right-color: green;
+    border-right-color: rgb(0, 111, 214);
     border-radius: 0px 25px 0px 0px;
     /* margin:10px; */
     /* border-radius: 25px 25px 0px 0px; */
@@ -1470,19 +1481,19 @@ background: rgb(38, 157, 255);
     /* width: 33vw; */
     /* min-width: 200px; */
     /* border: solid;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-width: 3px; */
     /* background: rgba(255, 255, 255, 0); */
     /* background: white; */
-    color: green;
+    color: rgb(0, 111, 214);
     padding-right: 20px;
     margin-left: 0px;
     margin-right:20px;
     overflow-y: hidden;
     min-width: 310px;
-    /* -webkit-box-shadow: 0px 2px 1px 0px green;
--moz-box-shadow: 0px 2px 1px 0px green;
-box-shadow: 0px 2px 1px 0px green; */
+    /* -webkit-box-shadow: 0px 2px 1px 0px rgb(0, 111, 214);
+-moz-box-shadow: 0px 2px 1px 0px rgb(0, 111, 214);
+box-shadow: 0px 2px 1px 0px rgb(0, 111, 214); */
 }
 
 #viewidback {
@@ -1491,17 +1502,20 @@ box-shadow: 0px 2px 1px 0px green; */
     position: absolute;
     display: block;
     /* background: rgb(65, 121, 224); */
-    background: #ffbc59;
+    /* background: #ffbc59; */
+    background-color: rgb(245, 245, 245);
     /* margin: 4px; */
-    color: green;
+    color: rgb(0, 111, 214);
     font-weight: 500;
     border: solid;
     /* border-left: solid; */
     /* border: solid; */
-    border-color: r#ffbc59;
+    /* border-color: r#ffbc59; */
+    border-color: rgb(245, 245, 245);
     /* border-left-color: rgb(6, 190, 6); */
     border-left-color: #ffbc59;
     border-top-color: #ffbc59;
+    border-color: rgb(245, 245, 245);
     border-width: 3px;
     border-right: none;
     /* border-right-width: 2px; */
@@ -1536,11 +1550,11 @@ box-shadow: 0px 2px 1px 0px green; */
     /* width: 33vw; */
     /* min-width: 200px; */
     /* border: solid;
-    border-color: green;
+    border-color: rgb(0, 111, 214);
     border-width: 3px; */
     /* background: rgba(255, 255, 255, 0); */
     /* background: white; */
-    color: green;
+    color: rgb(0, 111, 214);
     padding-right: 20px;
     margin-left: 0px;
     margin-right:20px;
@@ -1550,7 +1564,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #linebreak {
     height: 3px;
-    background: green;
+    background: rgb(0, 111, 214);
 }
 
 #welcomecolumn > p {
@@ -1629,7 +1643,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #regheading {
     box-sizing: border-box;
-    background: green;
+    background: rgb(0, 111, 214);
     margin: 0px;
     min-height: 50px;
     /* padding: 20px; */
@@ -1643,7 +1657,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 .regsquare {
     display: inline-block;
-    background: green;
+    background: rgb(0, 111, 214);
     height: 6px;
     width: 26px;
     margin-right: 8px;
@@ -1731,7 +1745,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 #submitheading {
     box-sizing: border-box;
-    background: green;
+    background: rgb(0, 111, 214);
     margin: 0px;
     min-height: 50px;
     /* padding: 20px; */
@@ -1748,7 +1762,7 @@ box-shadow: 0px 2px 1px 0px green; */
 }
 
 .wisdetails-heading {
-    color: green;
+    color: rgb(0, 111, 214);
     font-size: 15px;
 }
 
@@ -1772,7 +1786,7 @@ box-shadow: 0px 2px 1px 0px green; */
     display: block;
     border: none;
     margin-left: auto;
-    -webkit-text-fill-color: green;
+    -webkit-text-fill-color: rgb(0, 111, 214);
 }
 
 .err-msg {
@@ -1807,7 +1821,7 @@ box-shadow: 0px 2px 1px 0px green; */
 
 .linebreak-sub {
     height: 2px;
-    background: green;
+    background: rgb(0, 111, 214);
     width: 200px;
 }
 
@@ -1827,11 +1841,11 @@ box-shadow: 0px 2px 1px 0px green; */
 #howdoesheadwrapper {
     /* border-bottom: solid; */
     /* border-width: 3px; */
-    /* border-color: green; */
+    /* border-color: rgb(0, 111, 214); */
     font-size: 30px;
     padding: 5px;
     padding-left: 10px;
-    -webkit-text-fill-color: green;
+    -webkit-text-fill-color: rgb(0, 111, 214);
     background-color: white;
     cursor: pointer;
 }
@@ -1899,10 +1913,10 @@ box-shadow: 0px 2px 1px 0px green; */
     position: relative;
     display: inline-block;
     /* color: rgb(209, 168, 63); */
-    /* color: green; */
+    /* color: rgb(0, 111, 214); */
     font-size: 20px;
-    -webkit-text-fill-color: rgb(6, 190, 6);
-    color: rgb(6, 190, 6);
+    -webkit-text-fill-color: rgb(0, 111, 214);
+    color: rgb(0, 111, 214);
 }
 
 .popClass {
@@ -1937,8 +1951,8 @@ box-shadow: 0px 2px 1px 0px green; */
     margin-right: 3px;
     border: none;
     font-size: 22px;
-    color: green;
-    -webkit-text-fill-color: green;
+    color: rgb(0, 111, 214);
+    -webkit-text-fill-color: rgb(0, 111, 214);
 }
 
 #cal-next:hover {
@@ -1968,8 +1982,8 @@ box-shadow: 0px 2px 1px 0px green; */
     margin-right: 3px;
     border: none;
     font-size: 22px;
-    color: green;
-    -webkit-text-fill-color: green;
+    color: rgb(0, 111, 214);
+    -webkit-text-fill-color: rgb(0, 111, 214);
 }
 
 #cal-back:hover {
@@ -2049,10 +2063,7 @@ box-shadow: 0px 2px 1px 0px green; */
     cursor: default;
 }
 
-.mysubmissionsdetails {
-    margin-right: 10px;
-}
-
-.mysubmissionsdetails:hover {
-    margin-right: 10px;
+.popClass {
+    color: rgb(0, 111, 214);
+    -webkit-text-fill-color: rgb(0, 111, 214);
 }
