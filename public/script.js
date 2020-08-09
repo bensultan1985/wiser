@@ -136,6 +136,8 @@ let test2 = document.getElementById("test2");
 let resEmail = document.getElementById("res-email")
 let sendPass = document.getElementById("sendpass")
 let saveLoginInfoReg = document.getElementById("savelogininfo-reg")
+let accUsername = document.getElementById("accusername");
+let accEmail = document.getElementById("accemail");
 
 //menu button elements
 let logoutLink = document.getElementById("logoutlink");
@@ -251,6 +253,7 @@ const checkPrevThird = () => {
 //login fuctions and rules
 let loggedIn = false;
 let saveduser = '';
+let savedemail = '';
 let lastCategory = {
   mainCat: 'newest wisdom',
   subCat: null
@@ -561,7 +564,7 @@ const loginAfterReg = (thoughtStr, authUserId) => {
         loginFound = true;
         // console.log(loginFound);
         if (loginFound == true) {
-          applyLogin(regName.value, doc.id,  doc.data().authUserId, doc.data().myCal, thoughtStr);
+          applyLogin(regName.value, doc.id,  doc.data().authUserId, doc.data().myCal, thoughtStr, doc.data().opDemo, doc.data().email);
         }
       }
     })
@@ -717,7 +720,7 @@ const checkLogin = (e) => {
         // console.log(loginFound);
         if (loginFound == true) {
           console.log('login found')
-          applyLogin(doc.data().username, doc.id, response.user.uid, doc.data().myCal, doc.data().thoughtStr, doc.data().opDemo);
+          applyLogin(doc.data().username, doc.id, response.user.uid, doc.data().myCal, doc.data().thoughtStr, doc.data().opDemo, doc.data().email);
         }
       }
     })
@@ -760,9 +763,10 @@ const RegInvalidMsg = (error) => {
 
 
 //if login data has a match in Firebase, the user will be logged in, and user data will populate necessary document objects.
-const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo) => {
+const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo, saveEmail) => {
   loggedIn = true;
   saveduser = name;
+  savedemail = saveEmail;
   howDoesDash.style.display = 'block';
   loginColumn.style.display = 'none';
   console.log(name + ' is logged in');
@@ -812,6 +816,8 @@ const logoutFunction = (e) => {
 
 
 const openAccount = () => {
+  accUsername.innerHTML = saveduser;
+  accEmail.innerHTML = savedemail;
   columnToggle(accountColumn)
 }
 

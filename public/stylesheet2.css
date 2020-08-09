@@ -2044,3 +2044,7 @@ box-shadow: 0px 2px 1px 0px green; */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.authdiv {
+    cursor: default;
+}
