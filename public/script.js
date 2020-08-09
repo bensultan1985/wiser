@@ -992,7 +992,7 @@ const openCalendar = (day) => {
   calEditor.style.display = 'block';
   //generate basic temporary calendar
   bigCalendarBox.innerHTML = '';
-  calintroline.innerHTML = 'Need inspiration with your morning brew? Customize your weekly calendar with your favorite wisdom!';
+  calintroline.innerHTML = `Need inspiration with your morning brew? Customize your weekly calendar with your favorite wisdom! All your favorite wisbits are in the pull-down menu below. Select one and click save.`;
   bigCalendarBox.innerHTML = tempCalendar(day)
   //will give value such as "Monday"
   let dayToSet = document.getElementById("daytoset");
