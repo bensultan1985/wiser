@@ -1316,6 +1316,7 @@ background: rgb(38, 157, 255);
        -webkit-touch-callout: none; /* iOS Safari */
        -webkit-user-select: none; /* Safari */
                                      /* supported by Chrome, Edge, Opera and Firefox */
+    border-top: none;
 }
 
 .favorited {
@@ -1333,6 +1334,7 @@ background: rgb(38, 157, 255);
        -webkit-touch-callout: none; /* iOS Safari */
        -webkit-user-select: none; /* Safari */
                                      /* supported by Chrome, Edge, Opera and Firefox */
+    border-top: none;
 }
 
 .commentlink {
@@ -1341,6 +1343,8 @@ background: rgb(38, 157, 255);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
                                   /* supported by Chrome, Edge, Opera and Firefox */
+    border-left: none;
+    border-top: none;
 }
 
 .borderalt1 {
