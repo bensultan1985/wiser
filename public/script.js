@@ -820,6 +820,7 @@ const openAccount = () => {
 const openFavorites = () => {
   columnToggle(favoritesColumn)
   db.collection('usersdb').doc(userId).get().then(snapshot => {
+    
     favoritesList.innerHTML = '';
     let favArray = snapshot.data().favWis;
       favArray.forEach(element => {
@@ -834,7 +835,24 @@ const openFavorites = () => {
         delButton.className = 'favDel'
         delButton.innerHTML = 'remove favorite'
         delButton.name = element.originalId
+        let viewButton = document.createElement("button");
+        viewButton.className = 'favDel'
+        viewButton.innerHTML = 'view wisbit'
+        let id = '';
+        let doc1 = {};
+        db.collection('wisdomcollection').doc(element.originalId).get().then(doc => {
+          doc1 = doc.data()
+          id = doc.id
+        })
+        console.log('wisfavid', id)
+        item.append(viewButton)
         item.appendChild(delButton)
+        viewButton.addEventListener('click', () => {
+          // createDetails(doc1, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody);
+          openDetailsColumn(doc1, id)
+          prevThird = favoritesColumn;
+          columnToggle(wisDetailsColumn)
+        })
         delButton.addEventListener('click', (e) => delFavorite(e, item, element))
     })
   })
@@ -1982,7 +2000,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
 }
 
 let tempDetails = '';
-const openDetailsColumn = (e) => {
+const openDetailsColumn = (e, id) => {
   e.preventDefault;
   if (wisDetailsColumn.style.display == 'block' && tempDetails == e.srcElement.attributes['1'].nodeValue) {
     columnToggle(prevThird)
@@ -1990,7 +2008,13 @@ const openDetailsColumn = (e) => {
   wisDetailsColumnBody.innerHTML = ''
   columnToggle(wisDetailsColumn)
   detailsHeadWrapper.addEventListener('click', backToPrevThird)
-  db.collection('wisdomcollection').doc(e.srcElement.attributes['1'].nodeValue).get().then((snapshot) => {
+  let source;
+  if (e.srcElement) {
+    source = e.srcElement.attributes['1'].nodeValue;
+  } else {
+    source = id
+  }
+  db.collection('wisdomcollection').doc(source).get().then((snapshot) => {
     let doc = snapshot.data()
     createDetails(doc, loggedIn, userId, db, favInfo, snapshot.id, wisDetailsColumnBody)
   })
