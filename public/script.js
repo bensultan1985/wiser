@@ -962,7 +962,7 @@ console.log(month, 'month')
         <br>
         <br>
         <br>
-    <label class="tempcallabel" for="attachimg" style="display: block">Add an image (optional)</label>
+    <label class="tempcallabel" for="attachimg" style="display: block">Add an image (optional)<br>copy any image address from the web and paste it:</label>
     <br>
         <input type="text" id="attachimg"/>
         <br><br>
@@ -977,7 +977,7 @@ console.log(month, 'month')
 
 
 
-const submitCalDayFunction = (event, calMsgInput, attachImg) => {
+const submitCalDayFunction = async (event, calMsgInput, attachImg) => {
   event.preventDefault()
   // console.log(`this is the day to set: ${dayToSet.options[dayToSet.selectedIndex].value}`)
   let tempDaySubmit = document.getElementById("tempCalDay")
@@ -989,11 +989,11 @@ const submitCalDayFunction = (event, calMsgInput, attachImg) => {
   let address = 'myCal.' + thisDay + '.entry';
   let addressImg = 'myCal.' + thisDay +'.imgsrc';
     if (attachImg.value) {
-        db.collection("usersdb").doc(userId).update({[addressImg]: attachImg.value}).then(
-        db.collection("usersdb").doc(userId).update({[address]: thisMessage}))
+        await db.collection("usersdb").doc(userId).update({[addressImg]: attachImg.value}).then(
+        await db.collection("usersdb").doc(userId).update({[address]: thisMessage}))
       } else {
-        db.collection("usersdb").doc(userId).update({[addressImg]: attachImg.placeholder}).then(
-          db.collection("usersdb").doc(userId).update({[address]: thisMessage}))
+        await db.collection("usersdb").doc(userId).update({[addressImg]: attachImg.placeholder}).then(
+          await db.collection("usersdb").doc(userId).update({[address]: thisMessage}))
       }
     refreshCal()
     animateSaved()
