@@ -321,8 +321,8 @@ return true;
 //Opens registration column
 const openReg = () => {
   columnToggle(regColumn)
-  regPass.addEventListener('input', asteriskPass)
-  regPassReEntry.addEventListener('input', asteriskPassRe)
+  // regPass.addEventListener('input', asteriskPass)
+  // regPassReEntry.addEventListener('input', asteriskPassRe)
 }
 
 
@@ -436,11 +436,11 @@ const addAsteriskLogin = (e) => {
     oldPassValueL = [];
     passArrayL = []
     getPass.value = '';
-    getPass.name = '';
+    // getPass.name = '';
     return
    }
   console.log('pass')
-  getPass.name += lastLetter
+  // getPass.name += lastLetter
   console.log('getpassname', getPass.name)
   if (getPass.value.length > 1) {
     let newArray = []
@@ -466,14 +466,14 @@ if (!isValidEmailAddress(regEmail.value)) {
   regName.value = '';
   regPass.value = '';
   regEmail.value = '';
-  regPass.name = '';
+  // regPass.name = '';
   canReg = false;
 }
-if (regPass.name != regPassReEntry.name) {
+if (regPass.value != regPassReEntry.value) {
   canReg = false;
   RegInvalidMsg('passwords do not match')
 };
-if (regPass.name.length < 6) {
+if (regPass.value.length < 6) {
   canReg = false;
   RegInvalidMsg('password must be at least 6 characters')
 }
@@ -482,7 +482,7 @@ if(regName < 3 || regName > 28) {
   RegInvalidMsg('username must be between 3 and 28 characters')
 }
 if (canReg == false) return false;
-const promise = auth.createUserWithEmailAndPassword(regEmail.value, regPass.name);
+const promise = auth.createUserWithEmailAndPassword(regEmail.value, regPass.value);
 promise.catch(e => {
   console.log(e.message)
   //if login is invalid, display a message to user to try again
@@ -543,7 +543,7 @@ promise.then((response) => {
   if (saveLoginInfoReg.checked == true) {
     window.localStorage.setItem('stayLogged', true);
     window.localStorage.setItem('savedLocalEmail', regEmail.value);
-    window.localStorage.setItem('savedLocalPass', regPass.name);
+    window.localStorage.setItem('savedLocalPass', regPass.value);
   }
   }
   )
@@ -575,18 +575,18 @@ const loginAfterReg = (thoughtStr, authUserId) => {
 
 //opens the login column
 const openLoginColumn = () => {
-  saveLoginInfo.checked = true;
-  staylogged.checked = true;
   getEmail.value = '';
-  getPass.name = '';
+  // getPass.name = '';
   getPass.value = '';
+
   if (window.localStorage.getItem('savedLocalEmail') && window.localStorage.getItem('savedLocalPass')) {
     console.log('working')
     getEmail.value = window.localStorage.getItem('savedLocalEmail');
-    getPass.name = window.localStorage.getItem('savedLocalPass');
-    for (let i = getPass.name.length; i > 0; i--) {
-      getPass.value += '*'
-    }
+    getPass.value = window.localStorage.getItem('savedLocalPass');
+    // getPass.name = window.localStorage.getItem('savedLocalPass');
+    // for (let i = getPass.name.length; i > 0; i--) {
+    //   getPass.value += '*'
+    // }
   }
   columnToggle(loginColumn)
 }
@@ -685,9 +685,10 @@ const checkLogin = (e) => {
   if (e) e.preventDefault();
   let loginFound = false;
 
-  if (saveLoginInfo.checked || stayLogged) {
+  if (saveLoginInfo.checked && stayLogged) {
     window.localStorage.setItem('savedLocalEmail', getEmail.value)
-    window.localStorage.setItem('savedLocalPass', getPass.name)
+    window.localStorage.setItem('savedLocalPass', getPass.value)
+    // window.localStorage.setItem('savedLocalPass', getPass.name)
   } else {
     localStorage.removeItem('savedLocalEmail')
     localStorage.removeItem('savedLocalPass')
@@ -699,7 +700,8 @@ const checkLogin = (e) => {
     window.localStorage.setItem('stayLogged', false)
   }
 
-  const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.name);
+  const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.value);
+  // const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.name);
   promise.catch(e => {
     console.log(e.message)
     //if login is invalid, display a message to user to try again
@@ -730,7 +732,7 @@ const checkLogin = (e) => {
 const namePassReset = () => {
   // getName.value = ''; no longer an element for login. login only requires getpass and get email
   getPass.value = '';
-  getPass.name = '';
+  // getPass.name = '';
   getEmail.value = '';
 }
 
@@ -2353,7 +2355,7 @@ tPBox.addEventListener('input', editThoughtStr);
 category.addEventListener('input', showSubCats);
 getNew.addEventListener('click', getNewest);
 mySubmissionsLink.addEventListener('click', openMySubmissions)
-getPass.addEventListener('input', addAsteriskLogin)
+// getPass.addEventListener('input', addAsteriskLogin)
 regNext1.addEventListener('click', openReg2)
 regBack2.addEventListener('click', openReg1)
 regBack3.addEventListener('click', openReg2)
@@ -2448,20 +2450,27 @@ db.collection('wisdomcollection').get().then(snapshot => {
 
 if (window.localStorage.getItem('stayLogged') == 'true') {
   console.log('found login info')
+  if (!window.localStorage.getItem('stayLogged'))
   if (window.localStorage.getItem('savedLocalEmail') && window.localStorage.getItem('savedLocalPass')) {
     console.log('working')
     getEmail.value = window.localStorage.getItem('savedLocalEmail');
-    getPass.name = window.localStorage.getItem('savedLocalPass');
-    for (let i = getPass.name.length; i > 0; i--) {
-      getPass.value += '*'
-    }
+    getPass.value = window.localStorage.getItem('savedLocalPass');
+    // getPass.name = window.localStorage.getItem('savedLocalPass');
+    // for (let i = getPass.name.length; i > 0; i--) {
+    //   getPass.value += '*'
+    // }
   }
   if (window.localStorage.getItem('stayLogged') == 'true')
+  // stayLogged.checked = true;
+  // saveLoginInfo.checked = true;
   stayLogged.checked = true;
   saveLoginInfo.checked = true;
-  checkLogin()
-  stayLogged.checked = true;
-  saveLoginInfo.checked = true;
+  if (window.localStorage.getItem('savedLocalEmail') && window.localStorage.getItem('savedLocalPass')) {
+    console.log('working')
+    getEmail.value = window.localStorage.getItem('savedLocalEmail');
+    getPass.value = window.localStorage.getItem('savedLocalPass');
+}
+checkLogin()
 }
 
 const forgotPassFunction = (e) => {

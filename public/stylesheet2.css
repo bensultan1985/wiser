@@ -407,7 +407,7 @@ h4, #categorytitle {
     width: 100%;
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 4fr 1fr;
     grid-gap: 0px;
     grid-auto-rows: minmax(38px, auto);
     background: white;
