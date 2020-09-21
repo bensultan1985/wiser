@@ -72,7 +72,7 @@ let dbCount = document.getElementById("dbcount");
 let regPassReEntry = document.getElementById("regpassreentry");
 let detailsHeadWrapper = document.getElementById("detailsheadwrapper");
 let viewId = document.getElementById('viewid');
-let viewIdBack = document.getElementById('viewidback');
+// let viewIdBack = document.getElementById('viewidback');
 let forgotPass = document.getElementById('forgotpass');
 let resetForm = document.getElementById('resetform');
 let formErr = document.getElementById("formerr");
@@ -183,10 +183,14 @@ let wWImage = document.getElementById("wwimage");
 let coinDiv = document.getElementById("coindiv");
 let tPBox = document.getElementById("tpbox");
 
+//mobile divs
+let mobCat = document.getElementById("cat-row-cat-button");
+let categoriesColumn = document.getElementById("categories-column");
+
 
 // let index = document.getElementById("index");
-let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn]
-let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
+let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn, 'noColumn']
+// let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
 //this can't include wisDetails Column for backtracking:
 let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, howDoesColumn];
 
@@ -198,24 +202,48 @@ const columnToggle = (selectedColumn) => {
     secondColumnArray.forEach(element => {
       if (element == selectedColumn) {toggleSecColumn(selectedColumn)}
     })
-    thirdColumnArray.forEach(element => {
-      if (element == selectedColumn) {toggleThirdColumn(selectedColumn)}
-    })
+    // thirdColumnArray.forEach(element => {
+    //   if (element == selectedColumn) {toggleThirdColumn(selectedColumn)}
+    // })
 }
 
   const toggleSecColumn = (selectedColumn) => {
-  viewId.style.display = 'none';
-  viewIdBack.style.display = 'none';
+    let keepOpen = null;
+    let checkForPrevArray = [loginColumn, promptColumn, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn]
+      checkForPrevArray.forEach(element => {
+        if (element.style.display == 'block') keepOpen = element;
+      })
+  categoriesColumn.style.display = 'none';
+  if (selectedColumn != 'noColumn') viewerWindow.style.display = 'none';
+  if (selectedColumn != 'noColumn') viewId.style.display = 'none';
+  // viewIdBack.style.display = 'none';
   loginColumn.style.display = 'none';
   promptColumn.style.display = 'none';
   // viewerWindow.style.display = 'block';
-  viewer.style.display = 'none';
+  if (selectedColumn != 'noColumn') viewer.style.display = 'none';
   formColumn.style.display = 'none';
   regColumn.style.display = 'none';
   forgotColumn.style.display = 'none';
+  dashboardColumn.style.display = 'none';
+  wishingWellColumn.style.display = 'none';
+  calendarColumn.style.display = 'none';
+  welcomeColumn.style.display = 'none';
+  accountColumn.style.display = 'none';
+  favoritesColumn.style.display = 'none';
+  mySubmissionsColumn.style.display = 'none';
+  wisDetailsColumn.style.display = 'none';
+  howDoesColumn.style.display = 'none';
 
-  if (selectedColumn) selectedColumn.style.display = 'block';
-  currentSecColumn = selectedColumn;
+  if (selectedColumn && selectedColumn != 'noColumn') {
+    selectedColumn.style.display = 'block';
+    currentSecColumn = selectedColumn;
+    viewerWindow.style.display = 'block';
+
+  } else {
+    // if (selectedColumn == viewId || selectedColumn == loginColumn || selectedColumn == promptColumn || selectedColumn == viewer || selectedColumn == formColumn || selectedColumn == regColumn || selectedColumn == forgotColumn)
+    viewerWindow.style.display = 'block';
+    keepOpen ? keepOpen.style.display = 'block' : console.log('no prev open');
+  }
 }
 
 const toggleThirdColumn = (selectedColumn) => {
@@ -302,6 +330,7 @@ let subCatObject = {
   Other: ['general']
 
 }
+let isSidebar = false;
 
 
 
@@ -612,8 +641,7 @@ const openMySubmissions = () => {
           if (item.className == 'fav-li subpop-yes') {
             item.innerHTML =
           `<div class="displayfav">
-          <i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span style="-webkit-text-fill-color: rgb(6, 190, 6);
-          color: rgb(6, 190, 6);">popular wisdom</span><br><br>
+          <span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span>popular wisdom</span></span><br><br>
             <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
             </div>
             <div>
@@ -782,11 +810,11 @@ const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo, saveEmail) 
   getFavInfo()
   console.log(`this is your favorites: ${favInfo}`)
   getCal(calInfo);
-  columnToggle(dashboardColumn);
   tPBox.value = thoughtStr
   lastTPValue = thoughtStr;
   if (opDemo) opDemoData = opDemo;
   lastSecondColumn == 'formColumn'? columnToggle(formColumn) : getNewest();
+  columnToggle(dashboardColumn);
 }
 
 const getFavInfo = () => {
@@ -1371,7 +1399,7 @@ const finalFavorite = (data) => {
   updateDb.update({favWis: firebase.firestore.FieldValue.arrayUnion({entry: originalData.wisdom,
   author: originalData.user,
 originalId: originalDocId})
-    }).then(getFavInfo()).then(data.innerHTML = 'Favorited <i class="fa fa-star"></i>')
+    }).then(getFavInfo()).then(data.innerHTML = 'favorited <i class="fa fa-star"></i>')
   }
   ).then(() => {
     console.log('column:', prevThird)
@@ -1446,7 +1474,7 @@ const getWise = async (catDetails) => {
   // viewer.appendChild(viewId)
   columnToggle(viewer);
   viewId.style.display = 'block';
-  viewIdBack.style.display = 'block';
+  // viewIdBack.style.display = 'block';
   //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
@@ -1494,8 +1522,7 @@ const getWise = async (catDetails) => {
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
-        let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
-color: rgb(6, 190, 6);">popular wisdom</span><br>`
+        let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span>`
         if (item.className == 'result-li') popularWatermark = '';
         item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
         if (loggedIn) {
@@ -1514,7 +1541,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let addStar = document.createElement("div");
             item.appendChild(addStar);
             addStar.className= `favoritestar ${subClass}`;
-            addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+            addStar.innerHTML = 'favorite <i class="fa fa-star-o"></i>';
             addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
             needStar = true;
           }
@@ -1522,7 +1549,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let favorited = document.createElement("div");
             item.appendChild(favorited);
             favorited.className= `favorited ${subClass}`;
-            favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+            favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
             needStar = true;
           }
     }
@@ -1670,7 +1697,7 @@ subCat: null};
   }
   columnToggle(viewer);
   viewId.style.display = 'block';
-  viewIdBack.style.display = 'block';
+  // viewIdBack.style.display = 'block';
   //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
@@ -1720,8 +1747,7 @@ subCat: null};
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
         if (doc.subCat) subText = '/' + doc.subCat;
-        let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
-color: rgb(6, 190, 6);">popular wisdom</span><br>`
+        let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span><br>`
         if (item.className == 'result-li') popularWatermark = ''
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
@@ -1742,7 +1768,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let addStar = document.createElement("div");
             item.appendChild(addStar);
             addStar.className= `favoritestar${subClass}`;
-            addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+            addStar.innerHTML = 'Favorite <i class="fa fa-star-o"></i>';
             addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
             needStar = true;
           }
@@ -1750,8 +1776,8 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let favorited = document.createElement("div");
             item.appendChild(favorited);
             favorited.className= `favorited${subClass}`;
-            favorited.style.padding ="6px";
-            favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+            // favorited.style.padding ="3px";
+            favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
             needStar = true;
           }
     }
@@ -1814,6 +1840,9 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
           contextLink.className = `favorited ${subClass} commentlink contextlink`
           contextLink.innerHTML = 'more context'
           item.appendChild(contextLink);
+          // let extraLine = document.createElement("div");
+          // extraLine.className = 'add-extra-line';
+          // item.appendChild(extraLine)
           contextLink.addEventListener('click', (e) => {
             e.preventDefault()
             let id = contextLink.parentElement.name
@@ -1871,8 +1900,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
               let subClass = '';
               if (item2.className == 'result-li-high') subClass = ' borderalt1';
               if (leftoverDocs[i].subCat) subText = '/' + leftoverDocs[i].subCat;
-              let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
-color: rgb(6, 190, 6);">popular wisdom</span><br>`
+              let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span>`
               if (item2.className == 'result-li') popularWatermark = '';
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
@@ -1893,7 +1921,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
                   let addStar = document.createElement("div");
                   item2.appendChild(addStar);
                   addStar.className= `favoritestar${subClass}`;
-                  addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+                  addStar.innerHTML = 'favorite<i class="fa fa-star-o"></i>';
                   addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
                   needStar = true;
                 }
@@ -1901,8 +1929,8 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
                   let favorited = document.createElement("div");
                   item2.appendChild(favorited);
                   favorited.className= `favorited${subClass}`;
-                  favorited.style.padding ="6px";
-                  favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+                  // favorited.style.padding ="6px";
+                  favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
                   needStar = true;
                 }
           }
@@ -2086,7 +2114,7 @@ wisbitDetails.append(category)
       let addStar = document.createElement("div");
       wisbitDetails.append(addStar);
       addStar.className= `details-favoritestar`;
-      addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i><br><br>';
+      addStar.innerHTML = 'favorite<i class="fa fa-star-o"></i><br><br>';
       addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
       needStar = true;
     }
@@ -2095,7 +2123,7 @@ wisbitDetails.append(category)
       wisbitDetails.appendChild(favorited);
       favorited.className= `details-favorited`;
       favorited.style.padding ="6px";
-      favorited.innerHTML = 'Favorited <i class="fa fa-star"></i><br><br>';
+      favorited.innerHTML = 'favorited <i class="fa fa-star"></i><br><br>';
       needStar = true;
     }
 }
@@ -2364,7 +2392,16 @@ regBack1.addEventListener('click', (e) => {e.preventDefault()})
 howDoes.addEventListener('click', () => columnToggle(howDoesColumn))
 howDoesHeadWrapper.addEventListener('click',() => columnToggle(prevThird))
 howDoesDash.addEventListener('click', () => columnToggle(howDoesColumn))
-
+mobCat.addEventListener('click', () => {
+  if (isSidebar) {
+    isSidebar = false;
+    categoriesColumn.style.display = 'none';
+  } else {
+    isSidebar = true;
+  columnToggle('noColumn');
+  categoriesColumn.style.display = 'block';
+  }
+})
 
 let subcats = document.getElementsByClassName("subcat");
 
@@ -2397,7 +2434,7 @@ subCatObject['Career'].forEach((element) => {
   subCategory.appendChild(item)
 })
 //init welcome column on-load
-columnToggle(welcomeColumn)
+// columnToggle(welcomeColumn)
 getNewest()
 
 let countObject = {}
