@@ -213,7 +213,7 @@ const columnToggle = (selectedColumn) => {
       checkForPrevArray.forEach(element => {
         if (element.style.display == 'block') keepOpen = element;
       })
-  categoriesColumn.style.display = 'none';
+  if (!isSidebar) categoriesColumn.style.display = 'none';
   if (selectedColumn != 'noColumn') viewerWindow.style.display = 'none';
   if (selectedColumn != 'noColumn') viewId.style.display = 'none';
   // viewIdBack.style.display = 'none';
