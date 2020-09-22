@@ -695,6 +695,7 @@ border-width: 7px; */
     border-bottom: solid;
     border-width: 1px;
     border-color: rgba(0, 128, 0, 0.377);
+    border-color: black;
 }
 
 
@@ -710,7 +711,7 @@ border-width: 7px; */
 .displaycomment {
     /* color: rgb(160, 104, 41); */
     margin: 0px;
-    background-color: #f5f2ef;
+    background-color: rgb(245, 245, 245);
     /* border-color: rgb(179, 179, 179); */
 
     padding-left: 10px;
@@ -719,7 +720,7 @@ border-width: 7px; */
 .displaycommentuser {
     margin: 0px;
     /* position: relative; */
-    background-color: #f5f2ef;
+    background-color: rgb(245, 245, 245);
     border-bottom: solid;
     border-width: 1px;
     padding-bottom: 4px;
@@ -827,7 +828,7 @@ border-width: 7px; */
       border-width: 2px;
       border: solid;
       border-color: white;
-      background-color: rgb(235, 247, 235);
+      background-color: rgb(245, 245, 245);
       color: black;
       display: block;
 }
@@ -877,11 +878,17 @@ border-width: 7px; */
     padding-top: 3px;
     padding-bottom: 3px;
     cursor: pointer;
+    text-shadow: 1px 1px white;
 }
 
 .favoritestar:hover {
-    position: relative;
-    color: green;
+    /* position: relative; */
+    /* color: green;
+    color: yellow; */
+    /* color: rgb(58, 58, 58); */
+    /* text-shadow: 1px 1px rgb(255, 255, 0); */
+
+    /* text-shadow: 1px 1px yellow; */
 }
 
 .details-favoritestar {
@@ -891,13 +898,11 @@ border-width: 7px; */
 }
 
 .details-favoritestar:hover {
-    position: relative;
     color: green;
 }
 
 .itemauthor {
     display: block;
-    /* position: relative; */
     text-align: right;
     padding-right: 0px;
 }
@@ -2112,13 +2117,13 @@ box-shadow: 0px 2px 1px 0px black; */
     text-align: center;
 }
 
-#howdoes-dash {
+/* #howdoes-dash {
     font-family: "helvetica";
     font-size: 18px;
     color: rgb(0, 111, 214);
     margin: 10px;
     cursor: pointer;
-}
+} */
 
 .howdetail-head {
     padding: 30px;
@@ -2131,14 +2136,19 @@ box-shadow: 0px 2px 1px 0px black; */
 
 .subpop-yes {
     border-color: rgb(6, 190, 6);
+    border-color: rgb(243, 208, 50);
     background: rgb(255, 241, 209);
+    background: white;
 }
 
 .subpop-no {
-    -webkit-text-fill-color: rgb(160, 104, 41);
+    -webkit-text-fill-color: black;
     color: rgb(160, 104, 41);
+    color: black;
     border-color: rgb(160, 104, 41);
+    border-color: rgb(168, 168, 168);
     background: rgb(255, 241, 209);
+    background: white;
 }
 
 .subpop-yes-button {
@@ -2146,16 +2156,18 @@ box-shadow: 0px 2px 1px 0px black; */
 }
 
 .subpop-no-button {
-    -webkit-text-fill-color: rgb(160, 104, 41);
+    -webkit-text-fill-color: black;
     color: rgb(160, 104, 41);
     border-color: rgb(160, 104, 41);
+    color: black;
+    border-color: black;
     /* background: rgb(255, 241, 209); */
 }
 .subpop-no-button:hover {
     /* -webkit-text-fill-color: rgb(160, 104, 41);
     color: rgb(160, 104, 41); */
     border-color: white;
-    background-color: rgb(160, 104, 41);
+    background-color: black;
     /* background: rgb(255, 241, 209); */
 }
 
@@ -2502,7 +2514,7 @@ border: solid;
 border-top: none;
 border-left: none;
 border-width: 1px;
-padding-top: 2px;
+padding-top: 0px;
     }
   
   .top-nav-4 {
@@ -2569,3 +2581,29 @@ border-width: 1px;
       max-width: 400px;
       width: 100%;
   }
+
+#search-bar {
+min-width: 200px;
+min-height: 18px;
+border: solid;
+border-width: 1px;
+}
+
+#search-button {
+    all: unset;
+    padding-left: 14px;
+    vertical-align: -2px;
+}
+
+#cat-row-search-bar {
+    padding-top: 1px;
+}
+
+#howdoescolumn {
+    margin: auto;
+}
+
+#howdoeswrapper {
+    margin: auto;
+    max-width: 1000px;
+}
