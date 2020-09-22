@@ -72,17 +72,17 @@ let dbCount = document.getElementById("dbcount");
 let regPassReEntry = document.getElementById("regpassreentry");
 let detailsHeadWrapper = document.getElementById("detailsheadwrapper");
 let viewId = document.getElementById('viewid');
-let viewIdBack = document.getElementById('viewidback');
+// let viewIdBack = document.getElementById('viewidback');
 let forgotPass = document.getElementById('forgotpass');
 let resetForm = document.getElementById('resetform');
 let formErr = document.getElementById("formerr");
 let regErr = document.getElementById("reg-err");
 let howDoesHeadWrapper = document.getElementById("howdoesheadwrapper")
-let howDoesDash = document.getElementById("howdoes-dash");
+let howDoesDash = document.getElementById("cat-row-quick-guide");
 
 
 //form elements
-let makeSubmit = document.getElementById("makesubmit");
+let makeSubmit = document.getElementById("cat-row-create-button");
 let formColumn = document.getElementById("formcolumn");
 let regColumn = document.getElementById("regcolumn");
 let headLoginButton = document.getElementById("headloginbutton");
@@ -183,10 +183,18 @@ let wWImage = document.getElementById("wwimage");
 let coinDiv = document.getElementById("coindiv");
 let tPBox = document.getElementById("tpbox");
 
+//new divs
+let searchBar = document.getElementById('search-bar');
+let searchButton = document.getElementById('search-button')
+
+//mobile divs
+let mobCat = document.getElementById("cat-row-cat-button");
+let categoriesColumn = document.getElementById("categories-column");
+
 
 // let index = document.getElementById("index");
-let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn]
-let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
+let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn, 'noColumn']
+// let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
 //this can't include wisDetails Column for backtracking:
 let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, howDoesColumn];
 
@@ -198,24 +206,49 @@ const columnToggle = (selectedColumn) => {
     secondColumnArray.forEach(element => {
       if (element == selectedColumn) {toggleSecColumn(selectedColumn)}
     })
-    thirdColumnArray.forEach(element => {
-      if (element == selectedColumn) {toggleThirdColumn(selectedColumn)}
-    })
+    // thirdColumnArray.forEach(element => {
+    //   if (element == selectedColumn) {toggleThirdColumn(selectedColumn)}
+    // })
 }
 
   const toggleSecColumn = (selectedColumn) => {
-  viewId.style.display = 'none';
-  viewIdBack.style.display = 'none';
+    let keepOpen = null;
+    let checkForPrevArray = [loginColumn, promptColumn, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn]
+      checkForPrevArray.forEach(element => {
+        if (element.style.display == 'block') keepOpen = element;
+      })
+  if (!isSidebar) categoriesColumn.style.display = 'none';
+  if (selectedColumn != 'noColumn') viewerWindow.style.display = 'none';
+  if (selectedColumn != 'noColumn') viewId.style.display = 'none';
+  // viewIdBack.style.display = 'none';
   loginColumn.style.display = 'none';
   promptColumn.style.display = 'none';
   // viewerWindow.style.display = 'block';
-  viewer.style.display = 'none';
+  if (selectedColumn != 'noColumn') viewer.style.display = 'none';
   formColumn.style.display = 'none';
   regColumn.style.display = 'none';
   forgotColumn.style.display = 'none';
+  dashboardColumn.style.display = 'none';
+  wishingWellColumn.style.display = 'none';
+  calendarColumn.style.display = 'none';
+  welcomeColumn.style.display = 'none';
+  accountColumn.style.display = 'none';
+  favoritesColumn.style.display = 'none';
+  mySubmissionsColumn.style.display = 'none';
+  wisDetailsColumn.style.display = 'none';
+  howDoesColumn.style.display = 'none';
 
-  if (selectedColumn) selectedColumn.style.display = 'block';
-  currentSecColumn = selectedColumn;
+  if (selectedColumn && selectedColumn != 'noColumn') {
+    selectedColumn.style.display = 'block';
+    currentSecColumn = selectedColumn;
+    viewerWindow.style.display = 'block';
+
+  } else {
+    // if (selectedColumn == viewId || selectedColumn == loginColumn || selectedColumn == promptColumn || selectedColumn == viewer || selectedColumn == formColumn || selectedColumn == regColumn || selectedColumn == forgotColumn)
+    viewerWindow.style.display = 'block';
+    keepOpen ? keepOpen.style.display = 'block' : console.log('no prev open');
+  }
+  if (selectedColumn == viewer) {viewId.style.display = 'block';}
 }
 
 const toggleThirdColumn = (selectedColumn) => {
@@ -302,6 +335,7 @@ let subCatObject = {
   Other: ['general']
 
 }
+let isSidebar = false;
 
 
 
@@ -323,6 +357,7 @@ const openReg = () => {
   columnToggle(regColumn)
   // regPass.addEventListener('input', asteriskPass)
   // regPassReEntry.addEventListener('input', asteriskPassRe)
+  prevThird = regColumn;
 }
 
 
@@ -587,6 +622,7 @@ const openLoginColumn = () => {
     // for (let i = getPass.name.length; i > 0; i--) {
     //   getPass.value += '*'
     // }
+    prevThird = loginColumn;
   }
   columnToggle(loginColumn)
 }
@@ -612,8 +648,7 @@ const openMySubmissions = () => {
           if (item.className == 'fav-li subpop-yes') {
             item.innerHTML =
           `<div class="displayfav">
-          <i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span style="-webkit-text-fill-color: rgb(6, 190, 6);
-          color: rgb(6, 190, 6);">popular wisdom</span><br><br>
+          <span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span>popular wisdom</span></span><br><br>
             <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
             </div>
             <div>
@@ -647,6 +682,7 @@ const openMySubmissions = () => {
             console.log(id)
             console.log(mySubmissionsDetails[0])
             console.log(element)
+            prevThird = mySubmissionsColumn;
               mySubmissionsDetails[i].addEventListener('click', openDetailsColumn)
           }
         }
@@ -782,11 +818,12 @@ const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo, saveEmail) 
   getFavInfo()
   console.log(`this is your favorites: ${favInfo}`)
   getCal(calInfo);
-  columnToggle(dashboardColumn);
   tPBox.value = thoughtStr
   lastTPValue = thoughtStr;
   if (opDemo) opDemoData = opDemo;
   lastSecondColumn == 'formColumn'? columnToggle(formColumn) : getNewest();
+  prevThird = dashboardColumn;
+  columnToggle(dashboardColumn);
 }
 
 const getFavInfo = () => {
@@ -819,6 +856,7 @@ const openAccount = () => {
   accUsername.innerHTML = saveduser;
   accEmail.innerHTML = savedemail;
   columnToggle(accountColumn)
+  prevThird = accountColumn;
 }
 
 
@@ -826,6 +864,7 @@ const openAccount = () => {
 const openFavorites = () => {
   favoritesList.innerHTML = '';
   columnToggle(favoritesColumn)
+  prevThird = favoritesColumn;
   db.collection('usersdb').doc(userId).get().then(snapshot => {
   
     let favArray = snapshot.data().favWis;
@@ -1134,6 +1173,7 @@ const openCalendar = (day) => {
 const openDashboard = () => {
   columnToggle(dashboardColumn);
   getCal();
+  prevThird = dashboardColumn;
 }
 
 
@@ -1145,10 +1185,15 @@ const openDashboard = () => {
 //displays the form submission column
 const openSubmit = () => {
   lastSecondColumn = 'formColumn'
-  columnToggle()
+  // columnToggle()
+  // prevThird = formColumn;
   if (showLogin(formColumn)) {
   columnToggle(formColumn)
-  } else {formColumn.style.display = 'none';}
+  prevThird = formColumn;
+  } else {
+    columnToggle(promptColumn)
+    prevThird = promptColumn;
+  }
 };
 
 const showSubCats = (e) => {
@@ -1371,7 +1416,7 @@ const finalFavorite = (data) => {
   updateDb.update({favWis: firebase.firestore.FieldValue.arrayUnion({entry: originalData.wisdom,
   author: originalData.user,
 originalId: originalDocId})
-    }).then(getFavInfo()).then(data.innerHTML = 'Favorited <i class="fa fa-star"></i>')
+    }).then(getFavInfo()).then(data.innerHTML = 'favorited <i class="fa fa-star"></i>')
   }
   ).then(() => {
     console.log('column:', prevThird)
@@ -1445,8 +1490,9 @@ const getWise = async (catDetails) => {
   }
   // viewer.appendChild(viewId)
   columnToggle(viewer);
+  prevThird = viewer;
   viewId.style.display = 'block';
-  viewIdBack.style.display = 'block';
+  // viewIdBack.style.display = 'block';
   //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
@@ -1494,8 +1540,7 @@ const getWise = async (catDetails) => {
         item.className = 'result-li-high' : console.log('style normal');
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
-        let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
-color: rgb(6, 190, 6);">popular wisdom</span><br>`
+        let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span>`
         if (item.className == 'result-li') popularWatermark = '';
         item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
         if (loggedIn) {
@@ -1514,7 +1559,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let addStar = document.createElement("div");
             item.appendChild(addStar);
             addStar.className= `favoritestar ${subClass}`;
-            addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+            addStar.innerHTML = 'favorite <i class="fa fa-star-o"></i>';
             addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
             needStar = true;
           }
@@ -1522,7 +1567,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let favorited = document.createElement("div");
             item.appendChild(favorited);
             favorited.className= `favorited ${subClass}`;
-            favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+            favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
             needStar = true;
           }
     }
@@ -1669,8 +1714,9 @@ subCat: null};
     viewId.innerHTML += '/' + lastCategory.subCat
   }
   columnToggle(viewer);
+  prevThird = viewer;
   viewId.style.display = 'block';
-  viewIdBack.style.display = 'block';
+  // viewIdBack.style.display = 'block';
   //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
   await db.collection('wisdomcollection').get().then((snapshot) => {
     // viewer.innerHTML = '';
@@ -1720,8 +1766,7 @@ subCat: null};
         let subClass = '';
         if (item.className == 'result-li-high') subClass = ' borderalt1';
         if (doc.subCat) subText = '/' + doc.subCat;
-        let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
-color: rgb(6, 190, 6);">popular wisdom</span><br>`
+        let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span><br>`
         if (item.className == 'result-li') popularWatermark = ''
         // console.log(`the value of this list item is: ${item.value}`)
         //displays readable data for the user
@@ -1742,7 +1787,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let addStar = document.createElement("div");
             item.appendChild(addStar);
             addStar.className= `favoritestar${subClass}`;
-            addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+            addStar.innerHTML = 'Favorite <i class="fa fa-star-o"></i>';
             addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
             needStar = true;
           }
@@ -1750,8 +1795,8 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
             let favorited = document.createElement("div");
             item.appendChild(favorited);
             favorited.className= `favorited${subClass}`;
-            favorited.style.padding ="6px";
-            favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+            // favorited.style.padding ="3px";
+            favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
             needStar = true;
           }
     }
@@ -1814,6 +1859,9 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
           contextLink.className = `favorited ${subClass} commentlink contextlink`
           contextLink.innerHTML = 'more context'
           item.appendChild(contextLink);
+          // let extraLine = document.createElement("div");
+          // extraLine.className = 'add-extra-line';
+          // item.appendChild(extraLine)
           contextLink.addEventListener('click', (e) => {
             e.preventDefault()
             let id = contextLink.parentElement.name
@@ -1871,8 +1919,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
               let subClass = '';
               if (item2.className == 'result-li-high') subClass = ' borderalt1';
               if (leftoverDocs[i].subCat) subText = '/' + leftoverDocs[i].subCat;
-              let popularWatermark = `<i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass" style="-webkit-text-fill-color: rgb(6, 190, 6);
-color: rgb(6, 190, 6);">popular wisdom</span><br>`
+              let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span>`
               if (item2.className == 'result-li') popularWatermark = '';
               // console.log(`the value of this list item is: ${item.value}`)
               //displays readable data for the user
@@ -1893,7 +1940,7 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
                   let addStar = document.createElement("div");
                   item2.appendChild(addStar);
                   addStar.className= `favoritestar${subClass}`;
-                  addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i>';
+                  addStar.innerHTML = 'favorite<i class="fa fa-star-o"></i>';
                   addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
                   needStar = true;
                 }
@@ -1901,8 +1948,8 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
                   let favorited = document.createElement("div");
                   item2.appendChild(favorited);
                   favorited.className= `favorited${subClass}`;
-                  favorited.style.padding ="6px";
-                  favorited.innerHTML = 'Favorited <i class="fa fa-star"></i>';
+                  // favorited.style.padding ="6px";
+                  favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
                   needStar = true;
                 }
           }
@@ -2016,6 +2063,255 @@ color: rgb(6, 190, 6);">popular wisdom</span><br>`
   })
 }
 
+
+const searchRes = async (term) => {
+  lastSecondColumn = viewer;
+  // console.log(catDetails)
+  //hides the form column if it is open
+  let commentableArray = false;
+  viewer.innerHTML = '';
+    let emptyBlock = document.createElement('div')
+  emptyBlock.style.height = '60px';
+  viewer.appendChild(emptyBlock)
+    viewId.innerHTML = 'Search Results'
+  columnToggle(viewer);
+  prevThird = viewer;
+  viewer.innerHTML += `Results for the term "${term}":<br><br>`
+  viewId.style.display = 'block';
+  // viewIdBack.style.display = 'block';
+  //get request to the Firebase collection. Param is snapshot because that is what the collection is referred to in documentation
+  await db.collection('wisdomcollection').get().then((snapshot) => {
+    // viewer.innerHTML = '';
+    let sortedDocs = []
+    let relevantDocFound = false;
+    totalDocs = 0;
+    totalWeight = 0;
+    snapshot.docs.forEach(doc => {
+      let id = doc.id;
+      sortedDocs.push(doc.data())
+      sortedDocs[sortedDocs.length-1].id = id;
+      sortedDocs[sortedDocs.length-1].weight = 0;
+    }
+    )
+    // console.log(sortedDocs)
+
+    sortedDocs.forEach(doc => {
+      doc.weight = doc.favorites + doc.endorsements.length;
+      // doc.colorPower = '#ffffff'
+      totalDocs++
+      totalWeight += doc.weight
+    })
+    sortedDocs = sortedDocs.sort((a, b) => b.weight-a.weight);
+    // console.log(sortedDocs)
+    //snapshot.docs is the path to retrieve objects
+  sortedDocs.forEach(doc =>
+    {
+      //for each doc, you must append with .data() to retrieve the data
+      // follow .data() with an object key to retrieve a value
+      let text = doc.wisdom
+      console.log(text)
+
+      const removePunc = (str) => {
+        //create an array of characters
+        let charArray = []
+        //iterate through the str
+        for (let i = 0; i < str.length; i++) {
+          //if character in string is between a-z, it is pushed into char array
+          if (str[i] >= 'a' && str[i] <= 'z') {
+            charArray.push(str[i])
+          };
+        };
+        //join the char array and output as a string
+        let checkedStr = charArray.join('');
+        return checkedStr;
+      };
+
+
+      const returnWordsObject = (text) => {
+        console.log(text)
+        const wordsObject = {};
+        let wordsArray = text.toLowerCase().split(' ');
+        
+        for (let i = 0; i < wordsArray.length; i++) {
+          let currentWord = wordsArray[i];
+          //remove any commas, periods, etc
+          currentWord = removePunc(currentWord);
+          wordsObject[currentWord]? wordsObject[currentWord]++ :     wordsObject[currentWord] = 1;
+        }
+        return wordsObject;
+        }
+      let wisdomWords = returnWordsObject(text);
+      console.log(typeof wisdomWords, wisdomWords)
+      console.log(wisdomWords[term])
+      if (wisdomWords[term]) {
+        relevantDocFound = true;
+        let checkFavorited = doc.wisdom
+        //creates new element in the DOM
+        let item = document.createElement("div");
+        //gives element a class name attribute
+        item.className = 'result-li'
+        item.name = doc.id;
+        item.value = doc.favorites
+        let subText = '';
+        if (doc.subCat) subText = '/' + doc.subCat;
+        // console.log(`the value of this list item is: ${item.value}`)
+        //displays readable data for the user
+        // item.style.backgroundColor = 'rgb(160, 104, 41)'
+        checkWisColorScheme(doc.weight, totalDocs, totalWeight) ? 
+        item.className = 'result-li-high' : console.log('style normal');
+        let subClass = '';
+        if (item.className == 'result-li-high') subClass = ' borderalt1';
+        let popularWatermark = `<span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span class="popClass">popular wisdom</span></span>`
+        if (item.className == 'result-li') popularWatermark = '';
+        item.innerHTML = `<div class="wisouterborder">${doc.category}${subText}</div><div class="commenttop${subClass}" name="${doc.id}">${popularWatermark} "${doc.wisdom}" <div class="authdiv">~ ${doc.user}</div></div>`;
+        if (loggedIn) {
+          db.collection('usersdb').doc(userId).get().then(snapshot => {
+            favInfo = snapshot.data().favWis
+          })
+            let needStar = true;
+            favInfo.forEach(element => {
+              if (element.entry == checkFavorited) {
+                // console.log(doc.wisdom)
+                // console.log(element.entry)
+                needStar = false;
+              }
+        })
+          if (needStar === true) {
+            let addStar = document.createElement("div");
+            item.appendChild(addStar);
+            addStar.className= `favoritestar ${subClass}`;
+            addStar.innerHTML = 'favorite <i class="fa fa-star-o"></i>';
+            addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
+            needStar = true;
+          }
+          if (needStar === false) {
+            let favorited = document.createElement("div");
+            item.appendChild(favorited);
+            favorited.className= `favorited ${subClass}`;
+            favorited.innerHTML = 'favorited <i class="fa fa-star"></i>';
+            needStar = true;
+          }
+    }
+
+
+        let populateComments = document.createElement("div")
+        // populateComments.style.borderRadius = '0% 0% 10% 10%'
+        let elemCount = 0;
+          doc.wisComments.forEach(element => {
+            let currentComment = document.createElement("div");
+            currentComment.innerHTML = `<p class="displaycomment">${element.commentkey}</p><p class="displaycommentuser">comment by ${element.userkey}<br></p>`
+            populateComments.appendChild(currentComment)
+            currentComment.id = element.commentId;
+            if (element.commentUser == userId) {
+              let delComButton = document.createElement("BUTTON")
+              delComButton.name = doc.id;
+              delComButton.value = element.commentId
+              delComButton.placeholder = element.id;
+              delComButton.innerHTML = 'delete comment';
+              delComButton.className = 'delcombutton';
+              populateComments.append(delComButton)
+              let commentData = element
+              console.log(commentData, 'this is comment data')
+              delComButton.addEventListener('click', (e) => delComment(e, commentData))
+              elemCount ++
+            }
+            })
+          if (!doc.wisComments[0])  {
+            populateComments.className = `populatecomments${subClass}`
+            
+          } else {
+            populateComments.className = `populatecomments-notlogged${subClass}`
+          }
+        //append the viewer column with a new item
+        viewer.appendChild(item);
+        let commentLink = document.createElement("div");
+    
+        commentLink.className = `favorited ${subClass} commentlink`
+        commentLink.innerHTML = `comments (${doc.wisComments.length})`
+        item.appendChild(commentLink);
+        commentLink.addEventListener('click', (e) => {
+          e.preventDefault()
+          //to open wisdetails:
+          // let id = commentLink.parentElement.name
+          // if (wisDetailsColumn.style.display == 'block' && tempDetails == commentLink.parentElement.name) {
+          //   columnToggle(prevThird)
+          // } else {
+          //   wisDetailsColumnBody.innerHTML = ''
+          //   columnToggle(wisDetailsColumn)
+          //   detailsHeadWrapper.addEventListener('click', backToPrevThird)
+          //   console.log(commentLink.parentElement.name)
+          //   db.collection('wisdomcollection').doc(commentLink.parentElement.name).get().then((snapshot) => {
+          //     let doc = snapshot.data()
+          //       createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+          //   })
+          // }
+          if (populateComments.style.display == 'block') {
+          populateComments.style.display = 'none';
+          } else {
+          populateComments.style.display = 'block';
+          }
+          tempDetails = commentLink.parentElement.name;
+        })
+        let contextLink = document.createElement("div");
+        contextLink.className = `favorited ${subClass} commentlink contextlink`
+        contextLink.innerHTML = 'more context'
+        item.appendChild(contextLink);
+        contextLink.addEventListener('click', (e) => {
+          e.preventDefault()
+          let id = contextLink.parentElement.name
+            console.log('2',tempDetails, contextLink.parentElement.name)
+            wisDetailsColumnBody.innerHTML = ''
+            columnToggle(wisDetailsColumn)
+            detailsHeadWrapper.addEventListener('click', backToPrevThird)
+            console.log(contextLink.parentElement.name)
+            db.collection('wisdomcollection').doc(contextLink.parentElement.name).get().then((snapshot) => {
+              let doc = snapshot.data()
+                createDetails(doc, loggedIn, userId, db, favInfo, id, wisDetailsColumnBody)
+            })
+          tempDetails = contextLink.parentElement.name;
+        })
+        console.log(commentLink.parentElement.name)
+        if (loggedIn) item.appendChild(populateComments);
+        if (!loggedIn && doc.wisComments[0]) item.appendChild(populateComments)
+      if (loggedIn) {
+        populateComments.className = `populatecomments ${subClass}`
+        let postCommentForm = document.createElement("form")
+        postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
+        <input type="text" class="postcommentid" style"visibility: hidden placeholder=${doc.id}><input type="text" class="actualcomment" name="actualcomment"/><button type="submit" class="postcommentbutton" value="submit" style="margin-left: 4px" name=${doc.id}>comment</button></form>`;
+        populateComments.appendChild(postCommentForm)
+        commentableArray = true;
+    }
+      }
+    })
+
+
+
+
+
+
+
+
+    if (relevantDocFound == false) {
+      viewer.innerHTML += `<br>0 results.`
+      return
+    }
+  }).then(async () => {
+  //add document object "submitComment" for comment button function
+    if (commentableArray) {
+      // console.log('generating comment buttons')
+      let postCommentButton = document.getElementsByClassName("postcommentbutton");
+      for (var i = 0; i < postCommentButton.length; i++) {
+        let currentCB = postCommentButton[i];
+        currentCB.addEventListener('click',(event) => submitComment(event, currentCB));
+      }
+    }
+    let linkBoxes = document.getElementsByClassName("commenttop")
+    for (let i = 0; i< linkBoxes.length; i++) {
+      linkBoxes[i].addEventListener('click', openDetailsColumn)
+    }
+  });
+};
+
 let tempDetails = '';
 const openDetailsColumn = (e, id) => {
   e.preventDefault;
@@ -2086,7 +2382,7 @@ wisbitDetails.append(category)
       let addStar = document.createElement("div");
       wisbitDetails.append(addStar);
       addStar.className= `details-favoritestar`;
-      addStar.innerHTML = 'Favorite this <i class="fa fa-star-o"></i><br><br>';
+      addStar.innerHTML = 'favorite<i class="fa fa-star-o"></i><br><br>';
       addStar.addEventListener('click',(event) => submitFavorite(event, addStar))
       needStar = true;
     }
@@ -2095,7 +2391,7 @@ wisbitDetails.append(category)
       wisbitDetails.appendChild(favorited);
       favorited.className= `details-favorited`;
       favorited.style.padding ="6px";
-      favorited.innerHTML = 'Favorited <i class="fa fa-star"></i><br><br>';
+      favorited.innerHTML = 'favorited <i class="fa fa-star"></i><br><br>';
       needStar = true;
     }
 }
@@ -2334,7 +2630,21 @@ getTravel.addEventListener('click', () => getWise({mainCat: 'Travel', subCat: nu
 getWellness.addEventListener('click', () => getWise({mainCat: 'Wellness', subCat: null}));
 // getNew.addEventListener('click', () => getWise({mainCat: 'New', subCat: null}));
 
-makeSubmit.addEventListener('click', openSubmit);
+let beforeSubmit = null;
+makeSubmit.addEventListener('click', () => {
+  if (formColumn.style.display == 'none' && promptColumn.style.display == 'none') {
+    let toCheck = prevThird;
+  openSubmit();
+    if (promptColumn.style.display == 'block' && toCheck != promptColumn) beforeSubmit = toCheck;
+  } else if (promptColumn.style.display == 'block') {
+    columnToggle(beforeSubmit)
+  } else if (formColumn.style.display == 'block' && prevThird == formColumn) {
+    columnToggle(beforeSubmit)
+  } else {
+    console.log(prevThird)
+  columnToggle(prevThird);
+}
+});
 headLoginButton.addEventListener('click', openLoginColumn);
 getSubmit.addEventListener('click', checkLogin);
 promptLogin.addEventListener('click', openLoginColumn);
@@ -2356,15 +2666,36 @@ category.addEventListener('input', showSubCats);
 getNew.addEventListener('click', getNewest);
 mySubmissionsLink.addEventListener('click', openMySubmissions)
 // getPass.addEventListener('input', addAsteriskLogin)
-regNext1.addEventListener('click', openReg2)
-regBack2.addEventListener('click', openReg1)
-regBack3.addEventListener('click', openReg2)
-regNext2.addEventListener('click', openReg3)
-regBack1.addEventListener('click', (e) => {e.preventDefault()})
-howDoes.addEventListener('click', () => columnToggle(howDoesColumn))
-howDoesHeadWrapper.addEventListener('click',() => columnToggle(prevThird))
-howDoesDash.addEventListener('click', () => columnToggle(howDoesColumn))
+regNext1.addEventListener('click', openReg2);
+regBack2.addEventListener('click', openReg1);
+regBack3.addEventListener('click', openReg2);
+regNext2.addEventListener('click', openReg3);
+regBack1.addEventListener('click', (e) => {e.preventDefault()});
+howDoes.addEventListener('click', () => columnToggle(howDoesColumn));
+howDoesHeadWrapper.addEventListener('click',() => columnToggle(prevThird));
+howDoesDash.addEventListener('click', () => {
+  if (howDoesColumn.style.display == 'none') {
+    columnToggle(howDoesColumn);
+  } else {
+    columnToggle(prevThird);
+  }
+})
+mobCat.addEventListener('click', () => {
+  if (isSidebar) {
+    isSidebar = false;
+    categoriesColumn.style.display = 'none';
+  } else {
+    isSidebar = true;
+  columnToggle('noColumn');
+  categoriesColumn.style.display = 'block';
+  }
+})
 
+searchButton.addEventListener('click', (e) => {
+e.preventDefault()
+searchRes(searchBar.value)
+searchBar.value = '';
+})
 
 let subcats = document.getElementsByClassName("subcat");
 
@@ -2397,7 +2728,7 @@ subCatObject['Career'].forEach((element) => {
   subCategory.appendChild(item)
 })
 //init welcome column on-load
-columnToggle(welcomeColumn)
+// columnToggle(welcomeColumn)
 getNewest()
 
 let countObject = {}
@@ -2521,3 +2852,5 @@ const calNextFunction = () => {
 calBack.addEventListener('click', calBackFunction)
 calNext.addEventListener('click', calNextFunction)
 calEdit.addEventListener('click', () => openCalendar(universalDayName))
+
+console.log(`Hello fellow programmer! Welcome to my source code. Beware that this was meant to be a student project. When I started building Wiser, I barely knew what an array or object was. Bear that in mind when you explore and scrutinize my code. There are many, many things I will reorganize and restructure when I create verson 2 of this site. If you are a recruiter or senior engineer and you like my site, I am available for hire! Contact me: bensultan1985@gmail.com`)
