@@ -9,6 +9,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
     <!-- reference your copy Font Awesome here (from our CDN or by hosting yourself) -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" href="favicon. ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="./stylesheet2.css">
   <link href="https://fonts.googleapis.com/css2?family=Alegreya&display=swap" rel="stylesheet">
   <head>
@@ -49,33 +50,60 @@
 
     <div id="cat-row">
       <!-- <div id="cat-row-cat-button" class="horizontal-button">categories</div><div id="cat-row-cat-button" class="horizontal-button">search</div><div id="cat-row-cat-button" class="horizontal-button">create wisbit</div><div id="cat-row-cat-button" class="horizontal-button">calendar</div><div id="cat-row-cat-button" class="horizontal-button">quick guide</div><div id="cat-row-cat-button" class="horizontal-button">contact us</div><div id="cat-row-cat-button" class="horizontal-button">quick guide</div><div id="cat-row-cat-button" class="horizontal-end">contact us</div> -->
-      <div class="top-nav-1">
+      <div class="top-nav-1" id="top-nav-1-id">
         <div id="cat-row-cat-button" class="horizontal-button">categories</div>
       </div>
-      <div class="top-nav-2">
+      <div class="top-nav-2" id="top-nav-2-id">
         <div id="cat-row-create-button" class="horizontal-button">create wisbit</div>
       </div>
-      <div class="top-nav-3">
+      <div class="top-nav-3" id="top-nav-3-id">
         <div id="cat-row-search-bar" class="horizontal-button">
           <form>
-            <input type="text" id="search-bar">
+            <input type="text" id="search-bar" id="top-nav-4-id">
             <button type="submit" id="search-button">search</button>
           </form>
         </div>
       </div>
-      <div class="top-nav-4">
+      <div class="top-nav-4" id="top-nav-4-id">
         <div id="cat-row-intro-button" class="horizontal-button">intro video</div>
       </div>
-      <div class="top-nav-5">
+      <div class="top-nav-5" id="top-nav-5-id">
         <div id="cat-row-quick-guide" class="horizontal-button">quick guide</div>
       </div>
-      <div class="top-nav-6">
+      <div class="top-nav-6" id="top-nav-6-id">
         <div id="cat-row-calendar-button" class="horizontal-button">calendar</div>
       </div>
-      <div class="top-nav-7"></div>
+      <!-- <div class="top-nav-7"></div>
       <div class="top-nav-8"></div>
-      <div class="top-nav-9"></div>
+      <div class="top-nav-9"></div> -->
     </div>
+
+    <div id="cat-row-mob">
+      <!-- <div id="cat-row-cat-button" class="horizontal-button">categories</div><div id="cat-row-cat-button" class="horizontal-button">search</div><div id="cat-row-cat-button" class="horizontal-button">create wisbit</div><div id="cat-row-cat-button" class="horizontal-button">calendar</div><div id="cat-row-cat-button" class="horizontal-button">quick guide</div><div id="cat-row-cat-button" class="horizontal-button">contact us</div><div id="cat-row-cat-button" class="horizontal-button">quick guide</div><div id="cat-row-cat-button" class="horizontal-end">contact us</div> -->
+      <div class="top-nav-1-mob" id="top-nav-1-id-mob">
+        <div id="cat-row-cat-button-mob" class="horizontal-button-mob"><i class="fa fa-database"></i></div>
+      </div>
+      <div class="top-nav-2-mob" id="top-nav-2-id-mob">
+        <div id="cat-row-create-button-mob" class="horizontal-button-mob"><i class="fa fa-pencil"></i></div>
+      </div>
+      <div class="top-nav-4-mob" id="top-nav-4-id-mob">
+        <div id="cat-row-intro-button-mob" class="horizontal-button-mob"><i class="fa fa-video-camera"></i></div>
+      </div>
+      <div class="top-nav-5-mob" id="top-nav-5-id-mob">
+        <div id="cat-row-quick-guide-mob" class="horizontal-button-mob"><i class="fa fa-question-circle"></i></div>
+      </div>
+      <div class="top-nav-3-mob" id="top-nav-3-id-mob">
+        <div id="cat-row-search-bar-mob" class="horizontal-button-mob">
+          <form>
+            <input type="text" id="search-bar-mob" id="top-nav-4-id-mob">
+            <button type="submit" id="search-button-mob">
+              <i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
     <div class="row">
 
       <div class="column" id="categories-column">

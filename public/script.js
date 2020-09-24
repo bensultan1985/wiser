@@ -185,11 +185,18 @@ let tPBox = document.getElementById("tpbox");
 
 //new divs
 let searchBar = document.getElementById('search-bar');
-let searchButton = document.getElementById('search-button')
-
-//mobile divs
+let searchButton = document.getElementById('search-button');
 let mobCat = document.getElementById("cat-row-cat-button");
 let categoriesColumn = document.getElementById("categories-column");
+
+//mobile divs
+let mCatButton = document.getElementById('top-nav-1-id-mob');
+let mCreateButton = document.getElementById('top-nav-2-id-mob');
+// let mSearchButton = document.getElementById('top-nav-3-id-mob');
+let mIntroButton = document.getElementById('top-nav-4-id-mob'); 
+let mGuideButton = document.getElementById('top-nav-5-id-mob');
+let mSearchBar = document.getElementById('search-bar-mob');
+let mSearchButton = document.getElementById('search-button-mob');
 
 
 // let index = document.getElementById("index");
@@ -203,6 +210,7 @@ let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, 
 
 //   2.   /////////////MANAGE SECOND COLUMN
 const columnToggle = (selectedColumn) => {
+  if (test2.style.display == 'block') test2.style.display = 'none';
     secondColumnArray.forEach(element => {
       if (element == selectedColumn) {toggleSecColumn(selectedColumn)}
     })
@@ -818,6 +826,7 @@ const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo, saveEmail) 
   getFavInfo()
   console.log(`this is your favorites: ${favInfo}`)
   getCal(calInfo);
+  document.getElementById('top-nav-6-id').style.display = 'block';
   tPBox.value = thoughtStr
   lastTPValue = thoughtStr;
   if (opDemo) opDemoData = opDemo;
@@ -2630,7 +2639,7 @@ getTravel.addEventListener('click', () => getWise({mainCat: 'Travel', subCat: nu
 getWellness.addEventListener('click', () => getWise({mainCat: 'Wellness', subCat: null}));
 // getNew.addEventListener('click', () => getWise({mainCat: 'New', subCat: null}));
 
-let beforeSubmit = null;
+let beforeSubmit = viewer;
 makeSubmit.addEventListener('click', () => {
   if (formColumn.style.display == 'none' && promptColumn.style.display == 'none') {
     let toCheck = prevThird;
@@ -2639,9 +2648,12 @@ makeSubmit.addEventListener('click', () => {
   } else if (promptColumn.style.display == 'block') {
     columnToggle(beforeSubmit)
   } else if (formColumn.style.display == 'block' && prevThird == formColumn) {
+    if (beforeSubmit != formColumn) {
     columnToggle(beforeSubmit)
+    } else {
+      getNewest()
+    }
   } else {
-    console.log(prevThird)
   columnToggle(prevThird);
 }
 });
@@ -2691,11 +2703,37 @@ mobCat.addEventListener('click', () => {
   }
 })
 
+categoriesColumn.addEventListener('change', () => {
+  if (categoriesColumn.style.display == 'block') {
+    document.getElementById("top-nav-1-id").className = '.top-nav-1-alt';
+  } else {
+    if (categoriesColumn.style.display == 'none') {
+      document.getElementById("top-nav-1-id").className = '.top-nav-1';
+    }
+  }
+})
+
 searchButton.addEventListener('click', (e) => {
 e.preventDefault()
 searchRes(searchBar.value)
 searchBar.value = '';
 })
+
+mSearchButton.addEventListener('click', (e) => {
+e.preventDefault()
+searchRes(mSearchBar.value)
+mSearchBar.value = '';
+})
+
+test1.addEventListener('touchstart', () => {
+  if (test2.style.display == 'none') {
+    test2.style.display = 'block';
+  } else {
+     test2.style.display = 'none';
+  }
+})
+
+
 
 let subcats = document.getElementsByClassName("subcat");
 
@@ -2854,3 +2892,55 @@ calNext.addEventListener('click', calNextFunction)
 calEdit.addEventListener('click', () => openCalendar(universalDayName))
 
 console.log(`Hello fellow programmer! Welcome to my source code. Beware that this was meant to be a student project. When I started building Wiser, I barely knew what an array or object was. Bear that in mind when you explore and scrutinize my code. There are many, many things I will reorganize and restructure when I create verson 2 of this site. If you are a recruiter or senior engineer and you like my site, I am available for hire! Contact me: bensultan1985@gmail.com`)
+
+// console.log(window.innerWidth)
+// if (window.innerWidth >= '741') {
+//   document.getElementById('cat-row-mob').style.display = 'none';
+//   document.getElementById('cat-row').style.display = 'grid';
+// } else {
+//   document.getElementById('cat-row-mob').style.display = 'grid';
+//   document.getElementById('cat-row').style.display = 'none';
+// }
+
+// window.addEventListener('resize', () => {
+//   console.log(window.innerWidth)
+// })
+
+mGuideButton.addEventListener('click', () => {
+  if (howDoesColumn.style.display == 'none') {
+  columnToggle(howDoesColumn);
+  } else {
+    columnToggle(prevThird)
+  }
+})
+
+mCreateButton.addEventListener('click', () => {
+  if (formColumn.style.display == 'none' && promptColumn.style.display == 'none') {
+    let toCheck = prevThird;
+  openSubmit();
+    if (promptColumn.style.display == 'block' && toCheck != promptColumn) beforeSubmit = toCheck;
+  } else if (promptColumn.style.display == 'block') {
+    columnToggle(beforeSubmit)
+  } else if (formColumn.style.display == 'block' && prevThird == formColumn) {
+    if (beforeSubmit != formColumn) {
+    columnToggle(beforeSubmit)
+    } else {
+      getNewest()
+    }
+  } else {
+  columnToggle(prevThird);
+}
+});
+
+document.getElementById('top-nav-6-id').addEventListener('click', () => {
+  if (dashboardColumn.style.display == 'none') {
+    openDashboard();
+  } else {
+    console.log(prevThird)
+    if (prevThird != dashboardColumn) {
+      columnToggle(prevThird);
+  } else {
+    columnToggle(viewer)
+  }
+  }
+})
