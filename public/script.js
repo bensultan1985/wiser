@@ -197,10 +197,11 @@ let mIntroButton = document.getElementById('top-nav-4-id-mob');
 let mGuideButton = document.getElementById('top-nav-5-id-mob');
 let mSearchBar = document.getElementById('search-bar-mob');
 let mSearchButton = document.getElementById('search-button-mob');
+let mCategoriesColumn = document.getElementById('mob-categories');
 
 
 // let index = document.getElementById("index");
-let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn, 'noColumn']
+let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn, 'noColumn', mCategoriesColumn]
 // let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
 //this can't include wisDetails Column for backtracking:
 let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, howDoesColumn];
@@ -221,7 +222,7 @@ const columnToggle = (selectedColumn) => {
 
   const toggleSecColumn = (selectedColumn) => {
     let keepOpen = null;
-    let checkForPrevArray = [loginColumn, promptColumn, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn]
+    let checkForPrevArray = [loginColumn, promptColumn, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, mCategoriesColumn]
       checkForPrevArray.forEach(element => {
         if (element.style.display == 'block') keepOpen = element;
       })
@@ -229,6 +230,7 @@ const columnToggle = (selectedColumn) => {
   if (selectedColumn != 'noColumn') viewerWindow.style.display = 'none';
   if (selectedColumn != 'noColumn') viewId.style.display = 'none';
   // viewIdBack.style.display = 'none';
+  mCategoriesColumn.style.display = 'none';
   loginColumn.style.display = 'none';
   promptColumn.style.display = 'none';
   // viewerWindow.style.display = 'block';
@@ -2914,6 +2916,14 @@ mGuideButton.addEventListener('click', () => {
   }
 })
 
+mCatButton.addEventListener('click', () => {
+  if (mCategoriesColumn.style.display == 'none') {
+  columnToggle(mCategoriesColumn);
+  } else {
+    columnToggle(prevThird)
+  }
+})
+
 mCreateButton.addEventListener('click', () => {
   if (formColumn.style.display == 'none' && promptColumn.style.display == 'none') {
     let toCheck = prevThird;
@@ -2944,3 +2954,64 @@ document.getElementById('top-nav-6-id').addEventListener('click', () => {
   }
   }
 })
+
+let cycle = false;
+
+window.addEventListener('resize', () => {
+  if (cycle == true) {
+  let isCat = false;
+  if (window.innerWidth >= 740) {
+    if (mCategoriesColumn.style.display == 'block') {
+      isCat = true;
+      mCategoriesColumn.style.display = 'none';
+      console.log(isCat)
+      isSidebar = true;
+      columnToggle('noColumn');
+      categoriesColumn.style.display = 'block';
+      columnToggle(prevThird)
+    }
+  }
+  cycle = false;
+}
+})
+
+window.addEventListener('resize', () => {
+  if (!cycle) {
+    let isCat = false;
+  if (window.innerWidth < 740) {
+    if (categoriesColumn.style.display == 'block') {
+      isCat = true;
+    categoriesColumn.style.display = 'none';
+    isSidebar = true;
+    columnToggle(mCategoriesColumn)
+  }
+  }
+  cycle = true;}
+})
+
+document.body.addEventListener('touchmove', function(e){ 
+  document.getElementsByTagName('body')[0]. style .height = "100vh";
+  document.getElementsByTagName('body')[0]. style. overflow = "hidden";
+});
+
+
+
+
+
+
+// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+// We listen to the resize event
+window.addEventListener('resize', () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
+window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+window.addEventListener('keydown', preventDefaultForScrollKeys, false);
