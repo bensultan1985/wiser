@@ -701,8 +701,9 @@ const openMySubmissions = () => {
 }
 
 const deleteMySubmission = (e) => {
-  e.preventDefault
-  let forDelete = e.path[0].name
+  e.preventDefault()
+  console.log(e, 'hi')
+  let forDelete = e.srcElement.getAttribute("name")
   db.collection("wisdomcollection").doc(forDelete).delete().then(function() {
     console.log("Document successfully deleted!");
 }).catch(function(error) {
@@ -908,7 +909,7 @@ const openFavorites = () => {
         delButton.innerHTML = 'remove favorite'
         delButton.name = element.originalId
 
-        viewButton.innerHTML = 'view wisbit'
+        viewButton.innerHTML = 'view details'
 
         console.log('wisfavid', id)
         item.append(viewButton)

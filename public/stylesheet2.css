@@ -2347,11 +2347,41 @@ box-shadow: 0px 2px 1px 0px black; */
 }
 
 .mysubmissionsdetails {
-    margin-right: 10px;
+    border: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .mysubmissionsdetails:hover {
-    margin-right: 10px;
+    border: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-right: 20px;
+    margin-left: 20px;
+    background: white;
+    -webkit-text-fill-color: black;
+    color: black;
+}
+
+.mysubmissionsdelete {
+    border: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+.mysubmissionsdelete:hover {
+    border: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-right: 20px;
+    margin-left: 40px;
+    background: white;
+    -webkit-text-fill-color: black;
+    color: black;
 }
 
 .fa-lightbulb-o {
