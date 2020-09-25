@@ -1,4 +1,3 @@
-
 # Wiser
 
 ## The social media platform for sharing and collecting wisdom.
