@@ -222,7 +222,7 @@ const columnToggle = (selectedColumn) => {
 
   const toggleSecColumn = (selectedColumn) => {
     let keepOpen = null;
-    let checkForPrevArray = [loginColumn, promptColumn, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, mCategoriesColumn]
+    let checkForPrevArray = [loginColumn, promptColumn, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, mCategoriesColumn, howDoesColumn]
       checkForPrevArray.forEach(element => {
         if (element.style.display == 'block') keepOpen = element;
       })
