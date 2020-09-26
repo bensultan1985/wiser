@@ -1146,7 +1146,9 @@ const openCalendar = (day) => {
   wisArray = snapshot.data().favWis}).then(() => {
         // creates new element in the DOM
         if (wisArray.length == '0') {
-          calintroline.innerHTML = 'Need inspiration with your morning brew? Customize your calendar with your favorite wisdom!<span style="color: red"><br><br>**Before you can use your calendar, browse the left categories and save some wisdom to your "favorites".</span>'
+          let whichCat = 'categories';
+          if (window.innerWidth < 740) whichCat = '<i class="fa fa-database" style="padding-left: 4px; padding-right: 4px;"></i>';
+          calintroline.innerHTML = `Need inspiration with your morning brew? Customize your calendar with your favorite wisdom!<span style="color: red"><br><br>**You haven't added any favorites.<br>Before you can use your calendar, click the ${whichCat} button and add a wisbit to your "favorites".</span>`
           let placeholderMsg = document.createElement("option")
           placeholderMsg.text = 'no favorites found';
           placeholderMsg.value = "";
