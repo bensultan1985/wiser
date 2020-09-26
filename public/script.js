@@ -259,6 +259,7 @@ const columnToggle = (selectedColumn) => {
     keepOpen ? keepOpen.style.display = 'block' : console.log('no prev open');
   }
   if (selectedColumn == viewer) {viewId.style.display = 'block';}
+  checkButtons()
 }
 
 const toggleThirdColumn = (selectedColumn) => {
@@ -287,6 +288,31 @@ const checkPrevThird = () => {
       if (element != howDoesColumn) prevThird =  element
     }
   })
+}
+
+const checkButtons = () => {console.log('button')
+console.log(categoriesColumn.style.display)
+  if (categoriesColumn.style.display == 'block' || mCategoriesColumn.style.display == 'block') {
+    document.getElementById('top-nav-1-id').className += ' top-nav-1-alt';
+    document.getElementById('top-nav-1-id-mob').className += ' top-nav-1-alt';
+  } else {
+    document.getElementById('top-nav-1-id').className = 'top-nav-1';
+    document.getElementById('top-nav-1-id-mob').className = 'top-nav-1-mob';
+  }
+  if (formColumn.style.display == 'block' || promptColumn.style.display == 'block') {
+    document.getElementById('top-nav-2-id').className += ' top-nav-2-alt';
+    document.getElementById('top-nav-2-id-mob').className += ' top-nav-2-alt';
+  } else {
+    document.getElementById('top-nav-2-id').className = 'top-nav-2';
+    document.getElementById('top-nav-2-id-mob').className = 'top-nav-2-mob';
+  }
+  if (howDoesColumn.style.display == 'block') {
+    document.getElementById('top-nav-5-id').className += ' top-nav-1-alt';
+    document.getElementById('top-nav-5-id-mob').className += ' top-nav-1-alt';
+  } else {
+    document.getElementById('top-nav-5-id').className = 'top-nav-5';
+    document.getElementById('top-nav-5-id-mob').className = 'top-nav-5-mob';
+  }
 }
 
 
@@ -2699,10 +2725,12 @@ mobCat.addEventListener('click', () => {
   if (isSidebar) {
     isSidebar = false;
     categoriesColumn.style.display = 'none';
+    checkButtons();
   } else {
     isSidebar = true;
   columnToggle('noColumn');
   categoriesColumn.style.display = 'block';
+  checkButtons();
   }
 })
 
@@ -2920,6 +2948,7 @@ mGuideButton.addEventListener('click', () => {
 mCatButton.addEventListener('click', () => {
   if (mCategoriesColumn.style.display == 'none') {
   columnToggle(mCategoriesColumn);
+  // checkButtons()
   } else {
     columnToggle(prevThird)
   }

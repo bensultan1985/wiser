@@ -1299,6 +1299,8 @@ background: rgb(38, 157, 255);
     top:0;
     width:100%;
     z-index:11;
+    height: 300px;
+    width: 454px;
 }
 .hover_bkgr_fricc .helper{
     display:inline-block;
@@ -2479,6 +2481,17 @@ color: black;
     box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
   }
 
+  .top-nav-2-alt {
+      border-left: solid !important;
+      border-left-width: 1px !important;
+      /* border-color: black; */
+      /* border-color: black; */
+    background: rgb(245, 245, 245);
+  -webkit-box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
+  -moz-box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
+  box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
+}
+
   .horizontal-end {
     display: inline-block;
     box-sizing: border-box;
@@ -2879,6 +2892,14 @@ max-width: 100vw !important;
     padding-top: 2px;
     touch-action: manipulation;
         }
+
+        #category {
+            margin: 10px;
+        }
+
+        #subcategory {
+            margin: 10px;
+        }
 }
 
 
@@ -2908,6 +2929,12 @@ max-width: 100vw !important;
 }
 
 #cat-row-intro-button-mob {
+    -webkit-text-fill-color: gray;
+    color: gray;
+    touch-action: manipulation;
+}
+
+#cat-row-intro-button {
     -webkit-text-fill-color: gray;
     color: gray;
     touch-action: manipulation;
