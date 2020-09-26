@@ -2947,3 +2947,7 @@ max-width: 100vw !important;
     color: gray;
     touch-action: manipulation;
 }
+
+.displayfav {
+    padding: 10px;
+}

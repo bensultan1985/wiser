@@ -692,7 +692,7 @@ const openMySubmissions = () => {
             item.innerHTML =
           `<div class="displayfav">
           <span class="burst"><i class="fa fa-lightbulb-o"></i><i style="color: rgb(6, 190, 6)" class="fa fa-envira"></i><span>popular wisdom</span></span><br><br>
-            <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
+            <div> "${element.data().wisdom}"<br><br>submitted by ${element.data().user}
             </div>
             <div>
             <br>
@@ -703,7 +703,7 @@ const openMySubmissions = () => {
           if (item.className == 'fav-li subpop-no') {
             item.innerHTML =
           `<div class="displayfav">
-            <div> "${element.data().wisdom}"<br>submitted by ${element.data().user}
+            <div> "${element.data().wisdom}"<br><br>submitted by ${element.data().user}
             </div>
             <div>
             <br>
