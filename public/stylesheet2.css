@@ -2475,11 +2475,19 @@ color: black;
   }
 
   .top-nav-1-alt {
+      padding-left: 1px;
       background: rgb(245, 245, 245);
     -webkit-box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
     -moz-box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
     box-shadow: inset 0px -1px 2px 2px rgba(224,224,224,1);
   }
+
+  .top-nav-button-6-alt {
+      box-sizing: border-box;
+    padding-left: 3px;
+    padding-right: 1px;
+
+}
 
   .top-nav-2-alt {
       border-left: solid !important;

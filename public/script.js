@@ -290,7 +290,7 @@ const checkPrevThird = () => {
   })
 }
 
-const checkButtons = () => {console.log('button')
+const checkButtons = () => {
 console.log(categoriesColumn.style.display)
   if (categoriesColumn.style.display == 'block' || mCategoriesColumn.style.display == 'block') {
     document.getElementById('top-nav-1-id').className += ' top-nav-1-alt';
@@ -312,6 +312,13 @@ console.log(categoriesColumn.style.display)
   } else {
     document.getElementById('top-nav-5-id').className = 'top-nav-5';
     document.getElementById('top-nav-5-id-mob').className = 'top-nav-5-mob';
+  }
+  if (dashboardColumn.style.display == 'block') {
+    document.getElementById('top-nav-6-id').className += ' top-nav-1-alt';
+    document.getElementById('cat-row-calendar-button').className += ' top-nav-button-6-alt'
+  } else {
+    document.getElementById('top-nav-6-id').className = 'top-nav-6';
+    document.getElementById('cat-row-calendar-button').className = 'horizontal-button'
   }
 }
 
