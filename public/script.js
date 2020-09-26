@@ -937,7 +937,7 @@ const openFavorites = () => {
         })
 
   //displays readable data for the user
-        item.innerHTML = `<div class="displayfav"> "${element.entry}"<br>submitted by ${element.author}</div><br>`;
+        item.innerHTML = `<div class="displayfav"> "${element.entry}"<br><br>submitted by ${element.author}</div><br>`;
 
         delButton.innerHTML = 'remove favorite'
         delButton.name = element.originalId
@@ -2110,6 +2110,7 @@ subCat: null};
 
 
 const searchRes = async (term) => {
+  if (term == '') return;
   lastSecondColumn = viewer;
   // console.log(catDetails)
   //hides the form column if it is open
