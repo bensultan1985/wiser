@@ -2379,7 +2379,6 @@ const openDetailsColumn = (e, id) => {
     columnToggle(prevThird)
   } else {
   wisDetailsColumnBody.innerHTML = ''
-  columnToggle(wisDetailsColumn)
   detailsHeadWrapper.addEventListener('click', backToPrevThird)
   let source;
   if (e.srcElement) {
@@ -2390,6 +2389,7 @@ const openDetailsColumn = (e, id) => {
   db.collection('wisdomcollection').doc(source).get().then((snapshot) => {
     let doc = snapshot.data()
     createDetails(doc, loggedIn, userId, db, favInfo, snapshot.id, wisDetailsColumnBody)
+    columnToggle(wisDetailsColumn)
   })
 }
 tempDetails = e.srcElement.attributes['1'].nodeValue
@@ -2573,7 +2573,6 @@ wisbitDetails.append(category)
       wisbitDetails.appendChild(populateComments)
       }
 
-      wisDetailsColumnBody.appendChild(wisbitDetails)
     if (loggedIn) {
       let postCommentForm = document.createElement("form")
       postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
@@ -2589,6 +2588,7 @@ wisbitDetails.append(category)
     
     
   }
+  wisDetailsColumnBody.appendChild(wisbitDetails)
 //add document object "submitComment" for comment button function
 }
 
@@ -3052,18 +3052,26 @@ document.body.addEventListener('touchmove', function(e){
 
 
 // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-let vh = window.innerHeight * 0.01;
+// let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+// document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 // We listen to the resize event
-window.addEventListener('resize', () => {
+// window.addEventListener('resize', () => {
   // We execute the same script as before
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+//   let vh = window.innerHeight * 0.01;
+//   document.documentElement.style.setProperty('--vh', `${vh}px`);
+// });
 
 window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+
+var fixed = document.getElementById('fixed');
+
+fixed.addEventListener('touchmove', function(e) {
+
+        e.preventDefault();
+
+}, false);

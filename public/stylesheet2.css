@@ -70,11 +70,14 @@ body {
     /* background-color: rgb(218, 241, 255); */
     /* background-color: rgba(0, 110, 24, 0.055); */
     /* background-color: rgba(255, 153, 0, 0.651); */
-    overflow-x: auto;
-    overflow-y: hidden;
+    /* overflow-x: auto; */
+    /* overflow-y: hidden; */
+    overflow: hidden;
     height: 100vh;
     width: 100vw;
-    /* min-width:870px; */
+    /* min-width:740px; */
+    min-height: 100vh;
+    /* mobile viewport bug fix */
 }
 
 h1 {
@@ -2663,7 +2666,16 @@ border-width: 1px;
     max-width: 1000px;
 }
 
+
+
+#cat-row-mob {
+    display: none;
+    touch-action: manipulation;
+}
+
+
 @media only screen and (max-width: 740px) {
+
 
     .column {
         display: none;
@@ -2745,15 +2757,8 @@ max-width: 100vw !important;
         padding-bottom: 0px;
     }
 
-}
-
-#cat-row-mob {
-    display: none;
-    touch-action: manipulation;
-}
 
 
-@media only screen and (max-width: 740px) {
     body {
             height: 100vh; /* Fallback for browsers that do not support Custom Properties */
             height: calc(var(--vh, 1vh) * 100);
@@ -2762,7 +2767,19 @@ max-width: 100vw !important;
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
                                         /* supported by Chrome, Edge, Opera and Firefox */
-            touch-action: manipulation;
+            /* touch-action: manipulation;
+            min-height: -webkit-fill-available;
+            -webkit-overflow-scrolling: touch;
+            overflow: -moz-hidden-unscrollable; */
+            /* overflow: hidden;
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        touch-action: none; */
+            
 
     }
 
@@ -2908,6 +2925,17 @@ max-width: 100vw !important;
         #subcategory {
             margin: 10px;
         }
+
+        
+        html {
+            height: -webkit-fill-available;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+            position: fixed;
+            height: 100%;
+            overflow: hidden;
+            touch-action: none;
+          }
 }
 
 
