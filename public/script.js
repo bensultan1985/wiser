@@ -1733,7 +1733,11 @@ const getWise = async (catDetails) => {
     }
     let linkBoxes = document.getElementsByClassName("commenttop")
     for (let i = 0; i< linkBoxes.length; i++) {
-      linkBoxes[i].addEventListener('click', openDetailsColumn)
+      linkBoxes[i].addEventListener('click', (e) => {
+        console.log(linkBoxes[i])
+        let thisName = linkBoxes[i].attributes.name.value;
+        openDetailsColumn(linkBoxes[i], thisName)
+      })
     }
   });
 };
@@ -2104,7 +2108,11 @@ subCat: null};
     }
     let linkBoxes = document.getElementsByClassName("commenttop")
     for (let i = 0; i< linkBoxes.length; i++) {
-      linkBoxes[i].addEventListener('click', openDetailsColumn)
+      linkBoxes[i].addEventListener('click', (e) => {
+        console.log(linkBoxes[i])
+        let thisName = linkBoxes[i].attributes.name.value;
+        openDetailsColumn(linkBoxes[i], thisName)
+      })
     }
     dbcount.innerHTML = `<b>${dbCounter}</b> wisbits currently in database`;
   })
@@ -2355,7 +2363,11 @@ const searchRes = async (term) => {
     }
     let linkBoxes = document.getElementsByClassName("commenttop")
     for (let i = 0; i< linkBoxes.length; i++) {
-      linkBoxes[i].addEventListener('click', openDetailsColumn)
+      linkBoxes[i].addEventListener('click', (e) => {
+        console.log(linkBoxes[i])
+        let thisName = linkBoxes[i].attributes.name.value;
+        openDetailsColumn(linkBoxes[i], thisName)
+      })
     }
   });
 };
