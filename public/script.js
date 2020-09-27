@@ -3052,26 +3052,26 @@ document.body.addEventListener('touchmove', function(e){
 
 
 // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-// let vh = window.innerHeight * 0.01;
+let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
-// document.documentElement.style.setProperty('--vh', `${vh}px`);
+document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 // We listen to the resize event
-// window.addEventListener('resize', () => {
+window.addEventListener('change', () => {
   // We execute the same script as before
-//   let vh = window.innerHeight * 0.01;
-//   document.documentElement.style.setProperty('--vh', `${vh}px`);
-// });
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
 
 window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
-var fixed = document.getElementById('fixed');
+// var fixed = document;
 
-fixed.addEventListener('touchmove', function(e) {
+// fixed.addEventListener('touchmove', function(e) {
 
-        e.preventDefault();
+//         e.preventDefault();
 
-}, false);
+// }, false);

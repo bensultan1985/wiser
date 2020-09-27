@@ -2767,18 +2767,18 @@ max-width: 100vw !important;
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
                                         /* supported by Chrome, Edge, Opera and Firefox */
-            /* touch-action: manipulation;
+            touch-action: manipulation;
             min-height: -webkit-fill-available;
             -webkit-overflow-scrolling: touch;
-            overflow: -moz-hidden-unscrollable; */
-            /* overflow: hidden;
+            overflow: -moz-hidden-unscrollable;
+            overflow: hidden;
         box-sizing: border-box;
         width: 100vw;
         height: 100vh;
         overflow-y: hidden;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
-        touch-action: none; */
+        touch-action: none;
             
 
     }
@@ -2932,7 +2932,7 @@ max-width: 100vw !important;
             overflow: hidden;
             -webkit-overflow-scrolling: touch;
             position: fixed;
-            height: 100%;
+            /* height: 100%; */
             overflow: hidden;
             touch-action: none;
           }
