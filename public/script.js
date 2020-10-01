@@ -2121,6 +2121,7 @@ subCat: null};
 
 const searchRes = async (term) => {
   if (term == '') return;
+  term = term.toLowerCase()
   lastSecondColumn = viewer;
   // console.log(catDetails)
   //hides the form column if it is open
@@ -2379,7 +2380,6 @@ const openDetailsColumn = (e, id) => {
     columnToggle(prevThird)
   } else {
   wisDetailsColumnBody.innerHTML = ''
-  columnToggle(wisDetailsColumn)
   detailsHeadWrapper.addEventListener('click', backToPrevThird)
   let source;
   if (e.srcElement) {
@@ -2390,6 +2390,7 @@ const openDetailsColumn = (e, id) => {
   db.collection('wisdomcollection').doc(source).get().then((snapshot) => {
     let doc = snapshot.data()
     createDetails(doc, loggedIn, userId, db, favInfo, snapshot.id, wisDetailsColumnBody)
+    columnToggle(wisDetailsColumn)
   })
 }
 tempDetails = e.srcElement.attributes['1'].nodeValue
@@ -2573,7 +2574,6 @@ wisbitDetails.append(category)
       wisbitDetails.appendChild(populateComments)
       }
 
-      wisDetailsColumnBody.appendChild(wisbitDetails)
     if (loggedIn) {
       let postCommentForm = document.createElement("form")
       postCommentForm.innerHTML = `<form><label for="postcomment">Leave a comment:</label><br>
@@ -2589,6 +2589,7 @@ wisbitDetails.append(category)
     
     
   }
+  wisDetailsColumnBody.appendChild(wisbitDetails)
 //add document object "submitComment" for comment button function
 }
 
@@ -3063,7 +3064,21 @@ window.addEventListener('resize', () => {
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
 
+window.addEventListener('change', () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
 window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
 window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
 window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+
+// var fixed = document;
+
+// fixed.addEventListener('touchmove', function(e) {
+
+//         e.preventDefault();
+
+// }, false);
