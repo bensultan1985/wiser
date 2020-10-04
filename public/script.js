@@ -2968,6 +2968,11 @@ mGuideButton.addEventListener('click', () => {
   }
 })
 
+wisDetailsColumn.addEventListener('click', (e) => {
+  console.log(e)
+  if (e.target.id == 'wisdetailscolumn') columnToggle(prevThird);
+})
+
 mCatButton.addEventListener('click', () => {
   if (mCategoriesColumn.style.display == 'none') {
   columnToggle(mCategoriesColumn);
