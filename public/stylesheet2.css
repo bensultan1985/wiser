@@ -1402,7 +1402,7 @@
   }
   #opcontext {
       min-width: 250px;
-      max-width: 400px;
+      max-width: 380px;
       width: 100%;
       height: 60px;
       resize: none;
@@ -2637,7 +2637,7 @@
   
     #posttags {
         min-width: 250px;
-        max-width: 400px;
+        max-width: 380px;
         width: 100%;
     }
   
@@ -2979,4 +2979,34 @@
   
   .displayfav {
       padding: 10px;
+  }
+
+  .fa-chevron-right {
+  content:"\f054";
+  }
+
+  .fa-chevron-down {
+    content:"\f078";
+  }
+
+  #outer-options-box {
+      background: rgb(241, 241, 241);
+      border: solid;
+      border-color: rgb(184, 184, 184);
+      border-width: 1px;
+      border-radius: 25px;
+      padding: 5px;
+      max-width: 400px;
+      min-width: 200px;
+      margin: auto;
+  }
+
+  #add-options-box {
+    padding-top: 20px;
+    line-height: 18px;
+    padding-bottom: 5px;
+  }
+
+  #origauthor {
+      width: 220px;
   }

@@ -77,8 +77,11 @@ let forgotPass = document.getElementById('forgotpass');
 let resetForm = document.getElementById('resetform');
 let formErr = document.getElementById("formerr");
 let regErr = document.getElementById("reg-err");
-let howDoesHeadWrapper = document.getElementById("howdoesheadwrapper")
+let howDoesHeadWrapper = document.getElementById("howdoesheadwrapper");
 let howDoesDash = document.getElementById("cat-row-quick-guide");
+let addOptions = document.getElementById("add-options");
+let addOptionsBox = document.getElementById("add-options-box");
+let addOptionsArrow = document.getElementById("add-options-arrow");
 
 
 //form elements
@@ -3046,6 +3049,26 @@ window.addEventListener('resize', () => {
   }
   cycle = true;}
 })
+
+addOptions.addEventListener('click', (e) => {
+  e.preventDefault()
+  console.log('1')
+  if (addOptionsBox.style.display == 'none') {
+    console.log('2')
+    addOptionsBox.style.display = 'block';
+  } else {
+    addOptionsBox.style.display = 'none';
+    console.log('3')
+  }
+  if (addOptionsBox.style.display == 'block') {
+    addOptionsArrow.className = 'fa fa-chevron-down';
+  } else {
+    addOptionsArrow.className = 'fa fa-chevron-right';
+  }
+})
+
+
+
 
 document.body.addEventListener('touchmove', function(e){ 
   document.getElementsByTagName('body')[0]. style .height = "100vh";
