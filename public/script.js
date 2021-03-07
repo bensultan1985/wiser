@@ -379,7 +379,6 @@ let subCatObject = {
   Travel: ['attractions', 'beaches', 'budget', 'dangers', 'domestic', 'foreign languages', 'hotels & rentals', 'international', 'luxury', 'preparedness', 'vacations'],
   Wellness: ['beauty', 'meditation', 'mind & body', 'spirituality'],
   Other: ['general']
-
 }
 let isSidebar = false;
 
@@ -389,12 +388,12 @@ let isSidebar = false;
 const showLogin = (section) => {
   // console.log(loggedIn)
   if (!loggedIn) {
-  section.style.display = 'none';
-  columnToggle(promptColumn)
-  return false;
-}
+    section.style.display = 'none';
+    columnToggle(promptColumn);
+    return false;
+  };
 return true;
-}
+};
 
 
 
@@ -404,12 +403,12 @@ const openReg = () => {
   // regPass.addEventListener('input', asteriskPass)
   // regPassReEntry.addEventListener('input', asteriskPassRe)
   prevThird = regColumn;
-}
+};
 
 
-let storedValue = []
-let passArray = []
-let oldPassValue = []
+let storedValue = [];
+let passArray = [];
+let oldPassValue = [];
 let currentPassValue = [];
 
 
@@ -421,11 +420,11 @@ const asteriskPass = (e) => {
   if (noPassEdits(regPass) == false) {
     console.log('reset')
     oldPassValue = [];
-    passArray = []
+    passArray = [];
     regPass.value = '';
     regPass.name = '';
-    return
-   }
+    return;
+   };
   console.log('pass')
   regPass.name += lastLetter
   console.log('regpassname', regPass.name)
