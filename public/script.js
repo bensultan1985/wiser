@@ -22,192 +22,192 @@ const db = firebase.firestore()
 
 
 //   1.   /////////////DOM OBJECTS
-let submit = document.getElementById("submit");
-let wisdom = document.getElementById("wisdom");
-let category = document.getElementById("category");
-let viewer = document.getElementById("viewer");
-let retrieve = document.getElementById("retrieve");
-let form = document.getElementById("form")
-let aboutus = document.getElementById("aboutus");
-let getLife = document.getElementById("getlife");
-let getLove = document.getElementById("getlove");
-let getHardship = document.getElementById("gethardship");
-let getCareer = document.getElementById("getcareer");
-let getCreativity = document.getElementById("getcreativity");
-let getOther = document.getElementById("getother");
-let getCitizenship = document.getElementById("getcitizenship");
-let getEducation = document.getElementById("geteducation");
-let getFinance = document.getElementById("getfinance");
-let getHealthAndFitness = document.getElementById("gethealthandfitness");
-let getHome = document.getElementById("gethome");
-let getRoutine = document.getElementById("getroutine");
-let getSocial = document.getElementById("getsocial");
-let getTechnology = document.getElementById("gettechnology");
-let getTransportation = document.getElementById("gettransportation");
-let getTravel = document.getElementById("gettravel");
-let getWellness = document.getElementById("getwellness");
-let getNew = document.getElementById("getnew");
-let subCatDiv = document.getElementById("subcatdiv");
-let subCategory = document.getElementById("subcategory");
-let postEthnic = document.getElementById("postethnic");
-let postCountry = document.getElementById("postcountry");
-let origAuthor = document.getElementById("origauthor");
-let includeMyDemo = document.getElementById("includemydemo");
-let opContext = document.getElementById("opcontext");
-let sexChange = document.getElementsByClassName("sexchange");
-let ageChance = document.getElementsByClassName("agechange");
-let regCountry = document.getElementById("regcountry");
-let regEthnic = document.getElementById("regethnic");
-let regEdu = document.getElementById("regedu");
-let regSex = document.getElementsByName("regsex");
-let regAge = document.getElementsByName("regage");
-let mySubmissionsColumn = document.getElementById("mysubmissionscolumn");
-let mySubmissionsLink = document.getElementById("mysubmissionslink");
-let mySubmissionsList = document.getElementById("mysubmissionslist")
-let wisDetailsColumn = document.getElementById("wisdetailscolumn");
-let wisDetailsColumnBody = document.getElementById("wisdetailscolumnbody");
-let wisDetailsBackButton = document.getElementById("wisdetailsbackbutton");
-let postTags = document.getElementById("posttags");
-let dbCount = document.getElementById("dbcount");
-let regPassReEntry = document.getElementById("regpassreentry");
-let detailsHeadWrapper = document.getElementById("detailsheadwrapper");
-let viewId = document.getElementById('viewid');
-// let viewIdBack = document.getElementById('viewidback');
-let forgotPass = document.getElementById('forgotpass');
-let resetForm = document.getElementById('resetform');
-let formErr = document.getElementById("formerr");
-let regErr = document.getElementById("reg-err");
-let howDoesHeadWrapper = document.getElementById("howdoesheadwrapper");
-let howDoesDash = document.getElementById("cat-row-quick-guide");
-let addOptions = document.getElementById("add-options");
-let addOptionsBox = document.getElementById("add-options-box");
-let addOptionsArrow = document.getElementById("add-options-arrow");
+var submit = document.getElementById("submit");
+var wisdom = document.getElementById("wisdom");
+var category = document.getElementById("category");
+var viewer = document.getElementById("viewer");
+var retrieve = document.getElementById("retrieve");
+var form = document.getElementById("form")
+var aboutus = document.getElementById("aboutus");
+var getLife = document.getElementById("getlife");
+var getLove = document.getElementById("getlove");
+var getHardship = document.getElementById("gethardship");
+var getCareer = document.getElementById("getcareer");
+var getCreativity = document.getElementById("getcreativity");
+var getOther = document.getElementById("getother");
+var getCitizenship = document.getElementById("getcitizenship");
+var getEducation = document.getElementById("geteducation");
+var getFinance = document.getElementById("getfinance");
+var getHealthAndFitness = document.getElementById("gethealthandfitness");
+var getHome = document.getElementById("gethome");
+var getRoutine = document.getElementById("getroutine");
+var getSocial = document.getElementById("getsocial");
+var getTechnology = document.getElementById("gettechnology");
+var getTransportation = document.getElementById("gettransportation");
+var getTravel = document.getElementById("gettravel");
+var getWellness = document.getElementById("getwellness");
+var getNew = document.getElementById("getnew");
+var subCatDiv = document.getElementById("subcatdiv");
+var subCategory = document.getElementById("subcategory");
+var postEthnic = document.getElementById("postethnic");
+var postCountry = document.getElementById("postcountry");
+var origAuthor = document.getElementById("origauthor");
+var includeMyDemo = document.getElementById("includemydemo");
+var opContext = document.getElementById("opcontext");
+var sexChange = document.getElementsByClassName("sexchange");
+var ageChance = document.getElementsByClassName("agechange");
+var regCountry = document.getElementById("regcountry");
+var regEthnic = document.getElementById("regethnic");
+var regEdu = document.getElementById("regedu");
+var regSex = document.getElementsByName("regsex");
+var regAge = document.getElementsByName("regage");
+var mySubmissionsColumn = document.getElementById("mysubmissionscolumn");
+var mySubmissionsLink = document.getElementById("mysubmissionslink");
+var mySubmissionsList = document.getElementById("mysubmissionslist")
+var wisDetailsColumn = document.getElementById("wisdetailscolumn");
+var wisDetailsColumnBody = document.getElementById("wisdetailscolumnbody");
+var wisDetailsBackButton = document.getElementById("wisdetailsbackbutton");
+var postTags = document.getElementById("posttags");
+var dbCount = document.getElementById("dbcount");
+var regPassReEntry = document.getElementById("regpassreentry");
+var detailsHeadWrapper = document.getElementById("detailsheadwrapper");
+var viewId = document.getElementById('viewid');
+// var viewIdBack = document.getElementById('viewidback');
+var forgotPass = document.getElementById('forgotpass');
+var resetForm = document.getElementById('resetform');
+var formErr = document.getElementById("formerr");
+var regErr = document.getElementById("reg-err");
+var howDoesHeadWrapper = document.getElementById("howdoesheadwrapper");
+var howDoesDash = document.getElementById("cat-row-quick-guide");
+var addOptions = document.getElementById("add-options");
+var addOptionsBox = document.getElementById("add-options-box");
+var addOptionsArrow = document.getElementById("add-options-arrow");
 
 
 //form elements
-let makeSubmit = document.getElementById("cat-row-create-button");
-let formColumn = document.getElementById("formcolumn");
-let regColumn = document.getElementById("regcolumn");
-let headLoginButton = document.getElementById("headloginbutton");
-let loginColumn = document.getElementById("logincolumn");
-let getSubmit = document.getElementById("getsubmit");
-let getName = document.getElementById("getname");
-let getEmail = document.getElementById("getemail")
-let getPass = document.getElementById("getpass");
-let saveLoginInfo = document.getElementById("savelogininfo");
-let stayLogged = document.getElementById("staylogged")
-let loginErrMsg = document.getElementById("login-err-msg")
-let wisdomCount = document.getElementById("wisdom-count");
+var makeSubmit = document.getElementById("cat-row-create-button");
+var formColumn = document.getElementById("formcolumn");
+var regColumn = document.getElementById("regcolumn");
+var headLoginButton = document.getElementById("headloginbutton");
+var loginColumn = document.getElementById("logincolumn");
+var getSubmit = document.getElementById("getsubmit");
+var getName = document.getElementById("getname");
+var getEmail = document.getElementById("getemail")
+var getPass = document.getElementById("getpass");
+var saveLoginInfo = document.getElementById("savelogininfo");
+var stayLogged = document.getElementById("staylogged")
+var loginErrMsg = document.getElementById("login-err-msg")
+var wisdomCount = document.getElementById("wisdom-count");
 
-let regBack1 = document.getElementById("regback1");
-let regNext1 = document.getElementById("regnext1");
-let regBack2 = document.getElementById("regback2");
-let regNext2 = document.getElementById("regnext2");
-let regBack3 = document.getElementById("regback3");
-let regNext3 = document.getElementById("regnext3");
-let p11 = document.getElementById("p11");
-let p12 = document.getElementById("p12");
-let p13 = document.getElementById("p13");
-let p21 = document.getElementById("p21");
-let p22 = document.getElementById("p22");
-let p23 = document.getElementById("p23");
-let p31 = document.getElementById("p31");
-let p32 = document.getElementById("p32");
-let p33 = document.getElementById("p33");
-let regP1 = document.getElementById("reg-p-1");
-let regP2 = document.getElementById("reg-p-2");
-let regP3 = document.getElementById("reg-p-3");
-let regNav1 = document.getElementById("regnav1");
-let regNav2 = document.getElementById("regnav2");
-let regNav3 = document.getElementById("regnav3")
+var regBack1 = document.getElementById("regback1");
+var regNext1 = document.getElementById("regnext1");
+var regBack2 = document.getElementById("regback2");
+var regNext2 = document.getElementById("regnext2");
+var regBack3 = document.getElementById("regback3");
+var regNext3 = document.getElementById("regnext3");
+var p11 = document.getElementById("p11");
+var p12 = document.getElementById("p12");
+var p13 = document.getElementById("p13");
+var p21 = document.getElementById("p21");
+var p22 = document.getElementById("p22");
+var p23 = document.getElementById("p23");
+var p31 = document.getElementById("p31");
+var p32 = document.getElementById("p32");
+var p33 = document.getElementById("p33");
+var regP1 = document.getElementById("reg-p-1");
+var regP2 = document.getElementById("reg-p-2");
+var regP3 = document.getElementById("reg-p-3");
+var regNav1 = document.getElementById("regnav1");
+var regNav2 = document.getElementById("regnav2");
+var regNav3 = document.getElementById("regnav3")
 
 
 
-let headLogin = document.getElementById("headlogin");
-let headUsername = document.getElementById("headusername");
-let promptColumn = document.getElementById("promptcolumn");
-let promptLogin = document.getElementById("promptlogin");
-let regName = document.getElementById("regname");
-let regEmail = document.getElementById("regemail");
-let regPass = document.getElementById("regpass");
-let regSubmit = document.getElementById("regsubmit");
-let regButton = document.getElementById("regbutton");
-let headRegButton = document.getElementById("headregbutton");
-let topMenu = document.getElementById("topmenu");
-let test1 = document.getElementById("test1");
-let test2 = document.getElementById("test2");
-let resEmail = document.getElementById("res-email")
-let sendPass = document.getElementById("sendpass")
-let saveLoginInfoReg = document.getElementById("savelogininfo-reg")
-let accUsername = document.getElementById("accusername");
-let accEmail = document.getElementById("accemail");
+var headLogin = document.getElementById("headlogin");
+var headUsername = document.getElementById("headusername");
+var promptColumn = document.getElementById("promptcolumn");
+var promptLogin = document.getElementById("promptlogin");
+var regName = document.getElementById("regname");
+var regEmail = document.getElementById("regemail");
+var regPass = document.getElementById("regpass");
+var regSubmit = document.getElementById("regsubmit");
+var regButton = document.getElementById("regbutton");
+var headRegButton = document.getElementById("headregbutton");
+var topMenu = document.getElementById("topmenu");
+var test1 = document.getElementById("test1");
+var test2 = document.getElementById("test2");
+var resEmail = document.getElementById("res-email")
+var sendPass = document.getElementById("sendpass")
+var saveLoginInfoReg = document.getElementById("savelogininfo-reg")
+var accUsername = document.getElementById("accusername");
+var accEmail = document.getElementById("accemail");
 
 //menu button elements
-let logoutLink = document.getElementById("logoutlink");
-let accountLink = document.getElementById("accountlink")
-// let calendarLink = document.getElementById("calendarlink");
-let dashboardLink = document.getElementById("dashboardlink");
-let favoritesLink = document.getElementById("favoriteslink");
+var logoutLink = document.getElementById("logoutlink");
+var accountLink = document.getElementById("accountlink")
+// var calendarLink = document.getElementById("calendarlink");
+var dashboardLink = document.getElementById("dashboardlink");
+var favoritesLink = document.getElementById("favoriteslink");
 
 
-let favoritesHeader = document.getElementById("favoritesheader");
-let favoritesList = document.getElementById("favoriteslist");
+var favoritesHeader = document.getElementById("favoritesheader");
+var favoritesList = document.getElementById("favoriteslist");
 
 //columns + calendar
-let accountColumn = document.getElementById("accountcolumn");
-let favoritesColumn = document.getElementById("favoritescolumn");
-let welcomeColumn = document.getElementById("welcomecolumn");
-let welcome = document.getElementById("welcome");
-let calendarColumn = document.getElementById("calendarcolumn");
-let bigCalendarBox = document.getElementById("bigcalendarbox");
-let dashboardColumn = document.getElementById("dashboardcolumn");
-let dashboardCalendar = document.getElementById("dashboardcalendar");
-let leftHeader = document.getElementById("leftheader");
-let calendarPreview = document.getElementById("calendarpreview");
-let savedIcon = document.getElementById("savedicon");
-let calIntroLine = document.getElementById("calintroline");
-let viewerWindow = document.getElementById("viewerWindow");
-let forgotColumn = document.getElementById("forgotcolumn");
-let howDoesColumn = document.getElementById("howdoescolumn");
-let howDoes = document.getElementById("howdoes")
-let calBack = document.getElementById("cal-back");
-let calNext = document.getElementById("cal-next");
-let calEdit = document.getElementById("cal-edit");
-let calEditor = document.getElementById("cal-editor")
+var accountColumn = document.getElementById("accountcolumn");
+var favoritesColumn = document.getElementById("favoritescolumn");
+var welcomeColumn = document.getElementById("welcomecolumn");
+var welcome = document.getElementById("welcome");
+var calendarColumn = document.getElementById("calendarcolumn");
+var bigCalendarBox = document.getElementById("bigcalendarbox");
+var dashboardColumn = document.getElementById("dashboardcolumn");
+var dashboardCalendar = document.getElementById("dashboardcalendar");
+var leftHeader = document.getElementById("leftheader");
+var calendarPreview = document.getElementById("calendarpreview");
+var savedIcon = document.getElementById("savedicon");
+var calIntroLine = document.getElementById("calintroline");
+var viewerWindow = document.getElementById("viewerWindow");
+var forgotColumn = document.getElementById("forgotcolumn");
+var howDoesColumn = document.getElementById("howdoescolumn");
+var howDoes = document.getElementById("howdoes")
+var calBack = document.getElementById("cal-back");
+var calNext = document.getElementById("cal-next");
+var calEdit = document.getElementById("cal-edit");
+var calEditor = document.getElementById("cal-editor")
 
 //wishing well
-let wishingWellColumn = document.getElementById("wishingwellcolumn");
-let openWishButton = document.getElementById("openwishbutton");
-let wellSubmit = document.getElementById("wellsubmit");
-let wellWish = document.getElementById("wellwish");
-let wellWishButton = document.getElementById("wellwishbutton");
-let wishingWell = document.getElementById("wishingwell");
-let wWImage = document.getElementById("wwimage");
-let coinDiv = document.getElementById("coindiv");
-let tPBox = document.getElementById("tpbox");
+var wishingWellColumn = document.getElementById("wishingwellcolumn");
+var openWishButton = document.getElementById("openwishbutton");
+var wellSubmit = document.getElementById("wellsubmit");
+var wellWish = document.getElementById("wellwish");
+var wellWishButton = document.getElementById("wellwishbutton");
+var wishingWell = document.getElementById("wishingwell");
+var wWImage = document.getElementById("wwimage");
+var coinDiv = document.getElementById("coindiv");
+var tPBox = document.getElementById("tpbox");
 
 //new divs
-let searchBar = document.getElementById('search-bar');
-let searchButton = document.getElementById('search-button');
-let mobCat = document.getElementById("cat-row-cat-button");
-let categoriesColumn = document.getElementById("categories-column");
+var searchBar = document.getElementById('search-bar');
+var searchButton = document.getElementById('search-button');
+var mobCat = document.getElementById("cat-row-cat-button");
+var categoriesColumn = document.getElementById("categories-column");
 
 //mobile divs
-let mCatButton = document.getElementById('top-nav-1-id-mob');
-let mCreateButton = document.getElementById('top-nav-2-id-mob');
-// let mSearchButton = document.getElementById('top-nav-3-id-mob');
-let mIntroButton = document.getElementById('top-nav-4-id-mob'); 
-let mGuideButton = document.getElementById('top-nav-5-id-mob');
-let mSearchBar = document.getElementById('search-bar-mob');
-let mSearchButton = document.getElementById('search-button-mob');
-let mCategoriesColumn = document.getElementById('mob-categories');
+var mCatButton = document.getElementById('top-nav-1-id-mob');
+var mCreateButton = document.getElementById('top-nav-2-id-mob');
+// var mSearchButton = document.getElementById('top-nav-3-id-mob');
+var mIntroButton = document.getElementById('top-nav-4-id-mob'); 
+var mGuideButton = document.getElementById('top-nav-5-id-mob');
+var mSearchBar = document.getElementById('search-bar-mob');
+var mSearchButton = document.getElementById('search-button-mob');
+var mCategoriesColumn = document.getElementById('mob-categories');
 
 
-// let index = document.getElementById("index");
-let secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn, 'noColumn', mCategoriesColumn]
-// let thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
+// var index = document.getElementById("index");
+var secondColumnArray = [loginColumn, promptColumn, viewerWindow, viewer, formColumn, regColumn, forgotColumn, dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn, 'noColumn', mCategoriesColumn]
+// var thirdColumnArray = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, wisDetailsColumn, howDoesColumn];
 //this can't include wisDetails Column for backtracking:
-let thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, howDoesColumn];
+var thirdColumnPrevCheck = [dashboardColumn, wishingWellColumn, calendarColumn, welcomeColumn, accountColumn, favoritesColumn, mySubmissionsColumn, howDoesColumn];
 
 
 
@@ -330,28 +330,28 @@ console.log(categoriesColumn.style.display)
 
 //   3.   ////////////LOGIN + USER CODE + LOGOUT
 //login fuctions and rules
-let loggedIn = false;
-let saveduser = '';
-let savedemail = '';
-let lastCategory = {
+var loggedIn = false;
+var saveduser = '';
+var savedemail = '';
+var lastCategory = {
   mainCat: 'newest wisdom',
   subCat: null
 };
-let userId = '';
-let opDemoData = {};
-let lastTPValue = '';
-let currentSecColumn = '';
-let currentThirdColumn = '';
-let lastSecondColumn = '';
-let prevThird = welcomeColumn;
-let totalDocs = 0;
-let totalWeight = 0;
+var userId = '';
+var opDemoData = {};
+var lastTPValue = '';
+var currentSecColumn = '';
+var currentThirdColumn = '';
+var lastSecondColumn = '';
+var prevThird = welcomeColumn;
+var totalDocs = 0;
+var totalWeight = 0;
 //firebase authorized Id verification, obtained by signing into the secured database:
-let authUserId = '';
+var authUserId = '';
 //universalDayName is necessary for some calendar functions. Will create bugs if the date changes while user is editing a calendar. Must fix later:
-let universalDayName = '';
+var universalDayName = '';
 //calendar saved in temp memory that will allow changes before making put requests to Firebase:
-let calInfo = {
+var calInfo = {
   Monday: {entry: '', imgsrc: ''},
   Tuesday: {entry: '', imgsrc: ''},
   Wednesday: {entry: '', imgsrc: ''},
@@ -360,8 +360,8 @@ let calInfo = {
   Saturday: {entry: '', imgsrc: ''},
   Sunday: {entry: '', imgsrc: ''},
 }
-let favInfo = [];
-let subCatObject = {
+var favInfo = [];
+var subCatObject = {
   Career: ['career path', 'communication', 'conflict', 'engineering', 'entrepreneurship', 'freelance', 'inspiration', 'interpersonal skills', 'resume & interview', 'jobs', 'marketing', 'negotiation', 'networking', 'sales', 'small business'],
   Citizenship: ['activism', 'community', 'emergency', 'government', 'laws', 'programs'],
   Creativity: ['arts & crafts', 'criticism', 'inspiration', 'motivation', 'music business', 'musicians', 'performing arts', 'photography', 'show business', 'writing'],
@@ -381,166 +381,36 @@ let subCatObject = {
   Other: ['general']
 
 }
-let isSidebar = false;
+var isSidebar = false;
 
 
 
 //Prompt a login/register column, if a section requires login.
 const showLogin = (section) => {
-  // console.log(loggedIn)
   if (!loggedIn) {
   section.style.display = 'none';
-  columnToggle(promptColumn)
+  columnToggle(promptColumn);
   return false;
-}
+  };
 return true;
-}
+};
 
 
 
 //Opens registration column
 const openReg = () => {
-  columnToggle(regColumn)
+  columnToggle(regColumn);
   // regPass.addEventListener('input', asteriskPass)
   // regPassReEntry.addEventListener('input', asteriskPassRe)
   prevThird = regColumn;
-}
-
-
-let storedValue = []
-let passArray = []
-let oldPassValue = []
-let currentPassValue = [];
-
-
-const asteriskPass = (e) => {
-  e.preventDefault;
-  passArray = regPass.value.split('')
-  let lastLetter = passArray[passArray.length-1].toString()
-  console.log(lastLetter)
-  if (noPassEdits(regPass) == false) {
-    console.log('reset')
-    oldPassValue = [];
-    passArray = []
-    regPass.value = '';
-    regPass.name = '';
-    return
-   }
-  console.log('pass')
-  regPass.name += lastLetter
-  console.log('regpassname', regPass.name)
-  if (regPass.value.length > 1) {
-    let newArray = []
-    console.log('second')
-    for (let i = 0; i < passArray.length-1; i++)
-    newArray.push('*');
-    newArray.push(passArray[passArray.length-1])
-  regPass.value = newArray.join('')
-  }
-}
-
-const noPassEdits = (pass) => {
-  console.log(regPass.name)
-  let regPassArray = pass.value.split('')
-  let regNameArray = pass.name.split('')
-  console.log(regPassArray, regNameArray)
-  if (regPassArray.length > (regNameArray.length+1)) {
-    console.log('fail 1')
-    return false;
-  }
-  if (regPassArray.length <= (regNameArray.length)) {
-    console.log('fail 2')
-    return false;
-  }
-  for (let i = 0; i < regNameArray.length; i++) {
-    if (regPassArray[i] != regNameArray[i]) {
-      if (regPassArray[i].toString() == '*') {
-      console.log('anotherpass')
-      } else {
-      console.log('anotherfail')
-      return false
-    }
-  }
-  }
-  console.log('true')
-  return true
-}
-
-
-
-let storedValueRe = []
-let passArrayRe = []
-let oldPassValueRe = []
-let currentPassValueRe = [];
-
-
-const asteriskPassRe = (e) => {
-  e.preventDefault;
-  passArrayRe = regPassReEntry.value.split('')
-  let lastLetter = passArrayRe[passArrayRe.length-1].toString()
-  console.log(lastLetter)
-  if (noPassEdits(regPassReEntry) == false) {
-    console.log('reset')
-    oldPassValueRe = [];
-    passArrayRe = []
-    regPassReEntry.value = '';
-    regPassReEntry.name = '';
-    return
-   }
-  console.log('pass')
-  regPassReEntry.name += lastLetter
-  console.log('regpassname', regPassReEntry.name)
-  if (regPassReEntry.value.length > 1) {
-    let newArray = []
-    console.log('second')
-    for (let i = 0; i < passArrayRe.length-1; i++)
-    newArray.push('*');
-    newArray.push(passArrayRe[passArrayRe.length-1])
-  regPassReEntry.value = newArray.join('')
-  }
-}
-
-
-let storedValueL = []
-let passArrayL = []
-let oldPassValueL = []
-let currentPassValueL = [];
-
-
-const addAsteriskLogin = (e) => {
-  e.preventDefault;
-  passArrayL = getPass.value.split('')
-  let lastLetter = passArrayL[passArrayL.length-1].toString()
-  console.log(lastLetter)
-  if (noPassEdits(getPass) == false) {
-    console.log('reset')
-    oldPassValueL = [];
-    passArrayL = []
-    getPass.value = '';
-    // getPass.name = '';
-    return
-   }
-  console.log('pass')
-  // getPass.name += lastLetter
-  console.log('getpassname', getPass.name)
-  if (getPass.value.length > 1) {
-    let newArray = []
-    console.log('second')
-    for (let i = 0; i < passArrayL.length-1; i++)
-    newArray.push('*');
-    newArray.push(passArrayL[passArrayL.length-1])
-  getPass.value = newArray.join('')
-  }
-}
-
-
+};
 
 //Submit registration to Firebase (database of users is the "usersdb" collection in Firebase)
 const regNewUser = (e) => {
   e.preventDefault();
-let setAuthUserId = '';
-let thoughtStr = 'This notepad will auto-save with every keystroke. Your note will be here the next time you log in! This is ideal for: \n\n-Quick phone call notes.\n-Project ideas\n-appointment reminders\n-creative writing\n\n It\'s like your very own digital Post-It pad! Erase this text and type your own notes to get started!'
-let canReg = true;
+var setAuthUserId = '';
+var thoughtStr = 'This notepad will auto-save with every keystroke. Your note will be here the next time you log in! This is ideal for: \n\n-Quick phone call notes.\n-Project ideas\n-appointment reminders\n-creative writing\n\n It\'s like your very own digital Post-It pad! Erase this text and type your own notes to get started!'
+var canReg = true;
 if (!isValidEmailAddress(regEmail.value)) {
   console.log('email not valid');
   RegInvalidMsg('email not valid')
@@ -570,20 +440,15 @@ promise.catch(e => {
   RegInvalidMsg(e.message)
   return;
 })
-let sexChangeData = 'unspecified';
-let ageChangeData = 'unspecified';
+var sexChangeData = 'unspecified';
+var ageChangeData = 'unspecified';
 for (let i = 0; i < regSex.length; i++) {
   if (regSex[i].checked == true) sexChangeData = regSex[i].value
 }
 for (let i = 0; i < regAge.length; i++) {
   if (regAge[i].checked == true) ageChangeData = regAge[i].value
 }
-console.log('contacting server...')
-console.log('sexChangeData:', sexChangeData)
-console.log('ageChangeData:', ageChangeData)
-console.log(regCountry)
-console.log(regEthnic)
-console.log(regEdu)
+
 promise.then((response) => {
   authUserId = response.user.uid;
   db.collection('usersdb').add(
@@ -748,40 +613,25 @@ const deleteMySubmission = (e) => {
 openMySubmissions()
 }
 
-// const deleteMyFav = (e) => {
-//   e.preventDefault
-//   let forDelete = e.path[0].name
-//   for (let i = 0; i < favInfo.length; i++) {
-//     if (favInfo[i] == forDelete) db.collection("usersdb").doc(userId).favWis[i].delete().then(function() {
-//     console.log("Document successfully deleted!");
-// }).catch(function(error) {
-//     console.error("Error removing document: ", error);
-// });
-// openMySubmissions()
-// }
-
-
-
-
 //finds and verifies login information by sending user input to Firebase to see if there is a match.
 const checkLogin = (e) => {
   if (e) e.preventDefault();
   let loginFound = false;
 
   if (saveLoginInfo.checked && stayLogged) {
-    window.localStorage.setItem('savedLocalEmail', getEmail.value)
-    window.localStorage.setItem('savedLocalPass', getPass.value)
+    window.localStorage.setItem('savedLocalEmail', getEmail.value);
+    window.localStorage.setItem('savedLocalPass', getPass.value);
     // window.localStorage.setItem('savedLocalPass', getPass.name)
   } else {
-    localStorage.removeItem('savedLocalEmail')
-    localStorage.removeItem('savedLocalPass')
-  }
+    localStorage.removeItem('savedLocalEmail');
+    localStorage.removeItem('savedLocalPass');
+  };
 
   if (stayLogged.checked) {
-    window.localStorage.setItem('stayLogged', true)
+    window.localStorage.setItem('stayLogged', true);
   } else {
-    window.localStorage.setItem('stayLogged', false)
-  }
+    window.localStorage.setItem('stayLogged', false);
+  };
 
   const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.value);
   // const promise = auth.signInWithEmailAndPassword(getEmail.value, getPass.name);
@@ -808,7 +658,7 @@ const checkLogin = (e) => {
       }
     })
   })).then(namePassReset)
-}
+};
 
 
 
@@ -817,19 +667,19 @@ const namePassReset = () => {
   getPass.value = '';
   // getPass.name = '';
   getEmail.value = '';
-}
+};
 
 const loginInvalidMsg = (error) => {
-  let nodeMsg = document.createElement("div")
-  nodeMsg.innerHTML = 'email/password not found. try again.'
+  let nodeMsg = document.createElement("div");
+  nodeMsg.innerHTML = 'email/password not found. try again.';
   nodeMsg.style.color = 'red';
   nodeMsg.id = 'failedlogin';
   loginErrMsg.style.display = 'block';
-  if (error) nodeMsg.innerHTML = error
+  if (error) nodeMsg.innerHTML = error;
   loginErrMsg.append(nodeMsg);
   setTimeout(() => nodeMsg.style.display = 'none', 4000);
-  namePassReset()
-}
+  namePassReset();
+};
 
 const RegInvalidMsg = (error) => {
   let nodeMsg = document.createElement("div")
@@ -839,11 +689,8 @@ const RegInvalidMsg = (error) => {
   if (error) nodeMsg.innerHTML = error
   regErr.append(nodeMsg);
   setTimeout(() => nodeMsg.style.display = 'none', 4000);
-  namePassReset()
-}
-
-
-
+  namePassReset();
+};
 
 //if login data has a match in Firebase, the user will be logged in, and user data will populate necessary document objects.
 const applyLogin = (name, id, authUserId, myCal, thoughtStr, opDemo, saveEmail) => {
@@ -976,11 +823,10 @@ const delFavorite = (e, item, element) => {
 // Update read count
 db.collection('wisdomcollection').doc(element.originalId).update({ favorites: decrement });
   item.style.display = 'none'
-
 }
 
 
-let dateOffset = 0;
+var dateOffset = 0;
 const getCal = () => {
   console.log(calInfo)
   let dayName = '';
@@ -2948,7 +2794,7 @@ calBack.addEventListener('click', calBackFunction)
 calNext.addEventListener('click', calNextFunction)
 calEdit.addEventListener('click', () => openCalendar(universalDayName))
 
-console.log(`Hello fellow programmer! Welcome to my source code. Beware that this was meant to be a student project. When I started building Wiser, I barely knew what an array or object was. Bear that in mind when you explore and scrutinize my code. There are many, many things I will reorganize and restructure when I create verson 2 of this site. If you are a recruiter or senior engineer and you like my site, I am available for hire! Contact me: bensultan1985@gmail.com`)
+console.log(`Hello console lurker! Welcome to my source code. Wiser started out as my ambitious 2nd coding project. Since I barely knew how to code when I started building this site, it is chalk full of repeated code, unnecessary arrays, and confusing variables. However, it is also a highly inspired, ambitious full-stack project that I am proud of. In the future, I will be overhauling the site to make it much more efficient. If you are a recruiter or senior engineer and you like my site, I am available for hire! Contact me: bensultan1985@gmail.com`)
 
 // console.log(window.innerWidth)
 // if (window.innerWidth >= '741') {
